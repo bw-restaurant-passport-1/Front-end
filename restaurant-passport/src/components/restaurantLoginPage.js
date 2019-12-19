@@ -1,12 +1,23 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import styled from 'styled-components';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Titles = styled.div`font-family: 'Girassol', cursive;`;
 
-export default function App() {
+export default function App(props) {
 	const { register, handleSubmit, errors } = useForm();
-	const onSubmit = (data) => console.log(data);
+	const onSubmit = (data, e) => {
+		e.preventDefault();
+		axiosWithAuth()
+		.post('api/users', data)
+		.then(res => {
+			console.log(res.data)
+			localStorage.setItem('token', res.data.token);
+			props.history.push('/dashboard')
+		})
+		console.log(data)
+	};
 	console.log(errors);
 	return (
 		<Titles className='login-page'>
