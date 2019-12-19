@@ -8,7 +8,6 @@ export default function App() {
 	const { register, handleSubmit, errors } = useForm();
 	const onSubmit = (data) => console.log(data);
 	console.log(errors);
-
 	return (
 		<Titles className='login-page'>
 			<div className='forms'>
