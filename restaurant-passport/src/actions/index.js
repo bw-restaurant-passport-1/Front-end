@@ -11,11 +11,12 @@ export const login = state => dispatch => {
   dispatch({ type: LOGIN_START });
   //return will return axioswithauth vs axios
   return axios
-    .post('api end point here', state)
+    .post('https://restaurant-passport1.herokuapp.com/api/users/login', state)
     .then(res => {
-      const userInfo = jwtDecode('res.data.user.token or whatever named');
+      console.log(res);
+      const userInfo = jwtDecode(res.data.token);
       console.log(userInfo);
-      localStorage.setItem('token', res.data.user.token); // or whatever response is named on user object
+      localStorage.setItem('token', res.data.token); // or whatever response is named on user object
       dispatch({ type: LOGIN_SUCCESS, payload: userInfo });
     })
     .catch(err => console.log(err));
