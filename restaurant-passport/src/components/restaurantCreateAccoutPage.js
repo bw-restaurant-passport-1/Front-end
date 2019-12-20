@@ -24,7 +24,7 @@ export default function App(props) {
 	return (
 		<Titles className='register-page'>
 			<div className='forms'>
-				<h1 className='title'> Restaurant Passport Registeration </h1>
+				<h1 className='title'> Restaurant Passport Registration </h1>
 				<form className='forms2' onSubmit={handleSubmit(onSubmit)}>
 					<input
 						className='inputs form-control'
