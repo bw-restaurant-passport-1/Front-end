@@ -5,27 +5,27 @@
 
 - [x] Front-end react app set up
 
-- [] Dependencies set up
+- [ ] Dependencies set up
 
 - [x] Yarn/npm set up
 
-- [] Components set up
+- [ ] Components set up
 
-- [] Components completed
+- [ ] Components completed
 
-- [] All Images saved
+- [ ] All Images saved
 
 - [x] Privaterouters set up
 
-- [] Authorizations set up
+- [ ] Authorizations set up
 
-- [] CSS/SCSS/LESS
+- [ ] CSS/SCSS/LESS
 
-- [] Styling-Components
+- [ ] Styling-Components
 
 - [x] Redux Store set up
 
-- [] Routes completed
+- [ ] Routes completed
 
 - [x] Front-end pages deployed
 
