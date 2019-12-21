@@ -1,29 +1,31 @@
 # Front-End
 
 ## Front End List To Do
-[] Front-end react app set up
+### Starts December 17, 2019
 
-[] Dependencies set up
+- [x] Front-end react app set up
 
-[x] Yarn/npm set up
+- [] Dependencies set up
 
-[] Components set up
+- [x] Yarn/npm set up
 
-[] Components
+- [] Components set up
 
-[] Images
+- [] Components completed
 
-[] Privaterouters set up
+- [] All Images saved
 
-[] Authorizations set up
+- [x] Privaterouters set up
 
-[] CSS/SCSS/LESS
+- [] Authorizations set up
 
-[] Styling-Components
+- [] CSS/SCSS/LESS
 
-[] Context set up
+- [] Styling-Components
 
-[] Routes
+- [x] Redux Store set up
 
-[x] Front-end pages deployed
+- [] Routes completed
+
+- [x] Front-end pages deployed
 
