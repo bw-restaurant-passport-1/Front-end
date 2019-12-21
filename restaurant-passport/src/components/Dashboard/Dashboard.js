@@ -1,24 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Navbar from "../Navbar/Navbar.js";
 import Profile from "../Profile/Profile.js";
 import AddedRestaurants from "../AddedRestaurants/AddedRestaurants.js";
-
+import Footer from "../Footer/Footer.js";
+import styles from "../../styles/styles.css";
 
 //Where data is held for state 
 
 
-const Dashboard = () => {
+const Dashboard = ({data}) => {
 
 
 
     return (
-        <div>
-        <Navbar />
-        <Profile />
-        <AddedRestaurants />
-        
-
+        <div className="dashboard">
+            {/* <Navbar /> */}
+            <Profile />
+            <AddedRestaurants />
+            
+            {/* <Footer /> */}
         </div>
     )
 }
