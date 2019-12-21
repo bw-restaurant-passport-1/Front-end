@@ -5,7 +5,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth'
 
 const Titles = styled.h1`font-family: 'Girassol', cursive;`;
 
-export default function App(props) {
+const RestaurantCreateAccountPage = props => {
 	const { register, handleSubmit, errors } = useForm();
 	const onSubmit = (data, e) => {
 		e.preventDefault();
@@ -67,3 +67,4 @@ export default function App(props) {
 		</Titles>
 	);
 }
+export default RestaurantCreateAccountPage;
