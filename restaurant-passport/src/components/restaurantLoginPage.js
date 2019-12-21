@@ -5,6 +5,7 @@ import { login } from '../actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+
 const Titles = styled.div`
   font-family: 'Girassol', cursive;
 `;
