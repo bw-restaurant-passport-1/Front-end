@@ -26,8 +26,8 @@ export const passportReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        loggingIn: false
-        //TODO: username: action.payload.username or object returned
+        loggingIn: false,
+        username: action.payload.username
       };
     case LOGIN_ERROR:
       return {
@@ -57,5 +57,7 @@ export const passportReducer = (state = initialState, action) => {
         signingUp: false,
         error: action.payload
       };
+    default:
+      return state;
   }
 };
