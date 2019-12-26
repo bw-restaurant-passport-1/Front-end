@@ -107,6 +107,8 @@ section {
 }
 body {
 	line-height: 1;
+	min-height: 100%;
+	position: relative;
 }
 ol,
 ul {

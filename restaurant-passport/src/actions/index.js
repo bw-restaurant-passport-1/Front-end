@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
-//import axioswithauth after pull of mary push
+// import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
 import jwtDecode from 'jwt-decode';
 
 export const LOGIN_START = 'LOGIN_START';
@@ -10,8 +10,8 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const login = state => dispatch => {
   dispatch({ type: LOGIN_START });
   //return will return axioswithauth vs axios
-  return axios
-    .post('https://restaurant-passport1.herokuapp.com/api/users/login', state)
+  return axiosWithAuth()
+    .post('/api/users/login', state)
     .then(res => {
       console.log(res);
       const userInfo = jwtDecode(res.data.token);
@@ -28,8 +28,8 @@ export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
 export const signup = state => dispatch => {
   dispatch({ type: SIGNUP_START });
-  return axios
-    .post('api endpoint here', state)
+  return axiosWithAuth
+    .post('/api/users/register', state)
     .then(res => {
       console.log(res);
       localStorage.setItem('token', res.data); //whatever token obect key is on object

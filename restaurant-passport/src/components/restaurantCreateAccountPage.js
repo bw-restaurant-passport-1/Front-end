@@ -1,24 +1,22 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import styled from 'styled-components';
-import {axiosWithAuth} from '../utils/axiosWithAuth'
+import {signup} from '../actions/index';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
 
 const Titles = styled.h1`font-family: 'Girassol', cursive;`;
 
-const RestaurantCreateAccountPage = props => {
+const restaurantCreateAccountPage = props => {
 	const { register, handleSubmit, errors } = useForm();
-	const onSubmit = (data, e) => {
-		e.preventDefault();
-		axiosWithAuth()
-		.post('api/users', data)
-		.then(res => {
-			console.log(res.data)
-			localStorage.setItem('token', res.data.token);
+	const onSubmit = data => {
+		props.register(data)
+		.then(()=> {
 			props.history.push('/dashboard')
 		})
+		}
 		console.log(data)
 	
-	};
 	console.log(errors);
 
 	return (
@@ -67,4 +65,10 @@ const RestaurantCreateAccountPage = props => {
 		</Titles>
 	);
 }
-export default RestaurantCreateAccountPage;
+
+const mapStateToProps = state => {
+	return {
+		signingUp: state.signingUp
+	};
+};
+export default connect(mapStateToProps, {signup})(restaurantCreateAccountPage);
