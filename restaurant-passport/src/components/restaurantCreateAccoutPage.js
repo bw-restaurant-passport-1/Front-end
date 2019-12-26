@@ -1,7 +1,7 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import styled from 'styled-components';
-import {axiosWithAuth} from '../utils/axiosWithAuth'
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Titles = styled.h1`font-family: 'Girassol', cursive;`;
 
@@ -9,15 +9,12 @@ export default function App(props) {
 	const { register, handleSubmit, errors } = useForm();
 	const onSubmit = (data, e) => {
 		e.preventDefault();
-		axiosWithAuth()
-		.post('api/users', data)
-		.then(res => {
-			console.log(res.data)
+		axiosWithAuth().post('api/users', data).then((res) => {
+			console.log(res.data);
 			localStorage.setItem('token', res.data.token);
-			props.history.push('/dashboard')
-		})
-		console.log(data)
-	
+			props.history.push('/dashboard');
+		});
+		console.log(data);
 	};
 	console.log(errors);
 
@@ -33,6 +30,7 @@ export default function App(props) {
 						name='Username'
 						ref={register({ required: true, maxLength: 80 })}
 					/>
+					{errors.Username && <p className='errors'>Username Required</p>}
 					<input
 						className='inputs form-control'
 						type='password'
@@ -40,6 +38,8 @@ export default function App(props) {
 						name='Password'
 						ref={register({ required: true, max: 8 })}
 					/>
+					{errors.Password && <p className='errors'>Password Required</p>}
+
 					<input
 						className='inputs form-control'
 						type='text'
@@ -47,6 +47,7 @@ export default function App(props) {
 						name='Name'
 						ref={register({ required: true })}
 					/>
+					{errors.Name && <p className='errors'>Name Required</p>}
 					<input
 						className='inputs form-control'
 						type='text'
@@ -54,6 +55,8 @@ export default function App(props) {
 						name='City'
 						ref={register({ required: true })}
 					/>
+					{errors.City && <p className='errors'>City Required</p>}
+
 					<input
 						className='inputs form-control'
 						type='email'
@@ -61,6 +64,7 @@ export default function App(props) {
 						name='Email'
 						ref={register({ required: true, pattern: /^\S+@\S+$/i })}
 					/>
+					{errors.Email && <p className='errors'>Email Required</p>}
 					<input className='inputs' type='submit' />
 				</form>
 			</div>

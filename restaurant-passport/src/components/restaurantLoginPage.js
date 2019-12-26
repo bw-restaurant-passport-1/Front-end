@@ -25,18 +25,18 @@ const RestaurantLoginPage = (props) => {
 						className='inputs form-control'
 						type='text'
 						placeholder='Username'
-						name='username'
+						name='Username'
 						ref={register({ required: true, maxLength: 80 })}
 					/>
-					{errors.username && <p className='errors'>Username Required</p>}
+					{errors.Username && <p className='errors'>Username Required</p>}
 					<input
 						className='inputs form-control'
 						type='password'
 						placeholder='Password'
-						name='password'
+						name='Password'
 						ref={register({ required: true, max: 8 })}
 					/>
-					{errors.password && <p className='errors'>Password Required</p>}
+					{errors.Password && <p className='errors'>Password Required</p>}
 					<input className='inputs' type='submit' />
 				</form>
 			</div>
