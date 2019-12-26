@@ -1,6 +1,6 @@
 import React from 'react';
 // import axios from 'axios';
-import axiosWithAuth from '../utils/axiosWithAuth';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 import jwtDecode from 'jwt-decode';
 
 export const LOGIN_START = 'LOGIN_START';

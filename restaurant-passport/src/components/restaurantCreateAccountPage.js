@@ -3,20 +3,17 @@ import useForm from 'react-hook-form';
 import styled from 'styled-components';
 import {signup} from '../actions/index';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 const Titles = styled.h1`font-family: 'Girassol', cursive;`;
 
-const restaurantCreateAccountPage = props => {
+const RestaurantCreateAccountPage = props => {
 	const { register, handleSubmit, errors } = useForm();
 	const onSubmit = data => {
-		props.register(data)
-		.then(()=> {
-			props.history.push('/dashboard')
-		})
-		}
-		console.log(data)
-	
+		console.log(data);
+		props.register(data).then(()=> {props.history.push('/dashboard')
+	})
+}
 	console.log(errors);
 
 	return (
@@ -71,4 +68,4 @@ const mapStateToProps = state => {
 		signingUp: state.signingUp
 	};
 };
-export default connect(mapStateToProps, {signup})(restaurantCreateAccountPage);
+export default connect(mapStateToProps, {signup})(RestaurantCreateAccountPage);
