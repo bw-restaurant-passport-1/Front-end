@@ -21,6 +21,7 @@ export default function App() {
 						name='Username'
 						ref={register({ required: true, maxLength: 80 })}
 					/>
+					{errors.Username && <p className='errors'>Username Required</p>}
 					<input
 						className='inputs form-control'
 						type='password'
