@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Front-End
 
 ## Front End List To Do
@@ -29,8 +29,5 @@
 - [ ] Routes completed
 
 - [x] Front-end pages deployed
-=======
-# Front-end
 
->>>>>>> f8b5426019dae23d9b320b80ab4fd4e1de76a858
 

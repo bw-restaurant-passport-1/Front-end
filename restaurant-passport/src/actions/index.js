@@ -63,7 +63,18 @@ export const ADD_RESTAURANT_START = 'ADD_RESTAURANT_START';
 export const ADD_RESTAURANT_SUCCESS = 'ADD_RESTAURANT_SUCCESS';
 export const ADD_RESTAURANT_ERROR = 'ADD_RESTAURANT_ERROR';
 export const addRestaurant = state => dispatch => {
-
+  dispatch({type: ADD_RESTAURANT_START});
+  return axiosWithAuth()
+  .post('/api/restaurants', state)
+  .then(res => {
+    console.log('get', res)
+    localStorage.setItem('token', res.data);
+    dispatch({type: ADD_RESTAURANT_SUCCESS, payload: res.data});
+  })
+  .catch(err => {
+    console.log('err', err.response);
+    dispatch({type: ADD_RESTAURANT_ERROR, payload: 'res.data'});
+  })
 }
 
 export const UPDATE_RESTAURANT_START = 'UPDATE_RESTAURANT_START';
