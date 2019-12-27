@@ -12,7 +12,7 @@ export default function App(props) {
 		axiosWithAuth()
 		.post('api/users', data)
 		.then(res => {
-			console.log(res.data)
+			console.log(res.data,"dis data")
 			localStorage.setItem('token', res.data.token);
 			props.history.push('/dashboard')
 		})

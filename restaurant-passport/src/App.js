@@ -6,6 +6,7 @@ import './App.css';
 import Dashboard from "./components/Dashboard/Dashboard.js";
 import NavBar from "./components/Navbar/Navbar.js";
 import Footer from "./components/Footer/Footer.js";
+import RestaurantList from "./components/RestaurantList/RestaurantList.js"
 
 function App() {
 	return (
@@ -13,7 +14,11 @@ function App() {
 			<Route exact path='/' component={RestaurantLoginPage} />
 			<Route path='/register' component={restaurantCreateAccountPage} />
       		<Route path='/dashboard' component={NavBar} />
-			  <Route path="/dashboard" component={Dashboard} />
+
+			<Route exact path="/dashboard" component={Dashboard} />
+
+			<Route path="/dashboard/restaurants" component={RestaurantList} />
+
 			<Route path='/dashboard' component={Footer} />
 		</div>
 	);

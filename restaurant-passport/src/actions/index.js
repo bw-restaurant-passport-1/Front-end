@@ -18,6 +18,7 @@ export const login = state => dispatch => {
       console.log(userInfo);
       localStorage.setItem('token', res.data.token); // or whatever response is named on user object
       dispatch({ type: LOGIN_SUCCESS, payload: userInfo });
+      
     })
     .catch(err => console.log(err));
 };

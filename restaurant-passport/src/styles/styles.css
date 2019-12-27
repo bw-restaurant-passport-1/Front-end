@@ -1,10 +1,12 @@
 /* import styles from "../../styles/styles.css" */
 
 /* Dashboard Component */
-.dashboard {
+.main_container {
     display: grid;
     grid-template-columns: 300px auto;
     padding-bottom: 200px;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
 }
 
 .nav_bar {
@@ -29,6 +31,7 @@
 
 .nav_bar > a {
     color: #191970;
+    text-decoration: none;
 }
 
 .nav_bar > a:hover {
@@ -38,16 +41,21 @@
 
 /* Profile Component */
 .profile {
+    position: relative;
     width: 180px;
     display: inline-block;
-    height: 380px;
+    /* height: 48%; */
     margin: 40px 60px;
     text-align: center;
-    border-bottom: 10px solid #191970;
     font-family: 'Special Elite', cursive;
     font-size: 18px;
     /* grid-column-start: 1;
     grid-column-end: 1; */
+
+}
+.profile div, p{
+    margin-bottom: 12px;
+    word-wrap: break-word;
 }
 
 .profile_img_div {
@@ -55,8 +63,7 @@
 }
 
 .profile_img {
-    width: 180px;
-    height: 180px;
+   width: 100%;
 }
 
 .profile_edit {
@@ -82,6 +89,7 @@
 .profile_options {
     display: flex;
     flex-direction: column;
+    border-bottom: 10px solid #191970;
 }
 
 .profile_options > div {
@@ -89,28 +97,92 @@
 }
 
 
-/* Added Restaurants Component */
+/* FORM from Restaurant List */
+
+.rest_form {
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #E0DAD1;
+    border-radius: 10px;
+    padding: 25px 0;
+}
+
+.rest_form legend {
+    margin-bottom: 50px;
+}
+
+.rest_form input,.star_rating {
+    margin-bottom: 40px;
+}
+
+.rest_form label {
+    margin-bottom: 10px;
+}
+
+
+/* ////////////////////////////// */
+/* Restaurants Component */
 
 .restaurants_container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(265px, 1fr));
+    grid-auto-rows: auto;
+    grid-gap: 40px;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2rem;
+    list-style: none;
     /* grid-column-start: 2;
-    grid-column-end: 4; */
+    grid-column-end: 4;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     height: 1000px;
-    margin: 40px 40px;
-    font-family: 'Raleway', sans-serif;
+    margin: 40px 40px; */
+    
 }
 
-.rest_card {
-    width: 220px;
+
+.rest_header {
+    padding: 0 48px;
+}
+.rest_header > a {
+    text-decoration:none;
+    float: right;
+}
+
+.rest_header > a:visited{
+    color: black;
+}
+
+.rest_header >a:hover{
+    color: #DAA520;
+}
+.rest_header .rest_title, a{
+    padding-bottom: 6px;
     display: inline-block;
 }
+
+
+/* Restaurant Cards */
+.rest_card {
+    /* max-width: 300px; */
+    display: inline-block;
+    /* min-width: 260px; */
+    padding: 10px;
+}
 .rest_card .rest_img {
-    width: 200px;
     /* border: black solid 1px; */
+    height: auto;
+    max-width: 100%;
 }
 
 .rest_card .img_container {
     position: relative;
-
+    width: 100%;
 }
 
 .img_container .been_here {
@@ -121,6 +193,26 @@
     top: -10px;
 }
 
+.rating .gold {
+    fill: gold;
+}
+
+.rest_info {
+    position: relative;
+}
+
+.rest_info .see_reviews{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.rest_info .see_reviews:hover{
+    color: #DAA520;
+    cursor: pointer;
+}
+
+
 .img_container .bookmark {
     position: absolute;
     z-index: 3;
@@ -129,24 +221,44 @@
     cursor: pointer;
 }
 
-.bookmark svg g{
-color: rgba(160, 160, 160, 0.87);
+
+.bookmark svg{
+    fill: rgb(236, 236, 236);
 }
 
+.bookmark svg:hover{
+    fill: rgb(129, 129, 129);
+}
+
+/* //////////////////////////////////// */
+
 .footer {
+    box-sizing: border-box;
     width:100%;
     position: absolute;
-    height: 200px;   /* Height of the footer */
+    min-height: 200px;   /* Height of the footer */
     /* grid-column-start: 1;
     grid-column-end: 4; */
     background: #DAA520;
     bottom: 0;
+    padding: 2rem 3rem;
+    
+    
+}
+
+.footer .links {
+    display: flex;
+    width: 60%;
+    flex-wrap: wrap;
 }
 
 
-
 .footer a {
+    display: inline-block;
     text-decoration: none;
+    /* padding-right: 10%; */
+    padding-bottom: 18px;
+    width: 33%;
 }
 
 .footer a:visited {

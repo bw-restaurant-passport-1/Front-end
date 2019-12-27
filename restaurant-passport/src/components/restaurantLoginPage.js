@@ -14,7 +14,9 @@ const RestaurantLoginPage = props => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => {
     console.log(data);
-    //props.login(data).then(() => props.history.push('whatever the route is called'))
+    props.login(data).then((data) => {
+      props.history.push("/dashboard")
+    });
     props.login(data);
   };
   console.log(errors);
