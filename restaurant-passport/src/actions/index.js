@@ -65,7 +65,7 @@ export const ADD_RESTAURANT_ERROR = 'ADD_RESTAURANT_ERROR';
 export const addRestaurant = state => dispatch => {
   dispatch({type: ADD_RESTAURANT_START});
   return axiosWithAuth()
-  .post('/api/restaurants', state)
+  .post('/api/restaurant', state)
   .then(res => {
     console.log('get', res)
     localStorage.setItem('token', res.data);
@@ -81,5 +81,16 @@ export const UPDATE_RESTAURANT_START = 'UPDATE_RESTAURANT_START';
 export const UPDATE_RESTAURANT_SUCCESS = 'UPDATE_RESTAURANT_SUCCESS';
 export const UPDATE_RESTAURANT_ERROR = 'UPDATE_RESTAURANT_ERROR';
 export const updateRestaurant = state => dispatch => {
-  
+  dispatch({type: UPDATE_RESTAURANT_START});
+  return axiosWithAuth()
+  .put('/api/restaurant/:id', state)
+  .then(res => {
+    console.log('get', res)
+    localStorage.setItem('token', res.data);
+    dispatch({type: UPDATE_RESTAURANT_SUCCESS, payload: res.data});
+  })
+  .catch(err => {
+    console.log('err', err.response);
+    dispatch({type: UPDATE_RESTAURANT_ERROR, payload: 'res.data'});
+  })
 }
