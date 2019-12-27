@@ -5,12 +5,12 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
-  FETCHING_RESTAURANT_START,
-  FETCHING_RESTAURANT_SUCCESS,
-  FETCHING_RESTAURANT_ERROR, 
-  ADDING_RESTAURANT_START,
-  ADDING_RESTAURANT_SUCCESS,
-  ADDING_RESTAURANT_ERROR,
+  FETCH_RESTAURANT_START,
+  FETCH_RESTAURANT_SUCCESS,
+  FETCH_RESTAURANT_ERROR, 
+  ADD_RESTAURANT_START,
+  ADD_RESTAURANT_SUCCESS,
+  ADD_RESTAURANT_ERROR,
   UPDATE_RESTAURANT_START,
   UPDATE_RESTAURANT_SUCCESS,
   UPDATE_RESTAURANT_ERROR
@@ -70,36 +70,36 @@ export const passportReducer = (state = initialState, action) => {
         error: action.payload
       };
 
-      case FETCHING_RESTAURANT_START:
+      case FETCH_RESTAURANT_START:
         return {
           ...state,
           isFetching: true
         }
         
-        case FETCHING_RESTAURANT_SUCCESS:
+        case FETCH_RESTAURANT_SUCCESS:
           return {
             ...state,
             restaurants: action.payload,
             isFetching: false
           }
           
-          case FETCHING_RESTAURANT_ERROR:
+          case FETCH_RESTAURANT_ERROR:
             return {
               ...state,
               isFetching: false,
               error: action.payload
             }
-            case ADDING_RESTAURANT_START:
+            case ADD_RESTAURANT_START:
               return {
                 ...state,
                 isFetching: true
               }
-            case ADDING_RESTAURANT_SUCCESS:
+            case ADD_RESTAURANT_SUCCESS:
               return {
                 ...state,
                 restaurants: [...state.restaurants, action.payload]
               }
-              case ADDING_RESTAURANT_ERROR:
+              case ADD_RESTAURANT_ERROR:
               return {
                 ...state, 
                 isFetching: false,
@@ -113,7 +113,7 @@ export const passportReducer = (state = initialState, action) => {
               case UPDATE_RESTAURANT_SUCCESS:
                 return {
                   restaurants:state.restaurants.map(rest => rest.id === action.id ? {
-                    ...restaurants, isEditing:!action.isEditing}: restaurants)
+                    ...state.restaurants, isEditing:!action.isEditing}: state.restaurants)
                 }
                 case UPDATE_RESTAURANT_ERROR:
                   return {

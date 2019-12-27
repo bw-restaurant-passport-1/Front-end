@@ -28,7 +28,7 @@ export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
 export const signup = state => dispatch => {
   dispatch({ type: SIGNUP_START });
-  return axiosWithAuth
+  return axiosWithAuth()
     .post('/api/users/register', state)
     .then(res => {
       console.log(res);
@@ -40,3 +40,35 @@ export const signup = state => dispatch => {
       dispatch({ type: SIGNUP_ERROR, payload: 'res.data ' }); //whatever error
     });
 };
+export const FETCH_RESTAURANT_START = 'FETCH_RESTAURANT_START';
+export const FETCH_RESTAURANT_SUCCESS = 'FETCH_RESTAURANT_SUCCESS';
+export const FETCH_RESTAURANT_ERROR = 'FETCH_RESTAURANT_ERROR';
+
+export const fetchRestaurant = state => dispatch => {
+  dispatch({type: FETCH_RESTAURANT_START});
+  return axiosWithAuth()
+  .get('/api/restaurants', state)
+  .then(res => {
+    console.log('get', res)
+    localStorage.setItem('token', res.data);
+    dispatch({type: FETCH_RESTAURANT_SUCCESS, payload: res.data});
+  })
+  .catch(err => {
+    console.log('err', err.response);
+    dispatch({type: FETCH_RESTAURANT_ERROR, payload: 'res.data'});
+  })
+}
+
+export const ADD_RESTAURANT_START = 'ADD_RESTAURANT_START';
+export const ADD_RESTAURANT_SUCCESS = 'ADD_RESTAURANT_SUCCESS';
+export const ADD_RESTAURANT_ERROR = 'ADD_RESTAURANT_ERROR';
+export const addRestaurant = state => dispatch => {
+
+}
+
+export const UPDATE_RESTAURANT_START = 'UPDATE_RESTAURANT_START';
+export const UPDATE_RESTAURANT_SUCCESS = 'UPDATE_RESTAURANT_SUCCESS';
+export const UPDATE_RESTAURANT_ERROR = 'UPDATE_RESTAURANT_ERROR';
+export const updateRestaurant = state => dispatch => {
+  
+}
