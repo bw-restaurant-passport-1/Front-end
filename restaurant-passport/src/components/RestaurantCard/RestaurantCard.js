@@ -1,6 +1,6 @@
 import React from "react";
 
-import FaBookmarkO from "react-icons/lib/fa/bookmark-o";
+import {FaBookmarkO} from "react-icons/lib/fa";
 
 
 

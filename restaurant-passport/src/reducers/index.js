@@ -4,7 +4,16 @@ import {
   LOGIN_ERROR,
   SIGNUP_START,
   SIGNUP_SUCCESS,
-  SIGNUP_ERROR
+  SIGNUP_ERROR,
+  FETCH_RESTAURANT_START,
+  FETCH_RESTAURANT_SUCCESS,
+  FETCH_RESTAURANT_ERROR, 
+  ADD_RESTAURANT_START,
+  ADD_RESTAURANT_SUCCESS,
+  ADD_RESTAURANT_ERROR,
+  UPDATE_RESTAURANT_START,
+  UPDATE_RESTAURANT_SUCCESS,
+  UPDATE_RESTAURANT_ERROR
 } from '../actions/index';
 
 export const initialState = {
@@ -13,6 +22,9 @@ export const initialState = {
   username: '',
   error: '',
   signingUp: false,
+  isFetching: false,
+  isEditing: false,
+  restaurants: [],
   token: localStorage.getItem('token')
 };
 
@@ -57,6 +69,58 @@ export const passportReducer = (state = initialState, action) => {
         signingUp: false,
         error: action.payload
       };
+
+      case FETCH_RESTAURANT_START:
+        return {
+          ...state,
+          isFetching: true
+        }
+        
+        case FETCH_RESTAURANT_SUCCESS:
+          return {
+            ...state,
+            restaurants: action.payload,
+            isFetching: false
+          }
+          
+          case FETCH_RESTAURANT_ERROR:
+            return {
+              ...state,
+              isFetching: false,
+              error: action.payload
+            }
+            case ADD_RESTAURANT_START:
+              return {
+                ...state,
+                isFetching: true
+              }
+            case ADD_RESTAURANT_SUCCESS:
+              return {
+                ...state,
+                restaurants: [...state.restaurants, action.payload]
+              }
+              case ADD_RESTAURANT_ERROR:
+              return {
+                ...state, 
+                isFetching: false,
+                error: action.payload
+              }
+              case UPDATE_RESTAURANT_START:
+                return {
+                  ...state,
+                  isFetching: true,
+                }
+              case UPDATE_RESTAURANT_SUCCESS:
+                return {
+                  restaurants:state.restaurants.map(rest => rest.id === action.id ? {
+                    ...state.restaurants, isEditing:!action.isEditing}: state.restaurants)
+                }
+                case UPDATE_RESTAURANT_ERROR:
+                  return {
+                    ...state,
+                    isFetching: false,
+                    error: action.payload
+                  }
     default:
       return state;
   }
