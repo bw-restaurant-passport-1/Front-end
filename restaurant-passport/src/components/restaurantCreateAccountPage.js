@@ -2,19 +2,29 @@ import React from 'react';
 import useForm from 'react-hook-form';
 import styled from 'styled-components';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { signup } from '../actions/index';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Titles = styled.h1`font-family: 'Girassol', cursive;`;
 
-export default function App(props) {
+const RestaurantCreateAccountPage = (props) => {
 	const { register, handleSubmit, errors } = useForm();
-	const onSubmit = (data, e) => {
-		e.preventDefault();
-		axiosWithAuth().post('api/users', data).then((res) => {
-			console.log(res.data);
-			localStorage.setItem('token', res.data.token);
+	//REACT II LOOK AT THIS NOT SURE WHICH ONE IS THE ONE YOU WANT.
+	// const onSubmit = (data, e) => {
+	// 	e.preventDefault();
+	// 	axiosWithAuth().post('api/users', data).then((res) => {
+	// 		console.log(res.data);
+	// 		localStorage.setItem('token', res.data.token);
+	// 		props.history.push('/dashboard');
+	// 	});
+	// 	console.log(data);
+	// };
+	const onSubmit = (data) => {
+		console.log(data);
+		props.register(data).then(() => {
 			props.history.push('/dashboard');
 		});
-		console.log(data);
 	};
 	console.log(errors);
 
@@ -70,4 +80,11 @@ export default function App(props) {
 			</div>
 		</Titles>
 	);
-}
+};
+
+const mapStateToProps = (state) => {
+	return {
+		signingUp : state.signingUp,
+	};
+};
+export default connect(mapStateToProps, { signup })(RestaurantCreateAccountPage);
