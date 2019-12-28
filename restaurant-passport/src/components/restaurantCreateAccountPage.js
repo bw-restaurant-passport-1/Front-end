@@ -1,19 +1,31 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import styled from 'styled-components';
-import {signup} from '../actions/index';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { signup } from '../actions/index';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Titles = styled.h1`font-family: 'Girassol', cursive;`;
 
-const RestaurantCreateAccountPage = props => {
+const RestaurantCreateAccountPage = (props) => {
 	const { register, handleSubmit, errors } = useForm();
-	const onSubmit = data => {
+	//REACT II LOOK AT THIS NOT SURE WHICH ONE IS THE ONE YOU WANT.
+	// const onSubmit = (data, e) => {
+	// 	e.preventDefault();
+	// 	axiosWithAuth().post('api/users', data).then((res) => {
+	// 		console.log(res.data);
+	// 		localStorage.setItem('token', res.data.token);
+	// 		props.history.push('/dashboard');
+	// 	});
+	// 	console.log(data);
+	// };
+	const onSubmit = (data) => {
 		console.log(data);
-		props.register(data).then(()=> {props.history.push('/dashboard')
-	})
-}
+		props.register(data).then(() => {
+			props.history.push('/dashboard');
+		});
+	};
 	console.log(errors);
 
 	return (
@@ -28,6 +40,7 @@ const RestaurantCreateAccountPage = props => {
 						name='Username'
 						ref={register({ required: true, maxLength: 80 })}
 					/>
+					{errors.Username && <p className='errors'>Username Required</p>}
 					<input
 						className='inputs form-control'
 						type='password'
@@ -35,6 +48,8 @@ const RestaurantCreateAccountPage = props => {
 						name='Password'
 						ref={register({ required: true, max: 8 })}
 					/>
+					{errors.Password && <p className='errors'>Password Required</p>}
+
 					<input
 						className='inputs form-control'
 						type='text'
@@ -42,6 +57,7 @@ const RestaurantCreateAccountPage = props => {
 						name='Name'
 						ref={register({ required: true })}
 					/>
+					{errors.Name && <p className='errors'>Name Required</p>}
 					<input
 						className='inputs form-control'
 						type='text'
@@ -49,6 +65,8 @@ const RestaurantCreateAccountPage = props => {
 						name='City'
 						ref={register({ required: true })}
 					/>
+					{errors.City && <p className='errors'>City Required</p>}
+
 					<input
 						className='inputs form-control'
 						type='email'
@@ -56,16 +74,17 @@ const RestaurantCreateAccountPage = props => {
 						name='Email'
 						ref={register({ required: true, pattern: /^\S+@\S+$/i })}
 					/>
+					{errors.Email && <p className='errors'>Email Required</p>}
 					<input className='inputs' type='submit' />
 				</form>
 			</div>
 		</Titles>
 	);
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
 	return {
-		signingUp: state.signingUp
+		signingUp : state.signingUp,
 	};
 };
-export default connect(mapStateToProps, {signup})(RestaurantCreateAccountPage);
+export default connect(mapStateToProps, { signup })(RestaurantCreateAccountPage);
