@@ -1,19 +1,30 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import styled from 'styled-components';
-import { login } from '../actions/index';
+import { login } from '../../actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 const Titles = styled.div`font-family: 'Girassol', cursive;`;
 
 const RestaurantLoginPage = (props) => {
+	// const { register, handleSubmit, errors } = useForm();
+	// const onSubmit = (data) => {
+	// 	console.log(data);
+	// 	props.login(data).then(() => props.history.push('/dashboard'));
+	// };
+	// console.log(errors);
 	const { register, handleSubmit, errors } = useForm();
-	const onSubmit = (data) => {
+	const onSubmit = (data, e) => {
+		e.preventDefault();
+		axiosWithAuth().post('api/users/login', data).then((res) => {
+			console.log(res.data);
+			localStorage.setItem('token', res.data.token);
+			props.history.push('/dashboard');
+		});
 		console.log(data);
-		props.login(data).then(() => props.history.push('/dashboard'));
 	};
-	console.log(errors);
 
 	return (
 		<Titles className='login-page'>
@@ -24,20 +35,23 @@ const RestaurantLoginPage = (props) => {
 						className='inputs form-control'
 						type='text'
 						placeholder='Username'
-						name='Username'
+						name='username'
 						ref={register({ required: true, maxLength: 80 })}
 					/>
-					{errors.Username && <p className='errors'>Username Required</p>}
+					{errors.username && <p className='errors'>Username Required</p>}
 					<input
 						className='inputs form-control'
 						type='password'
 						placeholder='Password'
-						name='Password'
+						name='password'
 						ref={register({ required: true, max: 8 })}
 					/>
-					{errors.Password && <p className='errors'>Password Required</p>}
-					<input className='inputs' type='submit' />
+					{errors.password && <p className='errors'>Password Required</p>}
+					<input className='inputs buttons' type='submit' />
 				</form>
+				<Link className='inputs' to='/register'>
+					<p> New to Restaurant Passport? Sign up here. </p>
+				</Link>
 			</div>
 		</Titles>
 	);
