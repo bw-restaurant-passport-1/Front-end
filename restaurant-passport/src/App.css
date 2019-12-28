@@ -161,6 +161,12 @@ table {
 	margin: 1rem auto;
 	width: 80%;
 }
+.buttons {
+	background-color: goldenrod;
+	color: white;
+	border-radius: 40px;
+	width: 30%;
+}
 
 .form-control {
 	display: block;
