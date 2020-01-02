@@ -282,13 +282,17 @@ const RestaurantList = () =>{
 
 
  
-
+    const handleReset = (e) => {
+        e.preventDefault();
+        setSearchTerm({category: "", rating: 0, city: ""});
+        setHover(0);
+    }
 
 
     return (
         <div className="main_container">
 
-            <form className="rest_form">
+            <form className="rest_form" onReset={handleReset}>
                 <legend>Filter Restaurants by:</legend>
                 <label htmlFor="category">Category</label>
                 <input
@@ -312,6 +316,7 @@ const RestaurantList = () =>{
                     onChange={handleChange}
                     value={searchTerm.city}
                 />
+                <button type="reset" value="reset">Clear Search</button>
             </form>
             
             <div >

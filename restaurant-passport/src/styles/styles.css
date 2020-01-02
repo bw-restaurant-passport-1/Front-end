@@ -120,6 +120,9 @@
 .rest_form label {
     margin-bottom: 10px;
 }
+.rest_form button {
+    font-family: 'Raleway', sans-serif;
+}
 
 
 /* ////////////////////////////// */
@@ -242,8 +245,7 @@
     background: #DAA520;
     bottom: 0;
     padding: 2rem 3rem;
-    
-    
+    font-family: 'Raleway', sans-serif;
 }
 
 .footer .links {
