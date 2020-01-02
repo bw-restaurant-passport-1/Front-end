@@ -1,6 +1,6 @@
 import React from 'react';
-import RestaurantLoginPage from './components/restaurantLoginPage';
-import restaurantCreateAccountPage from './components/restaurantCreateAccoutPage';
+import RestaurantLoginPage from './components/accounts/restaurantLoginPage';
+import RestaurantCreateAccountPage from './components/accounts/restaurantCreateAccountPage';
 import { Route } from 'react-router-dom';
 import './App.css';
 import Dashboard from "./components/Dashboard/Dashboard.js";

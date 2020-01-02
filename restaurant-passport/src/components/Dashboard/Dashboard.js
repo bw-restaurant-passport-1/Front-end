@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import styled from "styled-components";
-import Navbar from "../Navbar/Navbar.js";
+// import styled from "styled-components";
+// import Navbar from "../Navbar/Navbar.js";
 import Profile from "../Profile/Profile.js";
 import RestaurantsDashboard from "../RestaurantsDashboard/RestaurantsDashboard.js";
 import Footer from "../Footer/Footer.js";
