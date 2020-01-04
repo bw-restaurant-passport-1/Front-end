@@ -10,7 +10,7 @@ const Profile  =  () => {
 
     const user ={
         username: "jacob1",
-        location: "glendale",
+        location: "glendale, AZ",
         email: "jacob1@lambda.com"
     }
 
@@ -32,8 +32,8 @@ const Profile  =  () => {
             </div>
 
             <div className="profile_options">
-                <div><MdBorderColor/><span>{} Reviews</span></div>
-                <div><MdCameraAlt/><span>{} Photos</span></div>
+                <div><MdBorderColor/><span> {user.reviews ? user.reviews : "0"} Reviews</span></div>
+                <div><MdCameraAlt/><span> {user.photos ? user.photos : "0"} Photos</span></div>
             </div>
         </div>
     )

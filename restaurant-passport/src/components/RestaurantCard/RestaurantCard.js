@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+import {Link} from "react-router-dom";
 import FaBookmarkO from "react-icons/lib/fa/bookmark-o";
 import FaStar from "react-icons/lib/fa/star";
+import { Router } from "react-router";
 
 
 
@@ -14,15 +15,9 @@ import FaStar from "react-icons/lib/fa/star";
 
 
 
-const RestaurantCard = () => {
+const RestaurantCard = ({restaurant}) => {
 
-    const restaurant = {
-        restaurantName: "Michael’s Food Place",
-        restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-        rating: 3,
-        been_here: true,
-        
-    };
+    
 
 
     const BookMarkMe = () => {

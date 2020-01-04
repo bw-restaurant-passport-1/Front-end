@@ -10,21 +10,21 @@ const RestaurantList = () =>{
         {        
             restaurantName: "Michael’s Food Place",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 1,
             been_here: true,
             category: "chinesse",
             city: "phoenex"
         },{
             restaurantName: "Kibuki's",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 4,
             been_here: false,
             category: "jappanese",
             city: "phoenex"
         }, {
             restaurantName: "Koichi's",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 2,
             been_here: true,
             category: "wtf",
             city: "phoenex"
@@ -40,7 +40,15 @@ const RestaurantList = () =>{
         {
             restaurantName: "Sam's Subs",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 5,
+            been_here: false,
+            category: "mexica",
+            city: "hellow"
+        },
+        {
+            restaurantName: "Sam's Subs",
+            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+            rating: 1,
             been_here: false,
             category: "mexica",
             city: "hellow"
@@ -56,7 +64,15 @@ const RestaurantList = () =>{
         {
             restaurantName: "Sam's Subs",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 5,
+            been_here: false,
+            category: "mexica",
+            city: "hellow"
+        },
+        {
+            restaurantName: "Sam's Subs",
+            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+            rating: 2,
             been_here: false,
             category: "mexica",
             city: "hellow"
@@ -72,7 +88,15 @@ const RestaurantList = () =>{
         {
             restaurantName: "Sam's Subs",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 1,
+            been_here: false,
+            category: "mexica",
+            city: "hellow"
+        },
+        {
+            restaurantName: "Sock Subs",
+            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+            rating: 0,
             been_here: false,
             category: "mexica",
             city: "hellow"
@@ -88,7 +112,7 @@ const RestaurantList = () =>{
         {
             restaurantName: "Sam's Subs",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 2,
             been_here: false,
             category: "mexica",
             city: "hellow"
@@ -104,7 +128,15 @@ const RestaurantList = () =>{
         {
             restaurantName: "Sam's Subs",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 5,
+            been_here: false,
+            category: "mexica",
+            city: "hellow"
+        },
+        {
+            restaurantName: "Sam's Subs",
+            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+            rating: 4,
             been_here: false,
             category: "mexica",
             city: "hellow"
@@ -120,39 +152,7 @@ const RestaurantList = () =>{
         {
             restaurantName: "Sam's Subs",
             restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
+            rating: 1,
             been_here: false,
             category: "mexica",
             city: "hellow"
@@ -200,31 +200,7 @@ const RestaurantList = () =>{
 
  
 
-        /*
-        switch (searchKey) {
-            case = "category":
-                results = restaurants.filter(rest => {
-                    return rest[searchKey].toLowerCase().includes(searchTerm[searchKey].toLowerCase());
-                });
-                break;
-        }
-        */
-        // if(SearchKey === "") {
-        //     results = restaurants.map(x => x);
-        //     console.log("Search Key empty");
-        // } else if (!isNaN(SearchKey)) {
-        //     console.log("Search Key is a number");
-        //     results = restaurants.filter(rest => {
-        //         console.log(rest)
-        //         return 
-        //     })
-        // } else {
-        //     results = restaurants.filter(rest => {
-        //         console.log(searchTerm[SearchKey]);
-        //         return rest[SearchKey].toLowerCase().includes(searchTerm[SearchKey].toLowerCase());
-        //     })
-        // }
-
+       
         console.log(searchResults);
 
         setSearchResults(results);
@@ -305,7 +281,7 @@ const RestaurantList = () =>{
 
 
                 <label htmlFor="rating">Rating</label>
-                <div className="star_rating">{stars}</div>
+                <div className="rating">{stars}</div>
 
 
                 <label htmlFor="City">City</label>
@@ -316,7 +292,7 @@ const RestaurantList = () =>{
                     onChange={handleChange}
                     value={searchTerm.city}
                 />
-                <button type="reset" value="reset">Clear Search</button>
+                <button type="reset" value="reset">Clear Filter</button>
             </form>
             
             <div >
@@ -330,9 +306,9 @@ const RestaurantList = () =>{
                     {searchResults.length <= 0  ? 
                             <h2>Nothing was found!</h2>
                         : 
-                        searchResults.map( rest => {
+                        searchResults.map( restdata => {
                             // console.log(rest);
-                            return <RestaurantCard />;
+                            return <RestaurantCard restaurant={restdata} />;
                         }) 
                     }
                 </div>  
