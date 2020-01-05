@@ -1,5 +1,5 @@
-import React from "react";
-import useFrom from "react-hook-form";
+import React,{ useState } from "react";
+import useForm from "react-hook-form";
 import { register } from "../../serviceWorker";
 import inbox from "react-icons/lib/fa/inbox";
 
@@ -7,39 +7,57 @@ import inbox from "react-icons/lib/fa/inbox";
 
 const AddRestaurant = (props) => {
 
-// restaurantName	String	
-// streetAddress	String
-// city	            String	
+    const {register, handleSubmit, errors, formState} = useForm();
+    const {isSubmitting, setSubmitting} = useState(false)
+
+    const onSubmit = (data, e) => {
+        e.preventDefault();
+        
+        console.log(formState.isSubmitting);
+        console.log(data);
+    }
+// restaurantName	String	REQ
+// streetAddress	String  REQ
+// city	            String	REQ
 // zipcode	String
 // phoneNumber	String
 // websiteURL	String	
 // restaurantPictureURL	String
 
+    console.log(errors);
     return (
         <div className="add_rest">
             <div className="add_rest_bg">
-                
+                &nbsp;
+                {/* <img src='../../images/add-restaurant-img.jpg'/> */}
             </div>
             <div className="add_rest_container">
                 <h1 className="add_rest_title">Get Started</h1>
-                <form className="add_rest_form">
+                <form className="add_rest_form" onSubmit={handleSubmit(onSubmit)}>
                     <input
+                        className={errors.restaurantName && "add_rest_errors"}
                         type="text"
-                        placeholder="Restaurant Name"
+                        placeholder={`Restaurant Name ${errors.restaurantName ? "is Required" : ""} `}
                         name="restaurantName"
                         ref={register({required: true})}
+                        style={{borderColor: errors.restaurantName && "red"}}
                     />
+                    {/* {errors.restaurantName && "Name required"} */}
                     <input
+                        className={errors.streetAddress && "add_rest_errors"}
                         type="address"
-                        placeholder="Street Address"
+                        placeholder={`Street Address ${errors.streetAddress ? "is Required" : ""} `}
                         name="streetAddress"
-                        ref={register()}
+                        ref={register({required: true})}
+                        style={{borderColor: errors.streetAddress && "red"}}
                     />
                     <input
+                        className={errors.city && "add_rest_errors"}
                         type="city"
-                        placeholder="City"
+                        placeholder={`City ${errors.city ? "is Required" : ""} `}
                         name="city"
-                        ref={register()}
+                        ref={register({required: true})}
+                        style={{borderColor: errors.city && "red"}}
                     />
                     <input 
                         type="zipcode"
@@ -65,7 +83,7 @@ const AddRestaurant = (props) => {
                         name="restaurantPictureURL"
                         reg={register()}
                     />
-                    <button className="rest_button" type="submit" >Create</button>
+                    <button disabled={formState.isSubmitting} className="rest_button" type="submit" >Create</button>
                 </form>
             </div>
         </div>

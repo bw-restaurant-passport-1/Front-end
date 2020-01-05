@@ -23,7 +23,7 @@ function App() {
 
 			<Route path="/dashboard/restaurants" component={RestaurantList} />
 			
-			<Route path="/dashboard/add_restaurant" component={AddRestaurant} />
+			<Route path="/dashboard/add-restaurant" component={AddRestaurant} />
 
 			<Route path='/dashboard' component={Footer} />
 		</div>
