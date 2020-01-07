@@ -1,8 +1,8 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import styled from 'styled-components';
-import {signup} from '../actions/index';
-import {connect} from 'react-redux';
+import { signup } from '../actions/index';
+import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 
 const Titles = styled.h1`font-family: 'Girassol', cursive;`;
@@ -11,7 +11,7 @@ const RestaurantCreateAccountPage = props => {
 	const { register, handleSubmit, errors } = useForm();
 	const onSubmit = data => {
 		console.log(data);
-		props.register(data).then(()=> {props.history.push('/dashboard')
+		props.signup(data).then(()=> {props.history.push('/dashboard')
 	})
 }
 	console.log(errors);
