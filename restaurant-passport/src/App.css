@@ -105,10 +105,16 @@ nav,
 section {
 	display: block;
 }
+html {
+	height: 100%;
+}
 body {
 	line-height: 1;
 	min-height: 100%;
 	position: relative;
+}
+#root,.App {
+	height: 100%;
 }
 ol,
 ul {

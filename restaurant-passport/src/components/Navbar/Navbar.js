@@ -1,8 +1,9 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
-import styles from '../../styles/styles.css';
 import HeaderWithLogOut from './logout';
 import { useDarkMode } from '../dark-mode-hooks/useDarkMode';
+
 
 const Navbar = () => {
 	const [ darkMode, setDarkMode ] = useDarkMode();
@@ -14,7 +15,7 @@ const Navbar = () => {
 		<nav className='nav_bar'>
 			<a className='titlenav'>Restaurant Passport</a>
 			<a>About</a>
-			<a>Search</a>
+			<Link to="/dashboard/add-restaurant">Add Restaurant</Link>
 			<a>Profile</a>
 			<HeaderWithLogOut />
 			<div className='dark-mode__toggle'>

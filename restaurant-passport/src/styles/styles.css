@@ -1,10 +1,24 @@
 /* import styles from "../../styles/styles.css" */
 
 /* Dashboard Component */
-.dashboard {
-	display: grid;
-	grid-template-columns: 300px auto;
-	padding-bottom: 200px;
+.main_container {
+    display: grid;
+    grid-template-columns: 300px auto;
+    padding-bottom: 200px;
+    margin-top: 12px;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    min-height: 100%;
+}
+
+@media screen and (max-width:1230px) {
+
+    .main_container{
+        grid-template-columns: auto;
+        grid-template-rows: 280px auto;
+    }
+
+
 }
 
 .nav_bar {
@@ -31,9 +45,10 @@
 	text-transform: Uppercase;
 }
 
-/* .nav_bar > a {
-	color: #191970;
-} */
+.nav_bar a {
+    text-decoration: none;
+
+} 
 .nav_bar a:visited {
 	color: inherit;
 }
@@ -44,25 +59,49 @@
 
 /* Profile Component */
 .profile {
-	width: 180px;
-	display: inline-block;
-	height: 380px;
-	margin: 40px 60px;
-	text-align: center;
-	border-bottom: 10px solid #191970;
-	font-family: 'Special Elite', cursive;
-	font-size: 18px;
-	/* grid-column-start: 1;
+    position: relative;
+    width: 180px;
+    display: inline-block;
+    /* height: 48%; */
+    margin: 40px 60px;
+    text-align: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 18px;
+    /* grid-column-start: 1;
     grid-column-end: 1; */
+
+}
+
+@media screen and (max-width:1230px) { 
+    .profile {
+        display: grid;
+        grid-template-columns: 180px auto auto auto;
+        grid-template-rows: auto;
+        width: auto;
+        border-bottom: 10px solid #191970;
+    }
+
+    .profile_img_div{
+        grid-row: 1/3;
+    }
+    .profile .profile_options {
+        border-bottom: none;
+    }
+}
+
+.profile div, p{
+    margin-bottom: 12px;
+    word-wrap: break-word;
 }
 
 .profile_img_div {
-	position: relative;
+    position: relative;
+    display: block;
+    text-align: center;
 }
 
 .profile_img {
-	width: 180px;
-	height: 180px;
+   width: 180px;
 }
 
 .profile_edit {
@@ -70,7 +109,6 @@
 	right: 15px;
 	top: 10px;
 	fill: white;
-	text-shadow: black;
 }
 
 .profile_edit > svg:hover {
@@ -86,35 +124,223 @@
 }
 
 .profile_options {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 10px solid #191970;
 }
 
 .profile_options > div {
 	margin-bottom: 18px;
 }
 
-/* Added Restaurants Component */
+
+/* FORM from Restaurant List */
+
+.rest_form {
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background: rgb(255, 255, 255); */
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 25px 0;
+    height: 450px;
+    
+}
+
+@media screen and (max-width:1230px) { 
+    .rest_form {
+        flex-direction: row;
+        height: auto;
+        padding: 0px;
+        justify-content: center;
+    }
+    .main_container .rest_form input, .rating{
+        margin-bottom: 0px;
+        margin: 0px 12px;
+    }
+    .main_container .rest_form .rating{
+        margin-bottom: 0px;
+    }
+    .main_container .rest_form legend {
+        margin-bottom: 80px;
+    }
+}
+
+.rest_form legend {
+    margin-bottom: 50px;
+}
+
+.rest_form input, .rating {
+    margin-bottom: 40px;
+
+}
+
+.rest_form input {
+    border: 1px solid #DAA520
+}
+
+.rest_form label {
+    margin-bottom: 10px;
+}
+.rest_form button {
+    font-family: 'Raleway', sans-serif;
+    background: #DAA520;
+    border: none;
+    color: white;
+    padding: .4rem 1rem;
+    font-size: 16px;
+}
+
+
+/*      Add Restaurant Form          */
+
+.add_rest {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: minmax(100%,100%);
+    margin-top: 12px;
+    position: relative;
+    min-height: 100%;
+    font-family: 'Special Elite', cursive;
+    padding-bottom: 200px;
+
+}
+
+.add_rest_bg {
+    display: inline-block;
+    background-image: url("../components/AddRestaurant/add-restaurant-img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100%;
+}
+
+.add_rest_container {
+    display: inline-block;
+    height: 100%;
+}
+
+.add_rest_title {
+    text-align: center;
+    margin-top: 6rem;
+    font-size: 40px;
+    color: #DAA520;
+    margin-bottom: 1rem;
+}
+
+.add_rest_form input,.rest_button {
+    font-family: 'Special Elite', cursive;
+}
+
+.add_rest_form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 3rem;
+    margin-bottom: 9rem;
+}
+
+.add_rest_form input{
+    border: none;
+    border-bottom: 2px solid #DAA520;
+    margin-bottom: 2rem;
+    color: #DAA520;
+    transition: border 300ms;
+    font-size: 1.4rem;
+}
+.add_rest_form input:focus {
+    border-bottom: 4px solid #daa520;
+    
+}
+.add_rest_form input::placeholder {
+    color: #DAA520;
+    opacity: .6;
+
+}
+
+
+.add_rest_form .add_rest_errors::placeholder {
+    color: red;
+    
+}
+
+.add_rest_form .rest_button {
+    align-self: center;
+    text-align: center;
+    background: #DAA520;
+    border: none;
+    color: white;
+    padding: .6rem 2rem;
+    font-size: 16px;
+    
+}
+
+.rest_button:hover {
+    cursor: pointer;
+    color: #DAA520;
+    background: white;
+    border: 1px solid #DAA520;
+}
+
+
+/* Restaurants Component */
+
+.rest_sections {
+    padding: 12px 0;
+}
 
 .restaurants_container {
-	/* grid-column-start: 2;
-    grid-column-end: 4; */
-	height: 1000px;
-	margin: 40px 40px;
-	font-family: 'Raleway', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(265px, 1fr));
+    grid-auto-rows: auto;
+    grid-gap: 40px;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2rem;
+    list-style: none;
+    
 }
 
+
+.rest_header {
+    padding: 0 3%;
+}
+.rest_header > a {
+    text-decoration:none;
+    float: right;
+}
+
+.rest_header > a:visited{
+    color: inherit;
+}
+
+.rest_header >a:hover{
+    color: #DAA520;
+}
+.rest_header .rest_title, a{
+    padding-bottom: 6px;
+    display: inline-block;
+}
+
+
+/* Restaurant Cards */
 .rest_card {
-	width: 220px;
-	display: inline-block;
+    /* max-width: 300px; */
+    display: inline-block;
+    /* min-width: 260px; */
+    padding: 10px;
 }
 .rest_card .rest_img {
-	width: 200px;
-	/* border: black solid 1px; */
+    /* border: black solid 1px; */
+    height: auto;
+    max-width: 100%;
 }
 
 .rest_card .img_container {
-	position: relative;
+    position: relative;
+    width: 100%;
 }
 
 .img_container .been_here {
@@ -125,6 +351,26 @@
 	top: -10px;
 }
 
+.rating .gold {
+    fill: gold;
+}
+
+.rest_info {
+    position: relative;
+}
+
+.rest_info .see_reviews{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.rest_info .see_reviews:hover{
+    color: #DAA520;
+    cursor: pointer;
+}
+
+
 .img_container .bookmark {
 	position: absolute;
 	z-index: 3;
@@ -133,26 +379,43 @@
 	cursor: pointer;
 }
 
-.bookmark svg g {
-	color: rgba(160, 160, 160, 0.87);
+
+.bookmark svg{
+    fill: rgb(236, 236, 236);
 }
+
+.bookmark svg:hover{
+    fill: rgb(129, 129, 129);
+}
+
+/* /////////////Footer/////////////////////// */
 
 .footer {
-	height: 200px; /* Height of the footer */
-	/* grid-column-start: 1;
-	grid-column-end: 4; */
-	display: grid;
-	row-gap: 0;
-	background: #daa520;
-	/* bottom: 0; */
-	grid-template-columns: repeat(3, 1fr);
-	width: 100%;
-	text-align: center;
-	padding-top: 15px;
+    box-sizing: border-box;
+    width:100%;
+    position: absolute;
+    min-height: 200px;   /* Height of the footer */
+    /* grid-column-start: 1;
+    grid-column-end: 4; */
+    background: #DAA520;
+    bottom: 0;
+    padding: 2rem 3rem;
+    font-family: 'Raleway', sans-serif;
 }
 
+.footer .links {
+    display: flex;
+    width: 60%;
+    flex-wrap: wrap;
+}
+
+
 .footer a {
-	text-decoration: none;
+    display: inline-block;
+    text-decoration: none;
+    /* padding-right: 10%; */
+    padding-bottom: 18px;
+    width: 33%;
 }
 
 .footer a:visited {
@@ -195,8 +458,17 @@
 
 .dark-mode {
 	color: goldenrod;
-	background-color: #313843;
+    background-color: #313843;
+    
 }
+/* To keep rating stars black */
+.dark-mode .rating svg {
+    color: rgb(0, 0, 0);
+}
+.dark-mode input {
+    background: #4a4848;
+}
+
 .navbar {
 	background-color: #1f2022;
 	border: none;
