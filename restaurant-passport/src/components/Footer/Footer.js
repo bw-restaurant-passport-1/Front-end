@@ -18,15 +18,18 @@ const Footer = () => {
     return (
 
         <div className="footer">
-            <Link to="/">About</Link>
-            <Link to="/">Sign Out</Link>
-            <Link to="/">Join</Link>
-            <Link to="/">Ratings</Link>
-            <Link to="/">Reviews</Link>
-            <Link to="/">Nearby Restaurants</Link>
-            <Link to="/">Contact Us</Link>
-            <Link to="/">Help</Link>
-            <Link to="/">Search</Link>
+            <div className="links">
+                <Link to="/">About</Link>
+                <Link to="/">Reviews</Link>
+                <Link to="/">Help</Link>
+                <Link to="/">Sign Out</Link>
+                <Link to="/">Nearby Restaurants</Link>
+                <Link to="/">Search</Link>
+                <Link to="/">Join</Link>
+                <Link to="/">Restaurants</Link>
+                <Link to="/">Ratings</Link>               
+                <Link to="/">Contact Us</Link>
+            </div>
         </div>
     )
 }

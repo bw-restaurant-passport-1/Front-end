@@ -4,18 +4,30 @@ import RestaurantCreateAccountPage from './components/accounts/restaurantCreateA
 import { Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import './App.css';
-import Dashboard from './components/Dashboard/Dashboard.js';
-import NavBar from './components/Navbar/Navbar.js';
-import Footer from './components/Footer/Footer.js';
+import Dashboard from "./components/Dashboard/Dashboard.js";
+import NavBar from "./components/Navbar/Navbar.js";
+import Footer from "./components/Footer/Footer.js";
+import RestaurantList from "./components/RestaurantList/RestaurantList.js";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop.js";
+import AddRestaurant from "./components/AddRestaurant/AddRestaurant.js";
+
 
 function App() {
 	return (
 		<div className='App'>
+			<ScrollToTop />
 			<Route exact path='/' component={RestaurantLoginPage} />
 			<Route path='/register' component={RestaurantCreateAccountPage} />
-      		<PrivateRoute path='/dashboard' component={NavBar} />
-			  <PrivateRoute path="/dashboard" component={Dashboard} />
-			<PrivateRoute path='/dashboard' component={Footer} />
+			
+      		<Route path='/dashboard' component={NavBar} />
+
+			<Route exact path="/dashboard" component={Dashboard} />
+
+			<Route path="/dashboard/restaurants" component={RestaurantList} />
+			
+			<Route path="/dashboard/add-restaurant" component={AddRestaurant} />
+
+			<Route path='/dashboard' component={Footer} />
 		</div>
 	);
 }
