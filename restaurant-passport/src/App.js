@@ -2,7 +2,7 @@ import React from 'react';
 import RestaurantLoginPage from './components/accounts/restaurantLoginPage';
 import RestaurantCreateAccountPage from './components/accounts/restaurantCreateAccountPage';
 import { Route } from 'react-router-dom';
-import PrivateRoute from './utils/PrivateRoute';
+// import PrivateRoute from './utils/PrivateRoute';
 import './App.css';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import NavBar from './components/Navbar/Navbar.js';
@@ -19,9 +19,9 @@ function App() {
 			<Route exact path='/' component={RestaurantLoginPage} />
 			<Route path='/register' component={RestaurantCreateAccountPage} />
 
-			<Route exact path='/dashboard' component={Dashboard} />
+      		<Route path='/dashboard' component={NavBar} />
 
-			<Route path='/dashboard' component={NavBar} />
+			<Route exact path='/dashboard' component={Dashboard} />
 
 			<Route path='/dashboard/restaurants' component={RestaurantList} />
 

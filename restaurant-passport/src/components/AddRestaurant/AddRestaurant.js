@@ -2,6 +2,8 @@ import React,{ useState } from "react";
 import useForm from "react-hook-form";
 import { register } from "../../serviceWorker";
 import inbox from "react-icons/lib/fa/inbox";
+import {addRestaurant} from '../../actions/index';
+import {connect} from 'react-redux';
 
 
 
@@ -9,10 +11,10 @@ const AddRestaurant = (props) => {
 
     const {register, handleSubmit, errors, formState} = useForm();
     const {isSubmitting, setSubmitting} = useState(false)
-
     const onSubmit = (data, e) => {
         e.preventDefault();
-        
+        props.addRestaurant(props.restaurants)
+        props.history.push('/dashboard')
         console.log(formState.isSubmitting);
         console.log(data);
     }
@@ -90,5 +92,10 @@ const AddRestaurant = (props) => {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        restaurants: state.restaurants
+    }
+}
 
-export default AddRestaurant;
+export default connect(mapStateToProps, {addRestaurant}) (AddRestaurant);
