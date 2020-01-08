@@ -45,18 +45,17 @@ export const FETCH_RESTAURANT_START = 'FETCH_RESTAURANT_START';
 export const FETCH_RESTAURANT_SUCCESS = 'FETCH_RESTAURANT_SUCCESS';
 export const FETCH_RESTAURANT_ERROR = 'FETCH_RESTAURANT_ERROR';
 
-export const fetchRestaurant = state => dispatch => {
+export const fetchRestaurant = id => dispatch => {
   dispatch({type: FETCH_RESTAURANT_START});
   return axiosWithAuth()
-  .get('/api/restaurants', state)
+  .get(`/api/passports/user/${id} `)
   .then(res => {
     console.log('get', res)
-    localStorage.setItem('token', res.data);
-    dispatch({type: FETCH_RESTAURANT_SUCCESS, payload: res.data});
+    dispatch({type: FETCH_RESTAURANT_SUCCESS, payload: res});
   })
   .catch(err => {
     console.log('err', err.response);
-    dispatch({type: FETCH_RESTAURANT_ERROR, payload: 'res.data'});
+    dispatch({type: FETCH_RESTAURANT_ERROR });
   })
 }
 
