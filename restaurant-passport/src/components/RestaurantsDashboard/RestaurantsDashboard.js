@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import RestaurantCard from "../RestaurantCard/RestaurantCard.js";
 import {fetchRestaurant} from '../../actions/index';
 import {connect} from 'react-redux';
@@ -7,7 +7,6 @@ import {Link} from "react-router-dom";
 const RestaurantsDashboard = (props) => {
 
     //Save the data for 3 of each section
-    const [restaurant, setRestaurant] = useState([]);
     const restaurants = props.restaurants
     // const restaurant = {
     //     restaurantName: "Michael’s Food Place",
@@ -16,10 +15,6 @@ const RestaurantsDashboard = (props) => {
     //     been_here: true,
         
     // };
-
-    const handleChanges = e => {
-        setRestaurant({...restaurant, [e.target.name]: e.target.value})
-    }
 
     useEffect(()=> {
         props.fetchRestaurant(1);

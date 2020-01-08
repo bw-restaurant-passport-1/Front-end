@@ -23,8 +23,6 @@ function App() {
 
 			<Route exact path='/dashboard' component={Dashboard} />
 
-			<Route path='/dashboard' component={NavBar} />
-
 			<Route path='/dashboard/restaurants' component={RestaurantList} />
 
 			<Route path='/dashboard/add-restaurant' component={AddRestaurant} />
