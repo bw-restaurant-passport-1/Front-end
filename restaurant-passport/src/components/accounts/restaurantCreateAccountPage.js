@@ -10,6 +10,7 @@ const Titles = styled.h1`
   font-family: 'Girassol', cursive;
 `;
 
+
 const RestaurantCreateAccountPage = props => {
   const { register, handleSubmit, errors } = useForm();
  
@@ -21,6 +22,7 @@ const RestaurantCreateAccountPage = props => {
     });
   };
   console.log(errors);
+
 
   return (
     <Titles className='register-page'>
