@@ -28,8 +28,12 @@ function App() {
 			
 			<PrivateRoute path="/dashboard/add-restaurant" component={AddRestaurant} />
 
+
 			<PrivateRoute path='/dashboard' component={Footer} />
 			<Route path='dashboard/restaurant/info' component={RestaurantInfo} />
+
+
+			
 
 		</div>
 	);
