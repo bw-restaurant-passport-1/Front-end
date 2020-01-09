@@ -2,7 +2,8 @@ import React,{ useState } from "react";
 import useForm from "react-hook-form";
 import { register } from "../../serviceWorker";
 import inbox from "react-icons/lib/fa/inbox";
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import {addRestaurant} from '../../actions/index';
+import {connect} from 'react-redux';
 
 
 
@@ -12,22 +13,19 @@ const AddRestaurant = (props) => {
 
     const zipcodeReg = /^\d{5}$/;
     const phoneRegEx = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
-    // const urlRegEx = /^[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU)$/;
     const urlRegEx = /^(https:\/\/|http:\/\/)?[a-zA-Z0-9\-\.]+\.(com|org|net|mil|edu|COM|ORG|NET|MIL|EDU)+[/a-zA-Z0-9\-\.]*?$/;
 
     console.log(props);
-    const onSubmit = (data, e) => {
-        e.preventDefault();
-        console.log(e);
-        axiosWithAuth().post('/api/restaurant',data).then((res) => {
-            console.log(res.data);
-            
-            //after submiting direct to restaurnat page of rest that was added
-            // props.history.replace(/dashboard/restaurant/:id)
-        })
 
         
         
+    const {isSubmitting, setSubmitting} = useState(false)
+    const onSubmit = (data, e) => {
+        e.preventDefault();
+        props.addRestaurant(props.restaurants)
+        props.history.push('/dashboard')
+        console.log(formState.isSubmitting);
+        console.log(data);
     }
 // restaurantName	String	REQ
 // streetAddress	String  REQ
@@ -115,5 +113,10 @@ const AddRestaurant = (props) => {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        restaurants: state.restaurants
+    }
+}
 
-export default AddRestaurant;
+export default connect(mapStateToProps, {addRestaurant}) (AddRestaurant);

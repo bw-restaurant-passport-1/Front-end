@@ -1,61 +1,24 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import RestaurantCard from "../RestaurantCard/RestaurantCard.js";
+import {fetchRestaurant} from '../../actions/index';
+import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
-
-import { axiosWithAuth } from "../../utils/axiosWithAuth.js";
 
 const RestaurantsDashboard = (props) => {
 
     //Save the data for 3 of each section
-
-
-    const [restaurants , setRestaurants] = useState([]);
-    
-
-    // const [allRestaurants, setAllRest] = useState(props.restaurants);
-
-
-    const [allStamptedRest, setAllStampedRest] = useState([]);
-    const [allRecommendedRest, setAllRecommendedRest] = useState([]);
-    
-    const restaurant = {
-        "id": 1,
-		"restaurantName": "Chili's",
-		"streetAddress": "3917 S Gilbert Rd",
-		"city": "Gilbert",
-		"zipcode": "85296",
-		"phoneNumber": "(480) 812-4636",
-		"websiteURL": "www.chilis.com",
-		"restaurantPictureURL": "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg"
-    };
-
-    // console.log(props)
-
+    const restaurants = props.restaurants
+    // const restaurant = {
+    //     restaurantName: "Michael’s Food Place",
+    //     restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //     rating: 3,
+    //     been_here: true,
+        
+    // };
 
     useEffect(()=> {
-        axiosWithAuth().get('/api/restaurants').then((res)=> {
-            console.log(res);
-            setRestaurants(res.data);
-            
-        },(error) =>{
-            console.log(error);
-        })
-
- 
-
-
-    },[])
-
-    const loadingRest = () => {
-        return (
-            <div>loading</div>
-        )
-    }
-
-    console.log(restaurants)
-
-    
-
+        props.fetchRestaurant(1);
+    }, [])
     return (
 
         <div>
@@ -67,14 +30,9 @@ const RestaurantsDashboard = (props) => {
                 </div>
                 
                 <div className="restaurants_container">
-                    {/* DO a loop to show only 3 items here */}
-                    
-
-                    
-                    {/* <RestaurantCard restaurant= {restaurant}/> */}
-                    <RestaurantCard restaurant= {restaurants[0]}/>
-                    <RestaurantCard restaurant= {restaurants[1]}/>
-                    <RestaurantCard restaurant= {restaurants[3]}/>
+                    {restaurants.map(restaurants => {
+                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                    })}
                 </div>
                 
             </div>
@@ -86,9 +44,9 @@ const RestaurantsDashboard = (props) => {
                 </div>
                 
                 <div className="restaurants_container">
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
+                    {restaurants.map(restaurants => {
+                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                    })}
                 </div>
                 
             </div>
@@ -100,9 +58,9 @@ const RestaurantsDashboard = (props) => {
                 </div>
                 
                 <div className="restaurants_container">
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
+                    {restaurants.map(restaurants => {
+                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                    })}
                 </div>
                 
             </div>
@@ -110,5 +68,10 @@ const RestaurantsDashboard = (props) => {
     )
 
 }
+const mapStateToProps = state => {
+    return {
+        restaurants: state.restaurants
+    }
+}
 
-export default RestaurantsDashboard;
+export default connect(mapStateToProps, {fetchRestaurant}) (RestaurantsDashboard);

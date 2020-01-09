@@ -1,21 +1,19 @@
 import React from 'react';
 import useForm from 'react-hook-form';
 import styled from 'styled-components';
-// import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import { signup } from '../../actions/index';
+import { signup } from '../actions/index';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Titles = styled.h1`font-family: 'Girassol', cursive;`;
 
-const RestaurantCreateAccountPage = (props) => {
+const RestaurantCreateAccountPage = props => {
 	const { register, handleSubmit, errors } = useForm();
-	const onSubmit = (data) => {
+	const onSubmit = data => {
 		console.log(data);
-		props.register(data).then(() => {
-			props.history.push('/dashboard');
-		});
-	};
+		props.signup(data).then(()=> {props.history.push('/dashboard')
+	})
+}
 	console.log(errors);
 
 	return (
@@ -27,57 +25,47 @@ const RestaurantCreateAccountPage = (props) => {
 						className='inputs form-control'
 						type='text'
 						placeholder='Username'
-						name='username'
+						name='Username'
 						ref={register({ required: true, maxLength: 80 })}
 					/>
-					{errors.username && <p className='errors'>Username Required</p>}
 					<input
 						className='inputs form-control'
 						type='password'
 						placeholder='Password'
-						name='password'
+						name='Password'
 						ref={register({ required: true, max: 8 })}
 					/>
-					{errors.password && <p className='errors'>Password Required</p>}
-
 					<input
 						className='inputs form-control'
 						type='text'
 						placeholder='Name'
-						name='name'
+						name='Name'
 						ref={register({ required: true })}
 					/>
-					{errors.name && <p className='errors'>Name Required</p>}
 					<input
 						className='inputs form-control'
 						type='text'
 						placeholder='City'
-						name='city'
+						name='City'
 						ref={register({ required: true })}
 					/>
-					{errors.city && <p className='errors'>City Required</p>}
-
 					<input
 						className='inputs form-control'
 						type='email'
 						placeholder='Email'
-						name='email'
+						name='Email'
 						ref={register({ required: true, pattern: /^\S+@\S+$/i })}
 					/>
-					{errors.email && <p className='errors'>Email Required</p>}
-					<input className='inputs buttons' type='submit' />
+					<input className='inputs' type='submit' />
 				</form>
-				<Link className='inputs' to='/'>
-					<p> Already have an accout with Restaurant Passport? Sign in here.</p>
-				</Link>
 			</div>
 		</Titles>
 	);
-};
+}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
-		signingUp : state.signingUp,
+		signingUp: state.signingUp
 	};
 };
-export default connect(mapStateToProps, { signup })(RestaurantCreateAccountPage);
+export default connect(mapStateToProps, {signup})(RestaurantCreateAccountPage);
