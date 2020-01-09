@@ -463,7 +463,48 @@ a {
 
 /* Restaurant info */
 .info_img {
-	margin-top: 40px;
+	margin-top: 30px;
 	height: auto;
-	max-width: 30%;
+	max-width: 19%;
+	margin-left: 40px;
+}
+
+.buttons_info {
+	align-self: center;
+	text-align: center;
+	background: #daa520;
+	border: none;
+	color: white;
+	padding: .5rem .5rem;
+	font-size: 14px;
+	font-family: 'Special Elite', cursive;
+	margin-left: 220px;
+}
+
+.buttons_info:hover {
+	cursor: pointer;
+	color: #daa520;
+	background: white;
+	border: 1px solid #daa520;
+}
+.address {
+	margin-bottom: 10px;
+}
+
+.info-card {
+	padding-right: 20px;
+	width: 100%;
+}
+.address_info {
+	margin-left: 40px;
+	font-family: 'Special Elite', cursive;
+}
+.info_ratings {
+	margin-left: 40px;
+	font-family: 'Special Elite', cursive;
+}
+
+.info-title {
+	margin-left: 40px;
+	font-family: 'Special Elite', cursive;
 }
