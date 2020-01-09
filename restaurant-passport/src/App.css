@@ -113,7 +113,8 @@ body {
 	min-height: 100%;
 	position: relative;
 }
-#root,.App {
+#root,
+.App {
 	height: 100%;
 }
 ol,
