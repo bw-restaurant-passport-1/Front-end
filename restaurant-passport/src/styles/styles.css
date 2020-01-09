@@ -251,6 +251,10 @@ p {
 	opacity: .6;
 }
 
+.add_rest_form .add_rest_errors {
+	color: red;
+}
+
 .add_rest_form .add_rest_errors::placeholder {
 	color: red;
 }

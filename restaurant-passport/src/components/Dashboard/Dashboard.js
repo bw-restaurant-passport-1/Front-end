@@ -1,17 +1,25 @@
-import React, {useState} from "react";
-// import styled from "styled-components";
-// import Navbar from "../Navbar/Navbar.js";
+import React, {useState, useEffect} from "react";
 import Profile from "../Profile/Profile.js";
 import RestaurantsDashboard from "../RestaurantsDashboard/RestaurantsDashboard.js";
-import Footer from "../Footer/Footer.js";
 import styles from "../../styles/styles.css";
 
-//Where data is held for state 
+
+ 
 
 
-const Dashboard = ({data}) => {
 
 
+const Dashboard = (props) => {
+
+    //Where data is held for state
+
+    
+
+    const [user, setUser] = useState();
+
+
+    
+    
 
     return (
         <div className="main_container">
