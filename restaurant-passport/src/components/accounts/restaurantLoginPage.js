@@ -53,7 +53,8 @@ const RestaurantLoginPage = props => {
 
 const mapStateToProps = state => {
   return {
-    loggingIn: state.loggingIn
+    loggingIn: state.loggingIn,
+	user: state.user
   };
 };
 

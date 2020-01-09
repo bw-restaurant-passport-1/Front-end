@@ -2,6 +2,8 @@ import React,{ useState } from "react";
 import useForm from "react-hook-form";
 import { register } from "../../serviceWorker";
 import inbox from "react-icons/lib/fa/inbox";
+import { addRestaurant } from '../../actions/index';
+import { connect } from 'react-redux';
 
 
 
@@ -12,9 +14,22 @@ const AddRestaurant = (props) => {
 
     const onSubmit = (data, e) => {
         e.preventDefault();
+        // const finalRestaurant = {id: Date.now(),
+        // restaurantName: data.restaurantName,
+        // streetAddress: data.streetAddress,
+        // city: data.city,
+        // zipcode: data.zipcode,
+        // phoneNumber: data.phoneNumber,
+        // websiteURL: data.websiteURL,
+        // restaurantPictureURL: data.restaurantPictureURL
+        // }
         
         console.log(formState.isSubmitting);
-        console.log(data);
+        console.log(data,'add rest submit');
+        props.addRestaurant(data).then(()=>{
+            
+            props.history.push('/dashboard');
+        })
     }
 // restaurantName	String	REQ
 // streetAddress	String  REQ
@@ -53,35 +68,36 @@ const AddRestaurant = (props) => {
                     />
                     <input
                         className={errors.city && "add_rest_errors"}
-                        type="city"
+                        type="text"
                         placeholder={`City ${errors.city ? "is Required" : ""} `}
                         name="city"
                         ref={register({required: true})}
                         style={{borderColor: errors.city && "red"}}
                     />
                     <input 
-                        type="zipcode"
-                        placeholder="Zipcode"
+                        className={errors.zipcode && 'add_rest_errors'}
+                        type="text"
+                        placeholder={`ZipCode ${errors.zipcode ? "is Required":""}`}
                         name="zipcode"
-                        ref={register()}
+                        ref={register({required: false})}
                     />
                     <input
-                        type="phone"
+                        type="text"
                         placeholder="Phone Number"
                         name="phoneNumber"
-                        ref={register()}
+                        ref={register({required: false})}
                     />
                     <input
-                        type="url"
+                        type="text"
                         placeholder="Website URL"
                         name="websiteURL"
-                        ref={register()}
+                        ref={register({required: false})}
                     />
                     <input
-                        type="url"
+                        type="text"
                         placeholder="Restaurant Picture URL"
                         name="restaurantPictureURL"
-                        reg={register()}
+                        ref={register( {required: false})}
                     />
                     <button disabled={formState.isSubmitting} className="rest_button" type="submit" >Create</button>
                 </form>
@@ -90,5 +106,14 @@ const AddRestaurant = (props) => {
     )
 }
 
+const mapStateToProps = state => {
+  return {
+    isFetching: state.isFetching,
+    restaurants: state.restaurants
+    
+  };
+};
 
-export default AddRestaurant;
+export default connect(mapStateToProps, { addRestaurant })(
+  AddRestaurant
+);

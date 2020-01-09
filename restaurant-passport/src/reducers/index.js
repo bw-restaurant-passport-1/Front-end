@@ -16,8 +16,9 @@ import {
   UPDATE_RESTAURANT_ERROR
 } from '../actions/index';
 
+const localUser = JSON.parse(localStorage.getItem('user'));
 export const initialState = {
-  user: [],
+  user: localUser,
   loggingIn: false,
   username: '',
   error: '',
@@ -40,13 +41,14 @@ export const passportReducer = (state = initialState, action) => {
       return {
         ...state,
         loggingIn: false,
-        username: action.payload.username
+        user: action.payload
         
       };
       
     case LOGIN_ERROR:
       return {
         ...state,
+        
         loggingIn: false
         //TODO: error: action.payload
       };

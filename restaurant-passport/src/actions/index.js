@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+ import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import jwtDecode from 'jwt-decode';
 
@@ -10,14 +10,16 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const login = state => dispatch => {
   dispatch({ type: LOGIN_START });
   //return will return axioswithauth vs axios
-  return axiosWithAuth()
-    .post('/api/users/login', state)
+  return axios.post('https://restaurant-passport1.herokuapp.com/api/users/login', state)
     .then(res => {
       console.log(res);
       const userInfo = jwtDecode(res.data.token);
+      const localUser = JSON.stringify(res.data);
       console.log(userInfo);
       localStorage.setItem('token', res.data.token); // or whatever response is named on user object
-      dispatch({ type: LOGIN_SUCCESS, payload: userInfo });
+      localStorage.setItem('user',localUser)
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      console.log(res.data,"login response")
     })
     .catch(err => {
       console.log(err);
@@ -31,11 +33,12 @@ export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
 export const signup = state => dispatch => {
   dispatch({ type: SIGNUP_START });
-  return axiosWithAuth()
-    .post('/api/users/register', state)
+  return axios.post('https://restaurant-passport1.herokuapp.com/api/users/register', state)
     .then(res => {
       console.log(res);
+      const localUser = JSON.stringify(res.data);
       localStorage.setItem('token', res.data.token); //whatever token obect key is on object
+      localStorage.setItem('user',localUser)
       dispatch({ type: SIGNUP_SUCCESS, payload: res.data }); //whatever the token object key is
     })
     .catch(err => {
@@ -54,6 +57,7 @@ export const fetchRestaurant = state => dispatch => {
     .then(res => {
       console.log('get', res);
       localStorage.setItem('token', res.data.token);
+      
       console.log(res.data);
       dispatch({ type: FETCH_RESTAURANT_SUCCESS, payload: res.data });
     })
@@ -69,15 +73,18 @@ export const ADD_RESTAURANT_ERROR = 'ADD_RESTAURANT_ERROR';
 export const addRestaurant = state => dispatch => {
   dispatch({ type: ADD_RESTAURANT_START });
   return axiosWithAuth()
-    .post('/api/restaurant', state)
+    .post('api/restaurants', state)
     .then(res => {
       console.log('get', res);
-      localStorage.setItem('token', res.data);
+      console.log(res.data);
+      //localStorage.setItem('token', res.data);
       dispatch({ type: ADD_RESTAURANT_SUCCESS, payload: res.data });
+      console.log('rest added successfully')
     })
     .catch(err => {
       console.log('err', err.response);
       dispatch({ type: ADD_RESTAURANT_ERROR, payload: 'res.data' });
+      console.log('rest not added')
     });
 };
 

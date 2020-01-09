@@ -1,43 +1,55 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {FaEdit} from "react-icons/lib/fa";
 import MdBorderColor from "react-icons/lib/md/border-color";
 import MdCameraAlt from "react-icons/lib/md/camera-alt";
+import { connect } from 'react-redux';
 
 
 
 
-const Profile  =  () => {
+const Profile  =  (props) => {
+    
 
-    const user ={
-        username: "jacob1",
-        location: "glendale, AZ",
-        email: "jacob1@lambda.com"
-    }
+    // const user ={
+    //     username: "jacob1",
+    //     location: "glendale, AZ",
+    //     email: "jacob1@lambda.com"
+    // }
+    console.log(props.user,"a user?");
+
+    
 
 
     return (
         <div className="profile">
             <div className="profile_img_div">
                 <a className="profile_edit" src="#"><FaEdit color="white"/></a>
-                <img className="profile_img" src={user.img ? user.img : "../../images/vector_user.jpg"}/>
+                <img className="profile_img" src={props.user.img ? props.user.img : "../../images/vector_user.jpg"}/>
             </div>
 
 
-            <p>{user.username}</p>
-            <p>{user.location}</p>
-            <p>{user.email}</p>
+            <p>{props.user.username}</p>
+            <p>{props.user.location}</p>
+            <p>{props.user.email}</p>
             <div className="profile_member">
                 <p>Member Since</p>
                 <p>December 2019</p>
             </div>
 
             <div className="profile_options">
-                <div><MdBorderColor/><span> {user.reviews ? user.reviews : "0"} Reviews</span></div>
-                <div><MdCameraAlt/><span> {user.photos ? user.photos : "0"} Photos</span></div>
+                <div><MdBorderColor/><span> {props.user.reviews ? props.user.reviews : "0"} Reviews</span></div>
+                <div><MdCameraAlt/><span> {props.user.photos ? props.user.photos : "0"} Photos</span></div>
             </div>
         </div>
     )
 }
 
-
-export default Profile;
+//export default Profile;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+export default connect(mapStateToProps)(
+  Profile
+);

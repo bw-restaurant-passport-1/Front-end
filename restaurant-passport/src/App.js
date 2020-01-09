@@ -19,15 +19,15 @@ function App() {
 			<Route exact path='/' component={RestaurantLoginPage} />
 			<Route path='/register' component={RestaurantCreateAccountPage} />
 			
-      		<Route path='/dashboard' component={NavBar} />
+      		<PrivateRoute path='/dashboard' component={NavBar} />
 
-			<Route exact path="/dashboard" component={Dashboard} />
+			<PrivateRoute exact path="/dashboard" component={Dashboard} />
 
-			<Route path="/dashboard/restaurants" component={RestaurantList} />
+			<PrivateRoute path="/dashboard/restaurants" component={RestaurantList} />
 			
-			<Route path="/dashboard/add-restaurant" component={AddRestaurant} />
+			<PrivateRoute path="/dashboard/add-restaurant" component={AddRestaurant} />
 
-			<Route path='/dashboard' component={Footer} />
+			<PrivateRoute path='/dashboard' component={Footer} />
 		</div>
 	);
 }
