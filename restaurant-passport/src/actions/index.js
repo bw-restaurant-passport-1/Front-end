@@ -50,13 +50,14 @@ export const FETCH_RESTAURANT_START = 'FETCH_RESTAURANT_START';
 export const FETCH_RESTAURANT_SUCCESS = 'FETCH_RESTAURANT_SUCCESS';
 export const FETCH_RESTAURANT_ERROR = 'FETCH_RESTAURANT_ERROR';
 
-export const fetchRestaurant = state => dispatch => {
+
+export const fetchRestaurantAll = state => dispatch => {
   dispatch({ type: FETCH_RESTAURANT_START });
   return axiosWithAuth()
     .get('/api/restaurants', state)
     .then(res => {
       console.log('get', res);
-      localStorage.setItem('token', res.data.token);
+      //localStorage.setItem('token', res.data.token);
       
       console.log(res.data);
       dispatch({ type: FETCH_RESTAURANT_SUCCESS, payload: res.data });
@@ -67,9 +68,25 @@ export const fetchRestaurant = state => dispatch => {
     });
 };
 
+export const fetchRestaurant = id => dispatch => {
+  dispatch({type: FETCH_RESTAURANT_START});
+  return axiosWithAuth()
+  .get(`/api/passports/user/${id} `)
+  .then(res => {
+    console.log('get', res.data)
+    dispatch({type: FETCH_RESTAURANT_SUCCESS, payload: res.data});
+  })
+  .catch(err => {
+    console.log('err', err.response);
+    dispatch({type: FETCH_RESTAURANT_ERROR });
+  })
+}
+
+
 export const ADD_RESTAURANT_START = 'ADD_RESTAURANT_START';
 export const ADD_RESTAURANT_SUCCESS = 'ADD_RESTAURANT_SUCCESS';
 export const ADD_RESTAURANT_ERROR = 'ADD_RESTAURANT_ERROR';
+
 export const addRestaurant = state => dispatch => {
   dispatch({ type: ADD_RESTAURANT_START });
   return axiosWithAuth()
@@ -87,6 +104,7 @@ export const addRestaurant = state => dispatch => {
       console.log('rest not added')
     });
 };
+
 
 export const UPDATE_RESTAURANT_START = 'UPDATE_RESTAURANT_START';
 export const UPDATE_RESTAURANT_SUCCESS = 'UPDATE_RESTAURANT_SUCCESS';

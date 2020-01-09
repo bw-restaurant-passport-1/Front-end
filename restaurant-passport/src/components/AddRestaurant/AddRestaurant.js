@@ -7,23 +7,15 @@ import { connect } from 'react-redux';
 
 
 
+
+
 const AddRestaurant = (props) => {
 
     const {register, handleSubmit, errors, formState} = useForm();
     const {isSubmitting, setSubmitting} = useState(false)
-
     const onSubmit = (data, e) => {
         e.preventDefault();
-        // const finalRestaurant = {id: Date.now(),
-        // restaurantName: data.restaurantName,
-        // streetAddress: data.streetAddress,
-        // city: data.city,
-        // zipcode: data.zipcode,
-        // phoneNumber: data.phoneNumber,
-        // websiteURL: data.websiteURL,
-        // restaurantPictureURL: data.restaurantPictureURL
-        // }
-        
+
         console.log(formState.isSubmitting);
         console.log(data,'add rest submit');
         props.addRestaurant(data).then(()=>{
@@ -107,6 +99,7 @@ const AddRestaurant = (props) => {
 }
 
 const mapStateToProps = state => {
+
   return {
     isFetching: state.isFetching,
     restaurants: state.restaurants
@@ -114,6 +107,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addRestaurant })(
-  AddRestaurant
-);
+
+    
+
+
+export default connect(mapStateToProps, {addRestaurant}) (AddRestaurant);
+
