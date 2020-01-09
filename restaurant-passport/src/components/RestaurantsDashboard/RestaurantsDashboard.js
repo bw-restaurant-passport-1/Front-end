@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useEffect} from "react";
 import RestaurantCard from "../RestaurantCard/RestaurantCard.js";
+import {fetchRestaurant} from '../../actions/index';
+import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 
-const RestaurantsDashboard = () => {
+const RestaurantsDashboard = (props) => {
 
     //Save the data for 3 of each section
-    
-    const restaurant = {
-        restaurantName: "Michael’s Food Place",
-        restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-        rating: 3,
-        been_here: true,
+    const restaurants = props.restaurants
+    // const restaurant = {
+    //     restaurantName: "Michael’s Food Place",
+    //     restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //     rating: 3,
+    //     been_here: true,
         
-    };
+    // };
 
-
+    useEffect(()=> {
+        props.fetchRestaurant(1);
+    }, [])
     return (
 
         <div>
@@ -26,9 +30,9 @@ const RestaurantsDashboard = () => {
                 </div>
                 
                 <div className="restaurants_container">
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
+                    {restaurants.map(restaurants => {
+                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                    })}
                 </div>
                 
             </div>
@@ -40,9 +44,9 @@ const RestaurantsDashboard = () => {
                 </div>
                 
                 <div className="restaurants_container">
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
+                    {restaurants.map(restaurants => {
+                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                    })}
                 </div>
                 
             </div>
@@ -54,9 +58,9 @@ const RestaurantsDashboard = () => {
                 </div>
                 
                 <div className="restaurants_container">
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
-                    <RestaurantCard restaurant= {restaurant}/>
+                    {restaurants.map(restaurants => {
+                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                    })}
                 </div>
                 
             </div>
@@ -64,5 +68,10 @@ const RestaurantsDashboard = () => {
     )
 
 }
+const mapStateToProps = state => {
+    return {
+        restaurants: state.restaurants
+    }
+}
 
-export default RestaurantsDashboard;
+export default connect(mapStateToProps, {fetchRestaurant}) (RestaurantsDashboard);

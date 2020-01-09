@@ -18,7 +18,7 @@ const RestaurantCard = ({ restaurant }) => {
 	return (
 		<div className='rest_card'>
 			<div className='img_container'>
-				{restaurant.been_here ? <img className='been_here' src='../../images/Been_Here.png' /> : null}
+				{restaurant.stamped ? <img className='been_here' src='../../images/Been_Here.png' /> : null}
 				<img
 					className='rest_img'
 					src={
@@ -41,11 +41,11 @@ const RestaurantCard = ({ restaurant }) => {
 				<div className='rating_container'>
 					Rating:
 					<span className='rating'>
-						{restaurant.rating >= 0.5 ? <FaStar className='gold' /> : <FaStar />}
-						{restaurant.rating >= 1.5 ? <FaStar className='gold' /> : <FaStar />}
-						{restaurant.rating >= 2.5 ? <FaStar className='gold' /> : <FaStar />}
-						{restaurant.rating >= 3.5 ? <FaStar className='gold' /> : <FaStar />}
-						{restaurant.rating >= 4.5 ? <FaStar className='gold' /> : <FaStar />}
+						{restaurant.myRating >= 0.5 ? <FaStar className='gold' /> : <FaStar />}
+						{restaurant.myRating >= 1.5 ? <FaStar className='gold' /> : <FaStar />}
+						{restaurant.myRating >= 2.5 ? <FaStar className='gold' /> : <FaStar />}
+						{restaurant.myRating >= 3.5 ? <FaStar className='gold' /> : <FaStar />}
+						{restaurant.myRating >= 4.5 ? <FaStar className='gold' /> : <FaStar />}
 					</span>
 				</div>
 				<a className='see_reviews'>See Reviews </a>
