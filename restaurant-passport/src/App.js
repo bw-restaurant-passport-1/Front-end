@@ -28,7 +28,7 @@ function App() {
 			<Route path='/dashboard/add-restaurant' component={AddRestaurant} />
 
 			<Route path='/dashboard' component={Footer} />
-			<Route path='dashboard/restaurant/info' component={RestaurantInfo} />
+			<Route path='/dashboard/restaurant/info' component={RestaurantInfo} />
 		</div>
 	);
 }
