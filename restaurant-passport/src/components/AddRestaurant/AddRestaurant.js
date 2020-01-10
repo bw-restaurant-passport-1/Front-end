@@ -2,8 +2,10 @@ import React,{ useState } from "react";
 import useForm from "react-hook-form";
 import { register } from "../../serviceWorker";
 import inbox from "react-icons/lib/fa/inbox";
-import {addRestaurant} from '../../actions/index';
-import {connect} from 'react-redux';
+import { addRestaurant } from '../../actions/index';
+import { connect } from 'react-redux';
+
+
 
 
 
@@ -22,10 +24,13 @@ const AddRestaurant = (props) => {
     const {isSubmitting, setSubmitting} = useState(false)
     const onSubmit = (data, e) => {
         e.preventDefault();
-        props.addRestaurant(props.restaurants)
-        props.history.push('/dashboard')
+
         console.log(formState.isSubmitting);
-        console.log(data);
+        console.log(data,'add rest submit');
+        props.addRestaurant(data).then(()=>{
+            
+            props.history.push('/dashboard');
+        })
     }
 // restaurantName	String	REQ
 // streetAddress	String  REQ
@@ -65,7 +70,7 @@ const AddRestaurant = (props) => {
                     />
                     <input
                         className={errors.city && "add_rest_errors"}
-                        type="city"
+                        type="text"
                         placeholder={`City ${errors.city ? "is Required" : ""} `}
                         name="city"
                         ref={register({required: true})}
@@ -73,38 +78,51 @@ const AddRestaurant = (props) => {
                     />
                     {errors.zipcode && <span>Zip Code Ex. 12345</span>}
                     <input 
-                        className={errors.zipcode && "add_rest_errors"}
-                        type="zipcode"
-                        placeholder="Zipcode"
+
+                        className={errors.zipcode && 'add_rest_errors'}
+                        type="text"
+                        placeholder={`ZipCode ${errors.zipcode ? "is Required":""}`}
                         name="zipcode"
-                        ref={register({pattern: zipcodeReg})}
+                        ref={register({required: false})}
                         style={{borderColor: errors.zipcode && "red"}}
+
                     />
                     {errors.phoneNumber && <span>Phone Number Ex. (111) 222-3333 | 1112223333 | 111-222-3333</span>}
                     <input
+
                         className={errors.phoneNumber && "add_rest_errors"}
-                        type="phone"
+                        type="text"
                         placeholder="Phone Number"
                         name="phoneNumber"
-                        ref={register({pattern: phoneRegEx})}
+                        ref={register({required: false})}
+                        //ref={register({pattern: phoneRegEx})}
                         style={{borderColor: errors.phoneNumber && "red"}}
+
                     />
                     {errors.websiteURL && <span>Please provide valid url.</span>}
                     <input
+
                         className={errors.websiteURL && "add_rest_errors"}
                         type="text"
                         placeholder="Website URL"
                         name="websiteURL"
-                        ref={register({pattern: urlRegEx})}
+                        ref={register({required: false})}
+                        //ref={register({pattern: urlRegEx})}
                         style={{borderColor: errors.websiteURL && "red"}}
+
+  
                     />
                     {errors.restaurantPictureURL && <span>Please provide valid url.</span>}
                     <input
                         type="text"
                         placeholder="Restaurant Picture URL"
                         name="restaurantPictureURL"
-                        ref={register({pattern: urlRegEx})}
+
+                        ref={register( {required: false})}
+
+                        //ref={register({pattern: urlRegEx})}
                         style={{borderColor: errors.restaurantPictureURL && "red"}}
+
                     />
                     <button disabled={formState.isSubmitting} className="rest_button" type="submit" >{formState.isSubmitting ? "Creating" : "Create"}</button>
                 </form>
@@ -114,9 +132,17 @@ const AddRestaurant = (props) => {
 }
 
 const mapStateToProps = state => {
-    return {
-        restaurants: state.restaurants
-    }
-}
+
+  return {
+    isFetching: state.isFetching,
+    restaurants: state.restaurants
+    
+  };
+};
+
+
+    
+
 
 export default connect(mapStateToProps, {addRestaurant}) (AddRestaurant);
+
