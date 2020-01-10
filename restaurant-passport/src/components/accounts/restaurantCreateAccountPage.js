@@ -12,7 +12,7 @@ const RestaurantCreateAccountPage = (props) => {
 	const { register, handleSubmit, errors } = useForm();
 	const onSubmit = (data) => {
 		console.log(data);
-		props.register(data).then(() => {
+		props.signup(data).then(() => {
 			props.history.push('/dashboard');
 		});
 	};
