@@ -349,10 +349,10 @@ a {
 	position: relative;
 }
 
-.rest_info .see_reviews {
-	position: absolute;
-	right: 0;
-	bottom: 0;
+.rest_card .see_reviews {
+	float: right;
+	color: inherit;
+	text-decoration: none;
 }
 
 .rest_info .see_reviews:hover {
@@ -375,6 +375,8 @@ a {
 .bookmark svg:hover {
 	fill: rgb(129, 129, 129);
 }
+
+
 
 /* /////////////Footer/////////////////////// */
 
@@ -455,6 +457,10 @@ a {
 	background: #4a4848;
 }
 
+.dark-mode .review_section {
+	background: #4a4848;
+}
+
 .navbar {
 	background-color: #1f2022;
 	border: none;
@@ -466,10 +472,22 @@ a {
 }
 
 /* Restaurant info */
+
+.info_card {
+	display: grid;
+	grid-template-columns: 320px auto;
+	padding-bottom: 220px;
+	margin-top: 12px;
+
+	position: relative;
+	min-height: 100%;
+	font-family: 'Special Elite', cursive;
+}
+
 .info_img {
 	margin-top: 30px;
 	height: auto;
-	max-width: 19%;
+	width: 260px;
 	margin-left: 40px;
 }
 
@@ -481,7 +499,6 @@ a {
 	color: white;
 	padding: .5rem .5rem;
 	font-size: 14px;
-	font-family: 'Special Elite', cursive;
 	margin-left: 220px;
 }
 
@@ -495,20 +512,122 @@ a {
 	margin-bottom: 10px;
 }
 
-.info-card {
-	padding-right: 20px;
-	width: 100%;
+
+
+.rest_info {
+	display: inline-block
 }
+
+
 .address_info {
 	margin-left: 40px;
-	font-family: 'Special Elite', cursive;
+
 }
 .info_ratings {
 	margin-left: 40px;
-	font-family: 'Special Elite', cursive;
+
 }
 
-.info-title {
+.info_title {
 	margin-left: 40px;
-	font-family: 'Special Elite', cursive;
+}
+
+.review_container{
+
+	display: inline-block;
+	top: 0;
+	margin: 5rem;
+
+}
+
+.review_form {
+	padding-bottom: 3rem;
+}
+
+.review_form .notes  {
+	width: 100%;
+	border: none;
+    border-bottom: 2px solid #daa520;
+    color: #daa520;
+    transition: border 300ms;
+    font-size: 1.4rem;
+}
+
+.review_form .notes:focus{
+	border-bottom: 4px solid #daa520;
+}
+
+.review_container .review_rating input {
+	display: none;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+
+.review_form input::placeholder {
+	color: #daa520;
+	opacity: .6;
+}
+
+.review_form .notes_label {
+	display: none;
+}
+
+.review_form .add_rating_errors::placeholder {
+	color: red;
+}
+
+.review_container .review_form .add_rating_errors{
+	fill: red;
+	border-bottom: 2px solid red;
+}
+
+.review_button {
+	float: right;
+	margin: 0;
+	padding: 1rem 2rem;
+}
+
+
+.reviews{
+	padding-top: 4rem;
+
+}
+.review_section{
+	
+	background: #F0EDED;
+	border-radius: 22px;
+}
+
+.review_section .reviewer_info {
+	display: flex;
+	align-items: center;
+	padding: 12px 8px;
+}
+
+.reviewer_info .reviewer_name_img{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 160px;
+	height: 160px;
+
+}
+
+.reviewer_name_img .reviewer_img{
+	width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+
+.reviewer_info .reviewer_review{
+	display: inline-block;
+	width: auto;
+	padding-left: 12px;
+
 }
