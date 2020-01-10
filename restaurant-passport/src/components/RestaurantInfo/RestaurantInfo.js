@@ -3,13 +3,16 @@ import styles from '../../styles/styles.css';
 import FaStar from 'react-icons/lib/fa/star';
 import useForm from 'react-hook-form';
 import { register } from '../../serviceWorker';
+import {connect} from 'react-redux';
+import {fetchRestaurant} from '../../actions/index';
 
 import ReviewCard from "./ReviewCard";
 
 
-const RestaurantsInfo = ({ restaurant }) => {
+const RestaurantsInfo = (props) => {
+	const restaurantData = props.restaurants;
 
-	//Fake data
+	// Fake data
 	// const [ restaurantData, setRestaurantData ] = useState({
 	// 	id                   : 1,
 	// 	restaurantName       : "Chili's",
@@ -26,8 +29,7 @@ const RestaurantsInfo = ({ restaurant }) => {
 		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
 	]);
 
-const restaurantData = restaurant;
-console.log( 'data', restaurant);
+console.log( 'data', props.restaurants[0]);
 
 
 
@@ -55,6 +57,7 @@ console.log( 'data', restaurant);
 	const [ avgRating, setAvgRating ] = useState(0);
 
 	useEffect(() => {
+		props.fetchRestaurant(1);
 		const avgTotal = reviewData.reduce((acc, curr) => {
 			let total = parseInt(acc.myRating) + parseInt(curr.myRating);
 			let avg = total / reviewData.length;
@@ -114,11 +117,11 @@ console.log( 'data', restaurant);
 		<div className='info_card'>
 			<div className="rest_info">
 				<div className='img_container'>
-					{restaurantData && <img className='info_img' src={restaurantData.restaurantPictureURL} />}
+					{restaurantData[0] && <img className='info_img' src={restaurantData[0].restaurantPictureURL} />}
 					{/* <img className='info_img' src='../../images/restaurant_placeholder.jpg' /> */}
 				</div>
 				<div>
-					<h1 className='info_title'> {restaurantData.restaurantName} </h1>
+					<h1 className='info_title'> {restaurantData[0].restaurantName} </h1>
 				</div>
 				<div className='info_ratings'>
 					Rating:
@@ -139,7 +142,7 @@ console.log( 'data', restaurant);
 				<div className='address_info'>
 					<h1> Address: </h1>
 					<p className='address'>
-						12345 w <br /> Everywhere <br /> Chicago, IL
+						{restaurantData[0].streetAddress}
 					</p>
 				</div>
 				<button disabled={formState.isSubmitting} className='buttons_info' type='submit'>
@@ -220,4 +223,10 @@ console.log( 'data', restaurant);
 	);
 };
 
-export default RestaurantsInfo;
+const mapStateToProps = state => {
+    return {
+        restaurants: state.restaurants
+    }
+}
+
+export default connect(mapStateToProps, {fetchRestaurant}) (RestaurantsInfo);

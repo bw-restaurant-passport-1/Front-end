@@ -19,6 +19,7 @@ const RestaurantsDashboard = (props) => {
     useEffect(()=> {
         props.fetchRestaurant(1);
     }, [])
+
     return (
 
         <div>
@@ -74,4 +75,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {fetchRestaurant}) (RestaurantsDashboard);
+export default connect(mapStateToProps, {fetchRestaurant})(RestaurantsDashboard);
