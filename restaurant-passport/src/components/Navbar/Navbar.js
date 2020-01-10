@@ -15,7 +15,7 @@ const Navbar = () => {
 			<a className='titlenav'>Restaurant Passport</a>
 			<a>About</a>
 			<Link to='/dashboard/add-restaurant'>
-				<a> Add Restaurant </a>{' '}
+				Add Restaurant
 			</Link>
 			<a>Profile</a>
 			<HeaderWithLogOut />

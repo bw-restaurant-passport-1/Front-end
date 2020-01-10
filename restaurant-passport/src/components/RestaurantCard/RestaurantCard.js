@@ -21,7 +21,7 @@ const RestaurantCard = ({ restaurant }) => {
 	console.log(restaurant);
 
 	//fake data
-	const [ restaurantData, setRestaurantData ] = useState([
+	const [ restaurantReviews, setRestaurantReviews ] = useState([
 		{ user_id: '2', restaurant_id: '1', stamped: true, notes: 'It was great', myRating: '3' },
 		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
 	]);
@@ -37,23 +37,23 @@ const RestaurantCard = ({ restaurant }) => {
 	useEffect(() => {
 		// axiosWithAuth().get(`/api/passports/restaurants/${restaurant.id}`).then((res)=> {
 		//     console.log(res);
-		//      setRestuarantData(res.data)
+		//      setRestaurantReviews(res.data)
 		// },(error) =>{
 		//     console.log(error);
 		// })
-		const avgTotal = restaurantData.reduce((acc, curr) => {
+		const avgTotal = restaurantReviews.reduce((acc, curr) => {
 			let total = parseInt(acc.myRating) + parseInt(curr.myRating);
-			let avg = total / restaurantData.length;
+			let avg = total / restaurantReviews.length;
 			return avg;
 		});
 
-		const user = restaurantData.find((rest) => {
+		const user = restaurantReviews.find((rest) => {
 			return rest.user_id === user_id;
 		});
 
 		setUserReviewData(user);
 
-		console.log(avgTotal);
+		console.log(userReviewData);
 
 		setAvgRating(avgTotal);
 	}, []);
@@ -68,7 +68,7 @@ const RestaurantCard = ({ restaurant }) => {
 		<div className='rest_card'>
 			<div className='img_container'>
 				{userReviewData.stamped ? <img className='been_here' src='../../images/Been_Here.png' /> : null}
-				{/* <img className="rest_img" src={restaurant.restaurantPictureURL ? restaurant.restaurantPictureURL : "../../images/restaurant_placeholder.jpg"} alt={restaurant.restaurantName} /> */}
+				
 				{restaurant && (
 					<img className='rest_img' src={restaurant.restaurantPictureURL} alt={restaurant.restaurantName} />
 				)}
@@ -89,8 +89,9 @@ const RestaurantCard = ({ restaurant }) => {
 						{avgRating >= 4.5 ? <FaStar className='gold' /> : <FaStar />}
 					</span>
 				</div>
-				<a className='see_reviews'>See Reviews </a>
+				
 			</div>
+            <Link to={"/dashboard/restaurant/info"} className='see_reviews'>See Reviews </Link>
 		</div>
 	);
 };
