@@ -284,7 +284,7 @@ const RestaurantList = () =>{
                 <div className="rating">{stars}</div>
 
 
-                <label htmlFor="City">City</label>
+                <label htmlFor="city">City</label>
                 <input
                     id="city"
                     type="text"
