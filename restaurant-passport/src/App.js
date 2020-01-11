@@ -13,7 +13,7 @@ import AddRestaurant from './components/AddRestaurant/AddRestaurant.js';
 import RestaurantInfo from './components/RestaurantInfo/RestaurantInfo';
 
 
-function App(props) {
+function App() {
 	return (
 		<div className='App'>
 			<ScrollToTop />
