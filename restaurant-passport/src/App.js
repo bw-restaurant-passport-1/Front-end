@@ -12,7 +12,8 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop.js';
 import AddRestaurant from './components/AddRestaurant/AddRestaurant.js';
 import RestaurantInfo from './components/RestaurantInfo/RestaurantInfo';
 
-function App() {
+
+function App(props) {
 	return (
 		<div className='App'>
 			<ScrollToTop />
@@ -28,7 +29,8 @@ function App() {
 			<PrivateRoute path='/dashboard/add-restaurant' component={AddRestaurant} />
 
 			<PrivateRoute path='/dashboard' component={Footer} />
-			<Route path='/dashboard/restaurant/info' component={RestaurantInfo} />
+
+			<Route exact path='/dashboard/:restaurantName' component= {RestaurantInfo}/>
 		</div>
 	);
 }

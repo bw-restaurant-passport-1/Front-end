@@ -5,6 +5,7 @@ import useForm from 'react-hook-form';
 import { register } from '../../serviceWorker';
 import {connect} from 'react-redux';
 import {fetchRestaurant} from '../../actions/index';
+import RestaurantInfoCard from '../restaurantInfoCard/restaurantInfoCard'
 
 import ReviewCard from "./ReviewCard";
 
@@ -29,7 +30,7 @@ const RestaurantsInfo = (props) => {
 		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
 	]);
 
-console.log( 'data', props.restaurants[0]);
+console.log( 'data', props.restaurants);
 
 
 
@@ -37,6 +38,7 @@ console.log( 'data', props.restaurants[0]);
 	const { register, formState, handleSubmit, errors, setValue } = useForm();
 
 	const { isSubmitting, setSubmitting } = useState(false);
+
 	const onSubmit = (data, e) => {
 		e.preventDefault();
 	};
@@ -110,45 +112,14 @@ console.log( 'data', props.restaurants[0]);
 		
 	for (let i = 0; i < 5; i++) {
         stars.push(<StarRated key={i} handleClick={handleClickStar} HoverIdx={HoverIdx} index={i + 1}/>)
-    }
+	}
 
 	//////////////////////////////
 	return (
-		<div className='info_card'>
-			<div className="rest_info">
-				<div className='img_container'>
-					{restaurantData[0] && <img className='info_img' src={restaurantData[0].restaurantPictureURL} />}
-					{/* <img className='info_img' src='../../images/restaurant_placeholder.jpg' /> */}
-				</div>
-				<div>
-					<h1 className='info_title'> {restaurantData[0].restaurantName} </h1>
-				</div>
-				<div className='info_ratings'>
-					Rating:
-					<span className='rating'>
-						{avgRating >= 0.5 ? <FaStar className='gold' /> : <FaStar />}
-						{avgRating >= 1.5 ? <FaStar className='gold' /> : <FaStar />}
-						{avgRating >= 2.5 ? <FaStar className='gold' /> : <FaStar />}
-						{avgRating >= 3.5 ? <FaStar className='gold' /> : <FaStar />}
-						{avgRating >= 4.5 ? <FaStar className='gold' /> : <FaStar />}
-					</span>
-				</div>
-				<button disabled={formState.isSubmitting} className='buttons_info' type='submit'>
-					Edit Details
-				</button>
-				<div className='img_container'>
-					<img className='info_img' src='../../images/map_image.jpg' />
-				</div>
-				<div className='address_info'>
-					<h1> Address: </h1>
-					<p className='address'>
-						{restaurantData[0].streetAddress}
-					</p>
-				</div>
-				<button disabled={formState.isSubmitting} className='buttons_info' type='submit'>
-					Get Directions!
-				</button>
-			</div>
+		<div
+		className='info_card'>
+				<RestaurantInfoCard key={restaurantData.id} restaurantData={restaurantData} avgRating={avgRating} formState={formState} FaStar={FaStar}/>
+				
 			<div className="review_container">
 				<form className="review_form" onSubmit={handleSubmit(onReviewSubmit)}>
 					<label htmlFor="notes" className="notes_label">Review</label>

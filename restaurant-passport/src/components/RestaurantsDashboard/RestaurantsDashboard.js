@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 const RestaurantsDashboard = (props) => {
 
     //Save the data for 3 of each section
-    const restaurants = props.restaurants
+    const restaurant = props.restaurants
     // const restaurant = {
     //     restaurantName: "Michael’s Food Place",
     //     restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
@@ -16,6 +16,11 @@ const RestaurantsDashboard = (props) => {
         
     // };
 
+    const routeToInfo = (e, restaurant) => {
+        e.preventDefault();
+		props.history.push(`/dashboard/${restaurant.restaurantName}`);
+      }
+      
     useEffect(()=> {
         props.fetchRestaurant(1);
     }, [])
@@ -30,9 +35,14 @@ const RestaurantsDashboard = (props) => {
                     <Link to="/dashboard/restaurants">See All</Link>
                 </div>
                 
-                <div className="restaurants_container">
-                    {restaurants.map(restaurants => {
-                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                <div
+                 className="restaurants_container">
+                    {restaurant.map(restaurant => {
+                        return (
+                        <div onClick={e => routeToInfo(e,restaurant)}>
+                         <RestaurantCard key ={restaurant.id} restaurant= {restaurant}/>
+                         </div>
+                         )
                     })}
                 </div>
                 
@@ -45,8 +55,8 @@ const RestaurantsDashboard = (props) => {
                 </div>
                 
                 <div className="restaurants_container">
-                    {restaurants.map(restaurants => {
-                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                    {restaurant.map(restaurant => {
+                        return  <RestaurantCard key ={restaurant.id} restaurant= {restaurant}/>
                     })}
                 </div>
                 
@@ -59,8 +69,8 @@ const RestaurantsDashboard = (props) => {
                 </div>
                 
                 <div className="restaurants_container">
-                    {restaurants.map(restaurants => {
-                        return  <RestaurantCard key ={restaurants.id} restaurant= {restaurants}/>
+                    {restaurant.map(restaurant => {
+                        return  <RestaurantCard key ={restaurant.id} restaurant= {restaurant}/>
                     })}
                 </div>
                 

@@ -91,7 +91,7 @@ const RestaurantCard = ({ restaurant }) => {
 				</div>
 				
 			</div>
-            <Link to={"/dashboard/restaurant/info"} className='see_reviews'>See Reviews </Link>
+            <Link to={`/dashboard/${restaurant.restaurantName}`} className='see_reviews'>See Reviews </Link>
 		</div>
 	);
 };
