@@ -46,25 +46,29 @@ export const signup = state => dispatch => {
       dispatch({ type: SIGNUP_ERROR, payload: err }); //whatever error
     });
 };
+export const FETCHALL_RESTAURANT_START = 'FETCHALL_RESTAURANT_START';
+export const FETCHALL_RESTAURANT_SUCCESS = 'FETCHALL_RESTAURANT_SUCCESS';
+export const FETCHALL_RESTAURANT_ERROR = 'FETCHALL_RESTAURANT_ERROR';
+
 export const FETCH_RESTAURANT_START = 'FETCH_RESTAURANT_START';
 export const FETCH_RESTAURANT_SUCCESS = 'FETCH_RESTAURANT_SUCCESS';
 export const FETCH_RESTAURANT_ERROR = 'FETCH_RESTAURANT_ERROR';
 
 
-export const fetchRestaurantAll = state => dispatch => {
-  dispatch({ type: FETCH_RESTAURANT_START });
+export const fetchRestaurantAll = () => dispatch => {
+  dispatch({ type: FETCHALL_RESTAURANT_START });
   return axiosWithAuth()
-    .get('/api/restaurants', state)
+    .get('/api/restaurants')
     .then(res => {
       console.log('get', res);
       //localStorage.setItem('token', res.data.token);
       
       console.log(res.data);
-      dispatch({ type: FETCH_RESTAURANT_SUCCESS, payload: res.data });
+      dispatch({ type: FETCHALL_RESTAURANT_SUCCESS, payload: res.data });
     })
     .catch(err => {
       console.log('err', err.response);
-      dispatch({ type: FETCH_RESTAURANT_ERROR, payload: 'res.data' });
+      dispatch({ type: FETCHALL_RESTAURANT_ERROR, payload: 'res.data' });
     });
 };
 
