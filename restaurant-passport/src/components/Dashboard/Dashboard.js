@@ -25,7 +25,7 @@ const Dashboard = (props) => {
             console.log(props.user, 'props user');
             console.log(currentUser,"the current");
             if(props.user==null){
-            const theUser = localStorage.getItem('user');
+            const theUser = JSON.parse(localStorage.getItem('user'));
             console.log(theUser,'local storage user')
             setCurrentUser(theUser);
     }
