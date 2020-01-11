@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FaBookmarkO from 'react-icons/lib/fa/bookmark-o';
 import FaStar from 'react-icons/lib/fa/star';
 import { Router } from 'react-router';
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
+// import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 // FaBookmarkO react-icons/lib/fa/bookmark-o
 // FaBookmark react-icons/lib/fa/bookmark        filled
@@ -17,7 +17,7 @@ import { axiosWithAuth } from '../../utils/axiosWithAuth';
 // notes	String	The review
 // myRating	String	Should be 1 through 5
 
-const RestaurantCard = ({ restaurant }) => {
+const RestaurantCard = ({ restaurant }, props) => {
 	console.log(restaurant);
 
 	//fake data
@@ -64,8 +64,13 @@ const RestaurantCard = ({ restaurant }) => {
 
 	console.log(userReviewData);
 
+	const routeToInfo = (e, restaurant) => {
+        e.preventDefault();
+		props.history.push(`/dashboard/${restaurant.restaurantName}`);
+	  }
+	  
 	return (
-		<div className='rest_card'>
+		<div onClick={e => routeToInfo(e,restaurant)} className='rest_card'>
 			<div className='img_container'>
 				{userReviewData.stamped ? <img className='been_here' src='../../images/Been_Here.png' /> : null}
 				
@@ -91,7 +96,7 @@ const RestaurantCard = ({ restaurant }) => {
 				</div>
 				
 			</div>
-            <Link to={"/dashboard/restaurant/info"} className='see_reviews'>See Reviews </Link>
+            <Link to={`/dashboard/${restaurant.restaurantName}`} className='see_reviews'>See Reviews </Link>
 		</div>
 	);
 };

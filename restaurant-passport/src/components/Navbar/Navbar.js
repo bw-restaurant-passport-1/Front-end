@@ -13,11 +13,11 @@ const Navbar = () => {
 	return (
 		<nav className='nav_bar'>
 			<a className='titlenav'>Restaurant Passport</a>
-			<a>About</a>
+			<a href="#">About</a>
 			<Link to='/dashboard/add-restaurant'>
 				Add Restaurant
 			</Link>
-			<a>Profile</a>
+			<Link to ='/dashboard'>Profile</Link>
 			<HeaderWithLogOut />
 			<div className='dark-mode__toggle'>
 				<div onClick={toggleMode} className={darkMode ? 'toggle toggled' : 'toggle'} />
