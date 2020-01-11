@@ -15,11 +15,6 @@ const RestaurantsDashboard = (props) => {
     //     been_here: true,
         
     // };
-
-    const routeToInfo = (e, restaurant) => {
-        e.preventDefault();
-		props.history.push(`/dashboard/${restaurant.restaurantName}`);
-      }
       
     useEffect(()=> {
         props.fetchRestaurant(1);
@@ -39,7 +34,7 @@ const RestaurantsDashboard = (props) => {
                  className="restaurants_container">
                     {restaurant.map(restaurant => {
                         return (
-                        <div onClick={e => routeToInfo(e,restaurant)}>
+                        <div>
                          <RestaurantCard key ={restaurant.id} restaurant= {restaurant}/>
                          </div>
                          )
