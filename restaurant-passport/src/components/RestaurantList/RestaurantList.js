@@ -2,170 +2,184 @@ import React, { useState, useEffect } from "react";
 import "../../styles/styles.css";
 import RestaurantCard from "../RestaurantCard/RestaurantCard";
 import FaStar from "react-icons/lib/fa/star";
+import {connect} from 'react-redux'
+import {fetchRestaurantAll} from "../../actions/index"
 
-const RestaurantList = () =>{
 
+const RestaurantList = (props) =>{
+    
+    let restaurants = [];
 
-    const restaurants = [
-        {        
-            restaurantName: "Michael’s Food Place",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 1,
-            been_here: true,
-            category: "chinesse",
-            city: "phoenex"
-        },{
-            restaurantName: "Kibuki's",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 4,
-            been_here: false,
-            category: "jappanese",
-            city: "phoenex"
-        }, {
-            restaurantName: "Koichi's",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 2,
-            been_here: true,
-            category: "wtf",
-            city: "phoenex"
-        },
-        {
-            restaurantName: "Tiffany's Brunch",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: true,
-            category: "Breakfast",
-            city: "phoenex"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 5,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 1,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 5,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 2,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 1,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sock Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 0,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 2,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 5,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 4,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 1,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        },
-        {
-            restaurantName: "Sam's Subs",
-            restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-            rating: 3,
-            been_here: false,
-            category: "mexica",
-            city: "hellow"
-        }
-    ];
+    // useEffect(()=>{
+    //     props.fetchRestaurantAll();
+        
+    //     // restaurants = props.allRestaurants;
+    //     // console.log(restaurants,' we are here')
+
+    // },[])
+    // restaurants = props.allRestaurants;
+        // console.log(restaurants,' we are here')
+
+    // const restaurants = [
+    //     {        
+    //         restaurantName: "Michael’s Food Place",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 1,
+    //         been_here: true,
+    //         category: "chinesse",
+    //         city: "phoenex"
+    //     },{
+    //         restaurantName: "Kibuki's",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 4,
+    //         been_here: false,
+    //         category: "jappanese",
+    //         city: "phoenex"
+    //     }, {
+    //         restaurantName: "Koichi's",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 2,
+    //         been_here: true,
+    //         category: "wtf",
+    //         city: "phoenex"
+    //     },
+    //     {
+    //         restaurantName: "Tiffany's Brunch",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 3,
+    //         been_here: true,
+    //         category: "Breakfast",
+    //         city: "phoenex"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 5,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 1,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 3,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 5,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 2,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 3,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 1,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sock Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 0,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 3,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 2,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 3,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 5,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 4,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 3,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 1,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     },
+    //     {
+    //         restaurantName: "Sam's Subs",
+    //         restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
+    //         rating: 3,
+    //         been_here: false,
+    //         category: "mexica",
+    //         city: "hellow"
+    //     }
+    // ];
 
     //save date that was selected to display
 
@@ -177,7 +191,9 @@ const RestaurantList = () =>{
     const [searchResults, setSearchResults] = useState(restaurants)
 
     useEffect(()=>{
-
+        props.fetchRestaurantAll();
+        restaurants = props.allRestaurants;
+        console.log(restaurants,"we double here")
         let searchKey = Object.keys(searchTerm).filter(key => searchTerm[key] !== "" && searchTerm[key] !== 0).toString();
 
         console.log("Search Key:", searchTerm[searchKey]);
@@ -187,13 +203,13 @@ const RestaurantList = () =>{
         let results = [];
 
         if(searchKey === "") {
-            results = restaurants.map(x => x);
+            results = props.allRestaurants.map(x => x);
         } else if(!isNaN(searchTerm[searchKey])) {
-            results = restaurants.filter(rest => {
+            results = props.allRestaurants.filter(rest => {
                 return rest[searchKey] === (searchTerm[searchKey]);
             });
         } else {
-            results = restaurants.filter(rest => {
+            results = props.allRestaurants.filter(rest => {
                 return rest[searchKey].toLowerCase().includes(searchTerm[searchKey].toLowerCase());
             });
         }
@@ -308,7 +324,7 @@ const RestaurantList = () =>{
                         : 
                         searchResults.map( restdata => {
                             // console.log(rest);
-                            return <RestaurantCard restaurant={restdata} />;
+                            return <RestaurantCard restaurant={restdata} props={props}/>;
                         }) 
                     }
                 </div>  
@@ -318,4 +334,10 @@ const RestaurantList = () =>{
     )
 }
 
-export default RestaurantList
+const mapStateToProps = state => {
+    return {
+        allRestaurants: state.allRestaurants
+    }
+}
+
+export default connect(mapStateToProps, {fetchRestaurantAll})(RestaurantList);

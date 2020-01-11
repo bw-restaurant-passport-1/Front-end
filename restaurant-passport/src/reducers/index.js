@@ -8,6 +8,9 @@ import {
   FETCH_RESTAURANT_START,
   FETCH_RESTAURANT_SUCCESS,
   FETCH_RESTAURANT_ERROR,
+  FETCHALL_RESTAURANT_START,
+  FETCHALL_RESTAURANT_SUCCESS,
+  FETCHALL_RESTAURANT_ERROR,
   ADD_RESTAURANT_START,
   ADD_RESTAURANT_SUCCESS,
   ADD_RESTAURANT_ERROR,
@@ -26,6 +29,7 @@ export const initialState = {
   isFetching: false,
   isEditing: false,
   restaurants: [],
+  allRestaurants: [],
   token: localStorage.getItem('token')
 };
 
@@ -96,6 +100,26 @@ export const passportReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.payload
       };
+
+    case FETCHALL_RESTAURANT_START:
+      return{
+        ...state,
+        isFetching: true
+      };
+
+    case FETCHALL_RESTAURANT_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        allRestaurants: action.payload
+      };
+
+    case FETCHALL_RESTAURANT_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      }
     case ADD_RESTAURANT_START:
       return {
         ...state,

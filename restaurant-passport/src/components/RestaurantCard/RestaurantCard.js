@@ -64,13 +64,14 @@ const RestaurantCard = ({ restaurant }, props) => {
 
 	console.log(userReviewData);
 
-	const routeToInfo = (e, restaurant) => {
-        e.preventDefault();
-		props.history.push(`/dashboard/${restaurant.restaurantName}`);
-	  }
+	// const routeToInfo = (e, restaurant) => {
+    //     e.preventDefault();
+	// 	props.history.push(`/dashboard/${restaurant.restaurantName}`);
+	//   }
 	  
 	return (
-		<div onClick={e => routeToInfo(e,restaurant)} className='rest_card'>
+        //took onclick={routeToInfo} out of div
+		<div  className='rest_card'>
 			<div className='img_container'>
 				{userReviewData.stamped ? <img className='been_here' src='../../images/Been_Here.png' /> : null}
 				
