@@ -4,14 +4,14 @@ import FaStar from 'react-icons/lib/fa/star';
 import useForm from 'react-hook-form';
 import { register } from '../../serviceWorker';
 import {connect} from 'react-redux';
-import {fetchRestaurant} from '../../actions/index';
+import {fetchRestaurantById} from '../../actions/index';
 import RestaurantInfoCard from '../restaurantInfoCard/restaurantInfoCard'
 
 import ReviewCard from "./ReviewCard";
 
 
 const RestaurantsInfo = (props) => {
-	const restaurantData = props.restaurants;
+	const restaurantData = props.restaurantId;
 
 	// Fake data
 	// const [ restaurantData, setRestaurantData ] = useState({
@@ -30,7 +30,7 @@ const RestaurantsInfo = (props) => {
 		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
 	]);
 
-console.log( 'data', props.restaurants);
+console.log( 'data', props.restaurantId);
 
 
 
@@ -59,7 +59,7 @@ console.log( 'data', props.restaurants);
 	const [ avgRating, setAvgRating ] = useState(0);
 
 	useEffect(() => {
-		props.fetchRestaurant(1);
+		props.fetchRestaurantById('1', restaurantData);
 		const avgTotal = reviewData.reduce((acc, curr) => {
 			let total = parseInt(acc.myRating) + parseInt(curr.myRating);
 			let avg = total / reviewData.length;
@@ -118,8 +118,10 @@ console.log( 'data', props.restaurants);
 	return (
 		<div
 		className='info_card'>
-				<RestaurantInfoCard key={restaurantData.id} restaurantData={restaurantData} avgRating={avgRating} formState={formState} FaStar={FaStar}/>
-				
+			{restaurantData.map (restaurantData => {
+				return <RestaurantInfoCard key={restaurantData.id} restaurantData={restaurantData} avgRating={avgRating} formState={formState} FaStar={FaStar}/>
+			})
+		}
 			<div className="review_container">
 				<form className="review_form" onSubmit={handleSubmit(onReviewSubmit)}>
 					<label htmlFor="notes" className="notes_label">Review</label>
@@ -196,8 +198,8 @@ console.log( 'data', props.restaurants);
 
 const mapStateToProps = state => {
     return {
-        restaurants: state.restaurants
+        restaurantId: state.restaurantId
     }
 }
 
-export default connect(mapStateToProps, {fetchRestaurant}) (RestaurantsInfo);
+export default connect(mapStateToProps, {fetchRestaurantById}) (RestaurantsInfo);

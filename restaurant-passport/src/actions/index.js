@@ -54,6 +54,10 @@ export const FETCH_RESTAURANT_START = 'FETCH_RESTAURANT_START';
 export const FETCH_RESTAURANT_SUCCESS = 'FETCH_RESTAURANT_SUCCESS';
 export const FETCH_RESTAURANT_ERROR = 'FETCH_RESTAURANT_ERROR';
 
+export const FETCH_RESTAURANTID_START = 'FETCH_RESTAURANTID_START';
+export const FETCH_RESTAURANTID_SUCCESS = 'FETCH_RESTAURANTID_SUCCESS';
+export const FETCH_RESTAURANTID_ERROR = 'FETCH_RESTAURANT_ERROR';
+
 
 export const fetchRestaurantAll = () => dispatch => {
   dispatch({ type: FETCHALL_RESTAURANT_START });
@@ -72,10 +76,10 @@ export const fetchRestaurantAll = () => dispatch => {
     });
 };
 
-export const fetchRestaurant = id => dispatch => {
+export const fetchRestaurant = (id, restaurantData) => dispatch => {
   dispatch({type: FETCH_RESTAURANT_START});
   return axiosWithAuth()
-  .get(`/api/passports/user/${id} `)
+  .get(`/api/passports/user/${id} `, restaurantData)
   .then(res => {
     console.log('get', res.data)
     dispatch({type: FETCH_RESTAURANT_SUCCESS, payload: res.data});
@@ -83,6 +87,21 @@ export const fetchRestaurant = id => dispatch => {
   .catch(err => {
     console.log('err', err.response);
     dispatch({type: FETCH_RESTAURANT_ERROR });
+  })
+}
+
+
+export const fetchRestaurantById = (id, fetchedId) => dispatch => {
+  dispatch({type: FETCH_RESTAURANTID_START});
+  return axiosWithAuth()
+  .get(`/api/restaurants/${id} `, fetchedId)
+  .then(res => {
+    console.log('get', res.data)
+    dispatch({type: FETCH_RESTAURANTID_SUCCESS, payload: res.data});
+  })
+  .catch(err => {
+    console.log('err', err.response);
+    dispatch({type: FETCH_RESTAURANTID_ERROR });
   })
 }
 

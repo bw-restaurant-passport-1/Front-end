@@ -3,7 +3,7 @@ import {FaEdit} from "react-icons/lib/fa";
 import MdBorderColor from "react-icons/lib/md/border-color";
 import MdCameraAlt from "react-icons/lib/md/camera-alt";
 import { connect } from 'react-redux';
-
+import profilePic from '../images/vector_user.jpg';
 
 
 
@@ -24,7 +24,7 @@ const Profile  =  (props) => {
         <div className="profile">
             <div className="profile_img_div">
                 <a className="profile_edit" src="#"><FaEdit color="white"/></a>
-                <img className="profile_img" src={props.user.img ? props.user.img : "../../images/vector_user.jpg"}/>
+                <img className="profile_img" src={props.user.img ? props.user.img : profilePic }/>
             </div>
 
 

@@ -30,7 +30,7 @@ function App() {
 
 			<PrivateRoute path='/dashboard' component={Footer} />
 
-			<Route exact path='/dashboard/:restaurantName' component= {RestaurantInfo}/>
+			<Route exact path='/dashboard/restaurant/:restaurantName' component= {RestaurantInfo}/>
 		</div>
 	);
 }

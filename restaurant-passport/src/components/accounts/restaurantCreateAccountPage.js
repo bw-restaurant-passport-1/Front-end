@@ -74,7 +74,7 @@ const RestaurantCreateAccountPage = props => {
           <input className='inputs buttons' type='submit' />
         </form>
         <Link className='inputs' to='/'>
-          <p> Already have an accout with Restaurant Passport? Sign in here.</p>
+          <p> Already have an account with Restaurant Passport? Sign in here.</p>
         </Link>
       </div>
     </Titles>

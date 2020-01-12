@@ -139,13 +139,13 @@ table {
 
 .login-page {
 	height: 100vh;
-	background: url(/images/desktop-login.png) no-repeat center center fixed;
+	background: url('./components/images/desktop-login.png') no-repeat center center fixed;
 	background-size: cover;
 }
 
 .register-page {
 	height: 100vh;
-	background: url(/images/desktop-register-page.png) no-repeat center center fixed;
+	background: url('./components/images/desktop-register-page.png') no-repeat center center fixed;
 	background-size: cover;
 	background-position: center;
 }
