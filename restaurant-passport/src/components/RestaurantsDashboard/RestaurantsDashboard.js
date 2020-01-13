@@ -16,7 +16,7 @@ const RestaurantsDashboard = (props) => {
         
     // };
     useEffect(()=> {
-        props.fetchRestaurant(1, restaurant);
+        props.fetchRestaurant(1);
     }, [])
 
     return (

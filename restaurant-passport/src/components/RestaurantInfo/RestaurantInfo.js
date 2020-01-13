@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styles from '../../styles/styles.css';
 import FaStar from 'react-icons/lib/fa/star';
 import useForm from 'react-hook-form';
-import { register } from '../../serviceWorker';
+// import { register } from '../../serviceWorker';
 import {connect} from 'react-redux';
-import {fetchRestaurantById} from '../../actions/index';
+import {fetchRestaurantById, fetchAllReviews, addReview} from '../../actions/index';
 import RestaurantInfoCard from '../restaurantInfoCard/restaurantInfoCard'
 
 import ReviewCard from "./ReviewCard";
@@ -12,7 +12,7 @@ import ReviewCard from "./ReviewCard";
 
 const RestaurantsInfo = (props) => {
 	const restaurantData = props.restaurantId;
-
+	// const reviewData = props.reviews;
 	// Fake data
 	// const [ restaurantData, setRestaurantData ] = useState({
 	// 	id                   : 1,
@@ -28,10 +28,9 @@ const RestaurantsInfo = (props) => {
 	const [ reviewData, setReviewData ] = useState([
 		{ user_id: '2', restaurant_id: '1', stamped: true, notes: 'It was great', myRating: '3' },
 		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
-	]);
+	])
 
 console.log( 'data', props.restaurantId);
-
 
 
 
@@ -46,7 +45,8 @@ console.log( 'data', props.restaurantId);
 
 	const onReviewSubmit = (data, e) => {
 		e.preventDefault();
-		console.log(data)
+		console.log('data submit', data)
+		props.addReview(data)
 	}
 
 
@@ -59,7 +59,9 @@ console.log( 'data', props.restaurantId);
 	const [ avgRating, setAvgRating ] = useState(0);
 
 	useEffect(() => {
-		props.fetchRestaurantById('1', restaurantData);
+		props.fetchRestaurantById('1');
+		props.fetchAllReviews();
+		console.log(reviewData)
 		const avgTotal = reviewData.reduce((acc, curr) => {
 			let total = parseInt(acc.myRating) + parseInt(curr.myRating);
 			let avg = total / reviewData.length;
@@ -123,7 +125,7 @@ console.log( 'data', props.restaurantId);
 			})
 		}
 			<div className="review_container">
-				<form className="review_form" onSubmit={handleSubmit(onReviewSubmit)}>
+				<form className="review_form" onSubmit={e => handleSubmit(e, onReviewSubmit)}>
 					<label htmlFor="notes" className="notes_label">Review</label>
 					<input
 						className= {`notes ${errors.notes ? "add_rating_errors": ""}`}
@@ -185,8 +187,8 @@ console.log( 'data', props.restaurantId);
 						{
 							reviewData.length < 0 ? <h2>No reviews</h2> 
 							:
-							reviewData.map(review => {
-								return <ReviewCard reviewer={review}/>
+							reviewData.map(reviewer => {
+								return <ReviewCard reviewer={reviewer}/>
 							})
 						}
 					</div>
@@ -198,8 +200,9 @@ console.log( 'data', props.restaurantId);
 
 const mapStateToProps = state => {
     return {
-        restaurantId: state.restaurantId
+		restaurantId: state.restaurantId,
+		reviews: state.reviews
     }
 }
 
-export default connect(mapStateToProps, {fetchRestaurantById}) (RestaurantsInfo);
+export default connect(mapStateToProps, {fetchRestaurantById, fetchAllReviews, addReview}) (RestaurantsInfo);

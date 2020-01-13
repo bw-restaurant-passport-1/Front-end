@@ -14,9 +14,15 @@ import {
   FETCH_RESTAURANTID_START,
   FETCH_RESTAURANTID_SUCCESS,
   FETCH_RESTAURANTID_ERROR,
+  FETCH_ALLREVIEWS_START,
+  FETCH_ALLREVIEWS_SUCCESS,
+  FETCH_ALLREVIEWS_ERROR,
   ADD_RESTAURANT_START,
   ADD_RESTAURANT_SUCCESS,
   ADD_RESTAURANT_ERROR,
+  ADD_REVIEW_START,
+  ADD_REVIEW_SUCCESS,
+  ADD_REVIEW_ERROR,
   UPDATE_RESTAURANT_START,
   UPDATE_RESTAURANT_SUCCESS,
   UPDATE_RESTAURANT_ERROR
@@ -34,9 +40,9 @@ export const initialState = {
   restaurants: [],
   restaurantId: [],
   allRestaurants: [],
+  reviews: [],
   token: localStorage.getItem('token')
 };
-
 export const passportReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_START:
@@ -145,6 +151,27 @@ export const passportReducer = (state = initialState, action) => {
         error: action.payload
       };
 
+      case FETCH_ALLREVIEWS_START:
+      return {
+        ...state,
+        isFetching: true
+      };
+
+    case FETCH_ALLREVIEWS_SUCCESS:
+      return {
+        ...state,
+        reviews: action.payload,
+        isFetching: false
+      };
+
+    case FETCH_ALLREVIEWS_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      };
+
+
     case ADD_RESTAURANT_START:
       return {
         ...state,
@@ -161,6 +188,24 @@ export const passportReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.payload
       };
+
+      case ADD_REVIEW_START:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case ADD_REVIEW_SUCCESS:
+      return {
+        ...state,
+        reviews: [...state.reviews, action.payload]
+      };
+    case ADD_REVIEW_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      };
+
     case UPDATE_RESTAURANT_START:
       return {
         ...state,
