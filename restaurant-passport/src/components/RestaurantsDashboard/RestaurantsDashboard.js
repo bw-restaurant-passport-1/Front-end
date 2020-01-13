@@ -15,7 +15,6 @@ const RestaurantsDashboard = (props) => {
     //     been_here: true,
         
     // };
-      
     useEffect(()=> {
         props.fetchRestaurant(1);
     }, [])

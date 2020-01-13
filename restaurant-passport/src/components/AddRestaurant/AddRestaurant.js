@@ -29,7 +29,7 @@ const AddRestaurant = (props) => {
         console.log(data,'add rest submit');
         props.addRestaurant(data).then(()=>{
             
-            props.history.push('/dashboard');
+            props.history.push(props.restaurants);
         })
     }
 // restaurantName	String	REQ

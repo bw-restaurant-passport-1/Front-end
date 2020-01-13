@@ -13,7 +13,7 @@ const Navbar = () => {
 	return (
 		<nav className='nav_bar'>
 			<a className='titlenav'>Restaurant Passport</a>
-			<a href="#">About</a>
+			<a href="https://bw-restaurant-passport-1.github.io/User-Interface/about.html">About</a>
 			<Link to='/dashboard/add-restaurant'>
 				Add Restaurant
 			</Link>

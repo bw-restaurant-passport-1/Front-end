@@ -54,6 +54,14 @@ export const FETCH_RESTAURANT_START = 'FETCH_RESTAURANT_START';
 export const FETCH_RESTAURANT_SUCCESS = 'FETCH_RESTAURANT_SUCCESS';
 export const FETCH_RESTAURANT_ERROR = 'FETCH_RESTAURANT_ERROR';
 
+export const FETCH_RESTAURANTID_START = 'FETCH_RESTAURANTID_START';
+export const FETCH_RESTAURANTID_SUCCESS = 'FETCH_RESTAURANTID_SUCCESS';
+export const FETCH_RESTAURANTID_ERROR = 'FETCH_RESTAURANTID_ERROR';
+
+export const FETCH_ALLREVIEWS_START = 'FETCH_ALLREVIEWS_START';
+export const FETCH_ALLREVIEWS_SUCCESS = 'FETCH_ALLREVIEWS_SUCCESS';
+export const FETCH_ALLREVIEWS_ERROR = 'FETCH_ALLREVIEWS_ERROR';
+
 
 export const fetchRestaurantAll = () => dispatch => {
   dispatch({ type: FETCHALL_RESTAURANT_START });
@@ -72,17 +80,46 @@ export const fetchRestaurantAll = () => dispatch => {
     });
 };
 
-export const fetchRestaurant = id => dispatch => {
+export const fetchRestaurant = (id) => dispatch => {
   dispatch({type: FETCH_RESTAURANT_START});
   return axiosWithAuth()
   .get(`/api/passports/user/${id} `)
   .then(res => {
-    console.log('get', res.data)
+    // console.log('get', res.data)
     dispatch({type: FETCH_RESTAURANT_SUCCESS, payload: res.data});
   })
   .catch(err => {
-    console.log('err', err.response);
+    // console.log('err', err.response);
     dispatch({type: FETCH_RESTAURANT_ERROR });
+  })
+}
+
+
+export const fetchRestaurantById = id => dispatch => {
+  dispatch({type: FETCH_RESTAURANTID_START});
+  return axiosWithAuth()
+  .get(`/api/restaurants/${id} `)
+  .then(res => {
+    // console.log('get', res.data)
+    dispatch({type: FETCH_RESTAURANTID_SUCCESS, payload: res.data});
+  })
+  .catch(err => {
+    // console.log('err', err.response);
+    dispatch({type: FETCH_RESTAURANTID_ERROR });
+  })
+}
+
+export const fetchAllReviews = state => dispatch => {
+  dispatch({type: FETCH_ALLREVIEWS_START});
+  return axiosWithAuth()
+  .get('/api/passports', state)
+  .then(res => {
+    console.log('get', res.data)
+    dispatch({type: FETCH_ALLREVIEWS_SUCCESS, payload: res.data});
+  })
+  .catch(err => {
+    console.log('err', err.response);
+    dispatch({type: FETCH_ALLREVIEWS_ERROR });
   })
 }
 
@@ -98,14 +135,33 @@ export const addRestaurant = state => dispatch => {
     .then(res => {
       console.log('get', res);
       console.log(res.data);
-      //localStorage.setItem('token', res.data);
       dispatch({ type: ADD_RESTAURANT_SUCCESS, payload: res.data });
       console.log('rest added successfully')
     })
     .catch(err => {
       console.log('err', err.response);
-      dispatch({ type: ADD_RESTAURANT_ERROR, payload: 'res.data' });
+      dispatch({ type: ADD_RESTAURANT_ERROR });
       console.log('rest not added')
+    });
+};
+
+export const ADD_REVIEW_START = 'ADD_REVIEW_START';
+export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
+export const ADD_REVIEW_ERROR = 'ADD_REVIEW_ERROR';
+
+export const addReview = state => dispatch => {
+  dispatch({ type: ADD_REVIEW_START });
+  return axiosWithAuth()
+    .post('api/passports', state)
+    .then(res => {
+      console.log('get', res);
+      dispatch({ type: ADD_REVIEW_SUCCESS, payload: res.data });
+      console.log('review added successfully')
+    })
+    .catch(err => {
+      console.log('err', err.response);
+      dispatch({ type: ADD_REVIEW_ERROR });
+      console.log('review not added')
     });
 };
 
@@ -113,10 +169,10 @@ export const addRestaurant = state => dispatch => {
 export const UPDATE_RESTAURANT_START = 'UPDATE_RESTAURANT_START';
 export const UPDATE_RESTAURANT_SUCCESS = 'UPDATE_RESTAURANT_SUCCESS';
 export const UPDATE_RESTAURANT_ERROR = 'UPDATE_RESTAURANT_ERROR';
-export const updateRestaurant = state => dispatch => {
+export const updateRestaurant = (id, updatedRestaurant) => dispatch => {
   dispatch({ type: UPDATE_RESTAURANT_START });
   return axiosWithAuth()
-    .put('/api/restaurant/:id', state)
+    .put(`/api/restaurant/${id}`, updatedRestaurant)
     .then(res => {
       console.log('get', res);
       localStorage.setItem('token', res.data);
@@ -124,6 +180,6 @@ export const updateRestaurant = state => dispatch => {
     })
     .catch(err => {
       console.log('err', err.response);
-      dispatch({ type: UPDATE_RESTAURANT_ERROR, payload: 'res.data' });
+      dispatch({ type: UPDATE_RESTAURANT_ERROR});
     });
 };
