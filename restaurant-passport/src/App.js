@@ -24,13 +24,15 @@ function App() {
 
 			<PrivateRoute exact path='/dashboard' component={Dashboard} />
 
-			<PrivateRoute path='/dashboard/restaurants' component={RestaurantList} />
+			<PrivateRoute exact path='/dashboard/restaurants' component={RestaurantList} />
 
-			<PrivateRoute path='/dashboard/add-restaurant' component={AddRestaurant} />
+			<PrivateRoute exact path='/dashboard/add-restaurant' component={AddRestaurant} />
 
 			<PrivateRoute path='/dashboard' component={Footer} />
 
-			<Route exact path='/dashboard/restaurant/:restaurantName' component= {RestaurantInfo}/>
+
+			<Route path='/dashboard/restaurants/:id' component= {RestaurantInfo}/>
+
 		</div>
 	);
 }

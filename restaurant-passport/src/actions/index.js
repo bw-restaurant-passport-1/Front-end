@@ -80,7 +80,30 @@ export const fetchRestaurantAll = () => dispatch => {
     });
 };
 
-export const fetchRestaurant = (id) => dispatch => {
+
+export const GETBYID_RESTAURANT_START = 'GETBYID_RESTAURANT_START';
+export const GETBYID_RESTAURANT_SUCCESS = 'GETBYID_RESTAURANT_SUCCESS';
+export const GETBYID_RESTAURANT_ERROR = 'GETBYID_RESTAURANT_ERROR';
+
+export const getRestaurantById = (id) => dispatch => {
+  dispatch({ type: GETBYID_RESTAURANT_START });
+  return axiosWithAuth()
+    .get(`/api/restaurants/${id}`)
+    .then(res => {
+      console.log('get', res);
+      //localStorage.setItem('token', res.data.token);
+      
+      console.log(res.data);
+      dispatch({ type: GETBYID_RESTAURANT_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log('err', err.response);
+      dispatch({ type: GETBYID_RESTAURANT_ERROR, payload: 'res.data' });
+    });
+};
+
+export const fetchRestaurant = id => dispatch => {
+
   dispatch({type: FETCH_RESTAURANT_START});
   return axiosWithAuth()
   .get(`/api/passports/user/${id} `)

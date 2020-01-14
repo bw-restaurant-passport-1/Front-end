@@ -5,6 +5,9 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
+  GETBYID_RESTAURANT_START,
+  GETBYID_RESTAURANT_SUCCESS,
+  GETBYID_RESTAURANT_ERROR,
   FETCH_RESTAURANT_START,
   FETCH_RESTAURANT_SUCCESS,
   FETCH_RESTAURANT_ERROR,
@@ -40,8 +43,14 @@ export const initialState = {
   restaurants: [],
   restaurantId: [],
   allRestaurants: [],
+
+  singleRestaurant: [],
+  token: localStorage.getItem('token'),
+  makeLifeEasier: false,
+
   reviews: [],
-  token: localStorage.getItem('token')
+  
+
 };
 export const passportReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -88,6 +97,27 @@ export const passportReducer = (state = initialState, action) => {
       return {
         ...state,
         signingUp: false,
+        error: action.payload
+      };
+
+    case GETBYID_RESTAURANT_START:
+      return {
+        ...state,
+        isFetching: true
+      };
+
+    case GETBYID_RESTAURANT_SUCCESS:
+      return {
+        ...state, 
+        isFetching: false,
+        singleRestaurant: action.payload,
+        makeLifeEasier: true
+      };
+
+    case GETBYID_RESTAURANT_ERROR:
+      return {
+        ...state,
+        isFetching: false,
         error: action.payload
       };
 

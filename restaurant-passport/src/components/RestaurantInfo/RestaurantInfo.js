@@ -4,15 +4,20 @@ import FaStar from 'react-icons/lib/fa/star';
 import useForm from 'react-hook-form';
 // import { register } from '../../serviceWorker';
 import {connect} from 'react-redux';
-import {fetchRestaurantById, fetchAllReviews, addReview} from '../../actions/index';
+import {fetchRestaurantById, fetchAllReviews, addReview, getRestaurantById, fetchRestaurant} from '../../actions/index';
+
 import RestaurantInfoCard from '../restaurantInfoCard/restaurantInfoCard'
 
 import ReviewCard from "./ReviewCard";
 
 
 const RestaurantsInfo = (props) => {
-	const restaurantData = props.restaurantId;
-	// const reviewData = props.reviews;
+
+	let restaurantData = [];
+	console.log('the restinfo page and the whole component')
+	// props.getRestaurantById(props.match.params.id);
+	// 	restaurantData = props.singleRest;
+
 	// Fake data
 	// const [ restaurantData, setRestaurantData ] = useState({
 	// 	id                   : 1,
@@ -28,7 +33,9 @@ const RestaurantsInfo = (props) => {
 	const [ reviewData, setReviewData ] = useState([
 		{ user_id: '2', restaurant_id: '1', stamped: true, notes: 'It was great', myRating: '3' },
 		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
-	])
+
+	]);
+
 
 console.log( 'data', props.restaurantId);
 
@@ -57,21 +64,55 @@ console.log( 'data', props.restaurantId);
 
 	//to display the avg rating for restaurnat selected
 	const [ avgRating, setAvgRating ] = useState(0);
+	//const ring = props.getRestaurantById(props.match.params.id);
+	const [ring, setRing] = useState(false);
+	let setRest =[];
+	//props.getRestaurantById(props.match.params.id)
+
+	
 
 	useEffect(() => {
-		props.fetchRestaurantById('1');
+
+
+		
+		
+		
+		//const doIt= () => {
+		props.getRestaurantById(props.match.params.id)
+		// .then(res =>{
+		// setRest = props.singleRest;
+		// }
+		// ).catch(err=>console.log(err));
+		console.log(props.singleRest,'a rest')
+		setRest = props.singleRest;
+	
+		//props.fetchRestaurantById('1');
 		props.fetchAllReviews();
 		console.log(reviewData)
+
 		const avgTotal = reviewData.reduce((acc, curr) => {
 			let total = parseInt(acc.myRating) + parseInt(curr.myRating);
 			let avg = total / reviewData.length;
 			return avg;
+			
 		});
 
 		setAvgRating(avgTotal);
+		
+		
+			console.log( 'data here', setRest);
+			restaurantData = setRest;
+			console.log(restaurantData,'what we got');
+		}
 
+		//doIt();
+			
+		
+		
 
-	}, []);
+	//}
+	, [props.makeLifeEasier]);
+	
 
 
 	// to set stars for review
@@ -118,12 +159,20 @@ console.log( 'data', props.restaurantId);
 
 	//////////////////////////////
 	return (
+
+		<>
+		{!props.singleRest && (<div>Loading...</div>)}
+
+		{props.singleRest && (
 		<div
 		className='info_card'>
-			{restaurantData.map (restaurantData => {
-				return <RestaurantInfoCard key={restaurantData.id} restaurantData={restaurantData} avgRating={avgRating} formState={formState} FaStar={FaStar}/>
-			})
-		}
+
+				{props.singleRest.map(rest=>{
+					return <RestaurantInfoCard key={rest.id} restaurantData={rest} avgRating={avgRating} formState={formState} FaStar={FaStar}/>
+				})}
+				{/* <RestaurantInfoCard key={props.singleRest.id} restaurantData={props.singleRest} avgRating={avgRating} formState={formState} FaStar={FaStar}/> */}
+
+
 			<div className="review_container">
 				<form className="review_form" onSubmit={e => handleSubmit(e, onReviewSubmit)}>
 					<label htmlFor="notes" className="notes_label">Review</label>
@@ -187,22 +236,31 @@ console.log( 'data', props.restaurantId);
 						{
 							reviewData.length < 0 ? <h2>No reviews</h2> 
 							:
-							reviewData.map(reviewer => {
-								return <ReviewCard reviewer={reviewer}/>
+
+							reviewData.map(review => {
+								return <ReviewCard key={review.id} reviewer={review}/>
+
 							})
 						}
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>)}
+		</>
 	);
 };
 
 const mapStateToProps = state => {
     return {
-		restaurantId: state.restaurantId,
-		reviews: state.reviews
+
+        restaurants: state.restaurants,
+		singleRest: state.singleRestaurant,
+		makeLifeEasier: state.makeLifeEasier,
+		reviews: state.reviews,
+		restaurantId: state.restaurantId
     }
 }
 
-export default connect(mapStateToProps, {fetchRestaurantById, fetchAllReviews, addReview}) (RestaurantsInfo);
+
+export default connect(mapStateToProps, {getRestaurantById,fetchRestaurantById, fetchAllReviews, addReview}) (RestaurantsInfo);
+

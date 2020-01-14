@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import FaBookmarkO from 'react-icons/lib/fa/bookmark-o';
 import FaStar from 'react-icons/lib/fa/star';
 import { Router } from 'react-router';
+
+import {connect} from 'react-redux';
+import {getRestaurantById} from '../../actions/index'
+
 import placeholder from '../images/restaurant_placeholder.jpg';
 import stamped from '../images/Been_Here.png';
+
 // import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 // FaBookmarkO react-icons/lib/fa/bookmark-o
@@ -21,6 +26,8 @@ import stamped from '../images/Been_Here.png';
 
 const RestaurantCard = ({ restaurant }, props) => {
 	console.log(restaurant);
+    console.log(restaurant.id,'id a thing?');
+    const theID = restaurant.id;
 
 	//fake data
 	const [ restaurantReviews, setRestaurantReviews ] = useState([
@@ -35,6 +42,11 @@ const RestaurantCard = ({ restaurant }, props) => {
 	// get user id that is signed in to match with reviews to show if they stamped it.
 
 	const user_id = '2';
+
+    // const clickHandle = e=>{
+    //     e.preventDefault();
+    //     props.getRestaurantById(theID);
+    // }
 
 	useEffect(() => {
 		// axiosWithAuth().get(`/api/passports/restaurants/${restaurant.id}`).then((res)=> {
@@ -91,9 +103,17 @@ const RestaurantCard = ({ restaurant }, props) => {
 				</div>
 				
 			</div>
-            <Link to={`/dashboard/restaurant/${restaurant.restaurantName}`} className='see_reviews'>See Reviews </Link>
+
+            <Link to={`/dashboard/restaurants/${restaurant.id}`  } className='see_reviews'>See Reviews </Link>
+
 		</div>
 	);
 };
 
-export default RestaurantCard;
+const mapStateToProps = state => {
+    return {
+        singleRestaurant: state.singleRestaurant
+    }
+}
+
+export default connect(mapStateToProps, {getRestaurantById})(RestaurantCard);
