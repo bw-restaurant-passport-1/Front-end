@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getRestaurantById} from '../../actions/index'
+import {getRestaurantById, updateRestaurant} from '../../actions/index'
+
+import map from '../images/map_image.jpg'
 
 const RestaurantInfoCard = ({restaurantData, avgRating, FaStar, formState},props) => {
 	let single = props.singleRest;
@@ -28,7 +30,7 @@ const RestaurantInfoCard = ({restaurantData, avgRating, FaStar, formState},props
 					Edit Details
 				</button>
 				<div className='img_container'>
-					<img className='info_img' src='../../images/map_image.jpg' />
+					<img className='info_img' src={map} />
 				</div>
 				<div className='address_info'>
 					<h1> Address: </h1>

@@ -169,7 +169,7 @@ const RestaurantList = (props) =>{
                         : 
                         searchResults.map( restdata => {
                             // console.log(rest);
-                            return <RestaurantCard restaurant={restdata} props={props}/>;
+                            return <RestaurantCard key ={restdata.id} restaurant={restdata} props={props}/>;
                         }) 
                     }
                 </div>  

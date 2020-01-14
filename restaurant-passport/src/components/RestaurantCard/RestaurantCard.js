@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import FaBookmarkO from 'react-icons/lib/fa/bookmark-o';
 import FaStar from 'react-icons/lib/fa/star';
 import { Router } from 'react-router';
+
 import {connect} from 'react-redux';
 import {getRestaurantById} from '../../actions/index'
+
+import placeholder from '../images/restaurant_placeholder.jpg';
+import stamped from '../images/Been_Here.png';
+
 // import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 // FaBookmarkO react-icons/lib/fa/bookmark-o
@@ -72,21 +77,13 @@ const RestaurantCard = ({ restaurant }, props) => {
 	};
 
 	console.log(userReviewData);
-
-	// const routeToInfo = (e, restaurant) => {
-    //     e.preventDefault();
-	// 	props.history.push(`/dashboard/${restaurant.restaurantName}`);
-	//   }
 	  
 	return (
-        //took onclick={routeToInfo} out of div
-		<div  className='rest_card'>
+		<div className='rest_card'>
 			<div className='img_container'>
-				{userReviewData.stamped ? <img className='been_here' src='../../images/Been_Here.png' /> : null}
+				{userReviewData.stamped ? <img className='been_here' src={stamped} /> : null}
 				
-				{restaurant && (
-					<img className='rest_img' src={restaurant.restaurantPictureURL} alt={restaurant.restaurantName} />
-				)}
+	{restaurant.restaurantPictureURL ? <img className='rest_img' src={restaurant.restaurantPictureURL} alt={restaurant.restaurantName}/> : <img className='rest_img' src= {placeholder} alt='placeholder'/> }
 				<a className='bookmark' onClick={BookMarkMe}>
 					<FaBookmarkO size={32} />
 				</a>
@@ -106,7 +103,9 @@ const RestaurantCard = ({ restaurant }, props) => {
 				</div>
 				
 			</div>
+
             <Link to={`/dashboard/restaurants/${restaurant.id}`  } className='see_reviews'>See Reviews </Link>
+
 		</div>
 	);
 };
