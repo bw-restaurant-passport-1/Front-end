@@ -5,13 +5,17 @@ import useForm from 'react-hook-form';
 import { register } from '../../serviceWorker';
 import {connect} from 'react-redux';
 import {fetchRestaurant} from '../../actions/index';
+import {getRestaurantById} from '../../actions/index';
 import RestaurantInfoCard from '../restaurantInfoCard/restaurantInfoCard'
 
 import ReviewCard from "./ReviewCard";
 
 
 const RestaurantsInfo = (props) => {
-	const restaurantData = props.restaurants;
+	let restaurantData = [];
+	console.log('the restinfo page and the whole component')
+	// props.getRestaurantById(props.match.params.id);
+	// 	restaurantData = props.singleRest;
 
 	// Fake data
 	// const [ restaurantData, setRestaurantData ] = useState({
@@ -30,7 +34,7 @@ const RestaurantsInfo = (props) => {
 		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
 	]);
 
-console.log( 'data', props.restaurants);
+
 
 
 
@@ -57,19 +61,56 @@ console.log( 'data', props.restaurants);
 
 	//to display the avg rating for restaurnat selected
 	const [ avgRating, setAvgRating ] = useState(0);
+	//const ring = props.getRestaurantById(props.match.params.id);
+	const [ring, setRing] = useState(false);
+	let setRest =[];
+	//props.getRestaurantById(props.match.params.id)
+
+	
 
 	useEffect(() => {
-		props.fetchRestaurant(1);
+
+		
+		
+		
+		//const doIt= () => {
+		props.getRestaurantById(props.match.params.id)
+		// .then(res =>{
+		// setRest = props.singleRest;
+		// }
+		// ).catch(err=>console.log(err));
+		console.log(props.singleRest,'a rest')
+		setRest = props.singleRest;
+		
+		
+		//console.log(setRest, 'set rest')
+		// if(setRest == null){
+		// 	setRest = props.singleRest;
+		// }
+		
 		const avgTotal = reviewData.reduce((acc, curr) => {
 			let total = parseInt(acc.myRating) + parseInt(curr.myRating);
 			let avg = total / reviewData.length;
 			return avg;
+			
 		});
 
 		setAvgRating(avgTotal);
+		
+		
+			console.log( 'data here', setRest);
+			restaurantData = setRest;
+			console.log(restaurantData,'what we got');
+		}
 
+		//doIt();
+			
+		
+		
 
-	}, []);
+	//}
+	, [props.makeLifeEasier]);
+	
 
 
 	// to set stars for review
@@ -116,9 +157,17 @@ console.log( 'data', props.restaurants);
 
 	//////////////////////////////
 	return (
+
+		<>
+		{!props.singleRest && (<div>Loading...</div>)}
+
+		{props.singleRest && (
 		<div
 		className='info_card'>
-				<RestaurantInfoCard key={restaurantData.id} restaurantData={restaurantData} avgRating={avgRating} formState={formState} FaStar={FaStar}/>
+				{props.singleRest.map(rest=>{
+					return <RestaurantInfoCard key={rest.id} restaurantData={rest} avgRating={avgRating} formState={formState} FaStar={FaStar}/>
+				})}
+				{/* <RestaurantInfoCard key={props.singleRest.id} restaurantData={props.singleRest} avgRating={avgRating} formState={formState} FaStar={FaStar}/> */}
 				
 			<div className="review_container">
 				<form className="review_form" onSubmit={handleSubmit(onReviewSubmit)}>
@@ -184,20 +233,23 @@ console.log( 'data', props.restaurants);
 							reviewData.length < 0 ? <h2>No reviews</h2> 
 							:
 							reviewData.map(review => {
-								return <ReviewCard reviewer={review}/>
+								return <ReviewCard key={review.id} reviewer={review}/>
 							})
 						}
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>)}
+		</>
 	);
 };
 
 const mapStateToProps = state => {
     return {
-        restaurants: state.restaurants
+        restaurants: state.restaurants,
+		singleRest: state.singleRestaurant,
+		makeLifeEasier: state.makeLifeEasier
     }
 }
 
-export default connect(mapStateToProps, {fetchRestaurant}) (RestaurantsInfo);
+export default connect(mapStateToProps, {getRestaurantById}) (RestaurantsInfo);

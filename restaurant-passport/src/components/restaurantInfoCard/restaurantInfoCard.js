@@ -1,7 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {getRestaurantById} from '../../actions/index'
 
-const RestaurantInfoCard = ({restaurantData, avgRating, FaStar, formState}) => {
-    
+const RestaurantInfoCard = ({restaurantData, avgRating, FaStar, formState},props) => {
+	let single = props.singleRest;
+    console.log('rest info card', restaurantData)
     return (
 <div className="rest_info">
 				<div className='img_container'>
@@ -40,4 +43,11 @@ const RestaurantInfoCard = ({restaurantData, avgRating, FaStar, formState}) => {
             )
 }
 
-export default RestaurantInfoCard;
+const mapStateToProps = state => {
+    return {
+        restaurants: state.restaurants,
+		singleRest: state.singleRestaurant
+    }
+}
+
+export default connect(mapStateToProps, {getRestaurantById}) (RestaurantInfoCard);
