@@ -25,6 +25,9 @@ const RestaurantsInfo = (props) => {
 	// 	restaurantPictureURL : 'https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg',
 	// });
 
+
+	
+
 	const [ reviewData, setReviewData ] = useState([
 		{ user_id: '2', restaurant_id: '1', stamped: true, notes: 'It was great', myRating: '3' },
 		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
@@ -61,6 +64,7 @@ console.log( 'data', props.restaurantId);
 	useEffect(() => {
 		props.fetchRestaurantById('1');
 		props.fetchAllReviews();
+		
 		console.log(reviewData)
 		const avgTotal = reviewData.reduce((acc, curr) => {
 			let total = parseInt(acc.myRating) + parseInt(curr.myRating);

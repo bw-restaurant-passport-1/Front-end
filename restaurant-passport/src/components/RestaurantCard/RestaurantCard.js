@@ -55,7 +55,7 @@ const RestaurantCard = ({ restaurant }, props) => {
 
 		setUserReviewData(user);
 
-		console.log(userReviewData);
+
 
 		setAvgRating(avgTotal);
 	}, []);
@@ -64,14 +64,14 @@ const RestaurantCard = ({ restaurant }, props) => {
 		console.log(restaurant);
 	};
 
-	console.log(userReviewData);
+	
 	  
 	return (
 		<div className='rest_card'>
 			<div className='img_container'>
 				{userReviewData.stamped ? <img className='been_here' src={stamped} /> : null}
 				
-	{restaurant.restaurantPictureURL ? <img className='rest_img' src={restaurant.restaurantPictureURL} alt={restaurant.restaurantName}/> : <img className='rest_img' src= {placeholder} alt='placeholder'/> }
+				{restaurant.restaurantPictureURL ? <img className='rest_img' src={restaurant.restaurantPictureURL} alt={restaurant.restaurantName}/> : <img className='rest_img' src= {placeholder} alt='placeholder'/> }
 				<a className='bookmark' onClick={BookMarkMe}>
 					<FaBookmarkO size={32} />
 				</a>

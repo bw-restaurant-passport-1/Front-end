@@ -137,6 +137,11 @@ table {
 	border-spacing: 0;
 }
 
+a:link{
+	color: black;
+}
+
+
 .login-page {
 	height: 100vh;
 	background: url('./components/images/desktop-login.png') no-repeat center center fixed;

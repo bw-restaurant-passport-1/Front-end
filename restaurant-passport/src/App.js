@@ -24,9 +24,9 @@ function App() {
 
 			<PrivateRoute exact path='/dashboard' component={Dashboard} />
 
-			<PrivateRoute path='/dashboard/restaurants' component={RestaurantList} />
+			<PrivateRoute exact path='/dashboard/restaurants/:section' component={RestaurantList} />
 
-			<PrivateRoute path='/dashboard/add-restaurant' component={AddRestaurant} />
+			<PrivateRoute exact path='/dashboard/add-restaurant' component={AddRestaurant} />
 
 			<PrivateRoute path='/dashboard' component={Footer} />
 

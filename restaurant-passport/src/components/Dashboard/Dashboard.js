@@ -20,6 +20,7 @@ const Dashboard = (props) => {
     // console.log('========')
     
     useEffect(()=>{
+      
         const doIT = ()=>{
             //setCurrentUser(props.user);
             console.log(props.user, 'props user');
