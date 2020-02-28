@@ -29,6 +29,7 @@ import {
 } from '../actions/index';
 
 const localUser = JSON.parse(localStorage.getItem('user'));
+
 export const initialState = {
   user: localUser,
   loggingIn: false,
@@ -43,6 +44,7 @@ export const initialState = {
   reviews: [],
   token: localStorage.getItem('token')
 };
+
 export const passportReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_START:

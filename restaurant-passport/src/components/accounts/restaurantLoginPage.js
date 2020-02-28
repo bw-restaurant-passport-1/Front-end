@@ -12,6 +12,7 @@ const Titles = styled.div`
 
 const RestaurantLoginPage = props => {
   const { register, handleSubmit, errors } = useForm();
+
   const onSubmit = (data, e) => {
     e.preventDefault();
     console.log(data);
@@ -41,7 +42,7 @@ const RestaurantLoginPage = props => {
             ref={register({ required: true, max: 8 })}
           />
           {errors.password && <p className='errors'>Password Required</p>}
-          <input className='inputs buttons' type='submit' />
+          <input disabled={props.isloggingIn}className='inputs buttons' type='submit' />
         </form>
         <Link className='inputs' to='/register'>
           <p> New to Restaurant Passport? Sign up here. </p>

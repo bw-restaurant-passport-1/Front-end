@@ -1,6 +1,5 @@
 import React,{ useState } from "react";
 import useForm from "react-hook-form";
-import { register } from "../../serviceWorker";
 import inbox from "react-icons/lib/fa/inbox";
 import { addRestaurant } from '../../actions/index';
 import { connect } from 'react-redux';

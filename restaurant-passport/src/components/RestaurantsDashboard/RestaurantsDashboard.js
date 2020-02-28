@@ -8,34 +8,12 @@ import compass from "react-icons/lib/fa/compass";
 
 const RestaurantsDashboard = ({ allRestaurants, isFetching,fetchRestaurantAll}) => {
 
-    //Save the data for 3 of each section
-    // console.log(props)
-
-    // const restaurant = {
-    //     restaurantName: "Michael’s Food Place",
-    //     restaurantPictureURL: "https://static.olocdn.net/menu/chilis/cdd356ec154236849bfe87c344ed0bde.jpg",
-    //     rating: 3,
-    //     been_here: true,
-        
-    // };
-  
-
-    const rest = allRestaurants
-
-     const [topsRecent, setTopRecent] = useState([])
-
-     
-
     
     useEffect(()=> {
         
 
         fetchRestaurantAll()
 
-        for(let x=0;x<3;x++){
-            console.log(rest)
-            setTopRecent([...topsRecent, allRestaurants[x]])
-        }
 
 
     }, [])
@@ -53,7 +31,7 @@ const RestaurantsDashboard = ({ allRestaurants, isFetching,fetchRestaurantAll}) 
                 
                 <div
                  className="restaurants_container">
-                    {allRestaurants && allRestaurants.map(x => <RestaurantCard key ={x.id} restaurant={x}/>)}
+                    {allRestaurants && allRestaurants.slice(0,3).map(x => <RestaurantCard key ={x.id} restaurant={x}/>)}
                 </div>
                 
             </div>
