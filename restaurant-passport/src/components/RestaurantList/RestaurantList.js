@@ -19,8 +19,14 @@ const RestaurantList = (props) =>{
     const [searchResults, setSearchResults] = useState(restaurants)
 
     useEffect(()=>{
+        props.fetchRestaurantAll()
+        
+    },[])
+
+    useEffect(()=>{
         props.fetchRestaurantAll();
-        restaurants = props.allRestaurants;
+        // restaurants = props.allRestaurants;
+
         console.log(restaurants,"we double here")
         let searchKey = Object.keys(searchTerm).filter(key => searchTerm[key] !== "" && searchTerm[key] !== 0).toString();
 

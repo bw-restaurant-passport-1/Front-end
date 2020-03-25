@@ -91,7 +91,7 @@ const RestaurantCard = ({ restaurant }, props) => {
 				</div>
 				
 			</div>
-            <Link to={`/dashboard/restaurant/${restaurant.restaurantName}`} className='see_reviews'>See Reviews </Link>
+            <Link to={`/dashboard/restaurant/${restaurant.restaurantName}/${restaurant.id}`} className='see_reviews'>See Reviews </Link>
 		</div>
 	);
 };

@@ -5,7 +5,7 @@ import MdCameraAlt from "react-icons/lib/md/camera-alt";
 import { connect } from 'react-redux';
 import profilePic from '../images/vector_user.jpg';
 
-
+import { userReviewFetch } from "../../actions/index.js";
 
 const Profile  =  (props) => {
     
@@ -17,7 +17,9 @@ const Profile  =  (props) => {
     // }
     console.log(props.user,"a user?");
 
-    
+    useEffect(()=>{
+      props.userReviewFetch();
+    },[])
 
 
     return (
@@ -50,6 +52,6 @@ const mapStateToProps = state => {
     user: state.user
   };
 };
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps, { userReviewFetch })(
   Profile
 );

@@ -109,6 +109,20 @@ export const fetchRestaurantById = id => dispatch => {
   })
 }
 
+export const FETCH_REVIEWID_START = "FETCH_REVIEWID_START";
+export const FETCH_REVIEWID_SUCCESS = "FETCH_REVIEWID_SUCCESS";
+export const FETCH_REVIEWID_ERROR = "FETCH_REVIEWID_ERROR";
+
+
+export const fetchReviewsId = id => dispatch => {
+  dispatch({type: FETCH_REVIEWID_START})
+  return axiosWithAuth()
+  .get(`/api/passports/restaurant/${id}`)
+  .then(reviews => {
+    
+  })
+}
+
 export const fetchAllReviews = state => dispatch => {
   dispatch({type: FETCH_ALLREVIEWS_START});
   return axiosWithAuth()
@@ -183,3 +197,24 @@ export const updateRestaurant = (id, updatedRestaurant) => dispatch => {
       dispatch({ type: UPDATE_RESTAURANT_ERROR});
     });
 };
+
+
+export const USER_REVIEWS_START = "USER_REVIEWS_START";
+export const USER_REVIEWS_SUCCESS = "USER_REVIEWS_SUCCESS";
+export const USER_REVIEWS_ERROR = "USER_REVIEWS_ERROR";
+
+export const userReviewFetch = (id) => dispatch => {
+  dispatch({type: USER_REVIEWS_START})
+
+  return axiosWithAuth()
+  .get(`/api/passports/user/:id`)
+  .then(reviews => {
+    console.log("Reviews Actions",reviews);
+    dispatch({type: USER_REVIEWS_SUCCESS})
+  })
+  .catch(err => {
+    console.log("Reviews Error",err);
+    dispatch({type: USER_REVIEWS_ERROR})
+
+  })
+}

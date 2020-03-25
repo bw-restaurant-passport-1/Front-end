@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { login } from '../../actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
+// import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 const Titles = styled.div`
   font-family: 'Girassol', cursive;
@@ -17,8 +17,9 @@ const RestaurantLoginPage = props => {
     e.preventDefault();
     console.log(data);
     props.login(data).then(() => props.history.push('/dashboard'));
+  
   };
-  console.log(errors);
+  console.log(props);
   
 
   return (
@@ -42,7 +43,7 @@ const RestaurantLoginPage = props => {
             ref={register({ required: true, max: 8 })}
           />
           {errors.password && <p className='errors'>Password Required</p>}
-          <input disabled={props.isloggingIn}className='inputs buttons' type='submit' />
+          <button disabled={props.loggingIn} className='inputs buttons' type="submit">{props.loggingIn ? "Signing In..." : "Sign In"}</button>
         </form>
         <Link className='inputs' to='/register'>
           <p> New to Restaurant Passport? Sign up here. </p>

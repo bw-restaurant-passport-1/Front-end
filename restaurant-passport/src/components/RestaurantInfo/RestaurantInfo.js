@@ -8,9 +8,12 @@ import {fetchRestaurantById, fetchAllReviews, addReview} from '../../actions/ind
 import RestaurantInfoCard from '../restaurantInfoCard/restaurantInfoCard'
 
 import ReviewCard from "./ReviewCard";
+import { useParams } from 'react-router';
 
 
 const RestaurantsInfo = (props) => {
+
+	const {id} = useParams()
 	const restaurantData = props.restaurantId;
 	// const reviewData = props.reviews;
 	// Fake data
@@ -39,12 +42,6 @@ console.log( 'data', props.restaurantId);
 
 	const { register, formState, handleSubmit, errors, setValue } = useForm();
 
-	const { isSubmitting, setSubmitting } = useState(false);
-
-	const onSubmit = (data, e) => {
-		e.preventDefault();
-	};
-
 
 	const onReviewSubmit = (data, e) => {
 		e.preventDefault();
@@ -62,8 +59,8 @@ console.log( 'data', props.restaurantId);
 	const [ avgRating, setAvgRating ] = useState(0);
 
 	useEffect(() => {
-		props.fetchRestaurantById('1');
-		props.fetchAllReviews();
+		props.fetchRestaurantById(id);
+		// props.fetchAllReviews();
 		
 		console.log(reviewData)
 		const avgTotal = reviewData.reduce((acc, curr) => {

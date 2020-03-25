@@ -165,7 +165,7 @@ a:link{
 
 .inputs {
 	font-size: 1.0rem;
-	font-family: 'Girassol', cursive;
+	font-family: 'Raleway', cursive;
 	background-color: midnightblue;
 	color: goldenrod;
 	text-align: center;
@@ -210,7 +210,7 @@ a:link{
 }
 
 .errors {
-	font-size: .8rem;
-	color: red;
+	font-size: 1rem;
+	color: rgb(250, 23, 23);
 	margin-left: 10%;
 }

@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 import LoadingCard from "../RestaurantCard/LoadingCard.js";
 import compass from "react-icons/lib/fa/compass";
 
-const RestaurantsDashboard = ({ allRestaurants, isFetching,fetchRestaurantAll}) => {
+const RestaurantsDashboard = ({ allRestaurants, isFetching, fetchRestaurantAll}) => {
 
     
     useEffect(()=> {

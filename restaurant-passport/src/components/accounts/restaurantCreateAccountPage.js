@@ -27,7 +27,7 @@ const RestaurantCreateAccountPage = props => {
   return (
     <Titles className='register-page'>
       <div className='forms'>
-        <h1 className='title'> Restaurant Passport Registration </h1>
+        <h1 className='title'> Restaurant Passport Register </h1>
         <form className='forms2' onSubmit={handleSubmit(onSubmit)}>
           <input
             className='inputs form-control'
@@ -71,7 +71,8 @@ const RestaurantCreateAccountPage = props => {
             ref={register({ required: true, pattern: /^\S+@\S+$/i })}
           />
           {errors.email && <p className='errors'>Email Required</p>}
-          <input className='inputs buttons' type='submit' />
+          
+          <button disabled={props.signingUp} className='inputs buttons' type="submit">{props.signingUp ? "Registering..." : "Register"}</button>
         </form>
         <Link className='inputs' to='/'>
           <p> Already have an account with Restaurant Passport? Sign in here.</p>
