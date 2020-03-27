@@ -31,7 +31,10 @@ import {
   USER_REVIEWS_ERROR,
   FETCH_REVIEWID_START,
   FETCH_REVIEWID_SUCCESS,
-  FETCH_REVIEWID_ERROR
+  FETCH_REVIEWID_ERROR,
+  FETCH_RESTAURANT_REVIEWS_START,
+  FETCH_RESTAURANT_REVIEWS_SUCCESS,
+  FETCH_RESTAURANT_REVIEWS_ERROR
 } from '../actions/index';
 
 const localUser = JSON.parse(localStorage.getItem('user'));
@@ -47,6 +50,7 @@ export const initialState = {
   restaurants: [],
   restaurantId: [],
   allRestaurants: [],
+  restaurantReviews: [],
   reviews: [],
   token: localStorage.getItem('token')
 };
@@ -142,7 +146,8 @@ export const passportReducer = (state = initialState, action) => {
       case FETCH_RESTAURANTID_START:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        restaurantId: []
       };
 
     case FETCH_RESTAURANTID_SUCCESS:
@@ -179,7 +184,26 @@ export const passportReducer = (state = initialState, action) => {
         error: action.payload
       };
 
-
+    case FETCH_RESTAURANT_REVIEWS_START:
+      return {
+        ...state,
+        isFetching: true,
+        restaurantReviews: []
+      }
+    case FETCH_RESTAURANT_REVIEWS_SUCCESS:
+      return {
+        ...state ,
+        isFetching : false,
+        restaurantReviews: action.payload
+      }
+    case FETCH_RESTAURANT_REVIEWS_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        restaurantReviews: [],
+        error: action.payload
+      }
+    
     case ADD_RESTAURANT_START:
       return {
         ...state,

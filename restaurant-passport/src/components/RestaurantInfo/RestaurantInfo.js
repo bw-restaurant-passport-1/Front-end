@@ -4,7 +4,7 @@ import FaStar from 'react-icons/lib/fa/star';
 import useForm from 'react-hook-form';
 // import { register } from '../../serviceWorker';
 import {connect} from 'react-redux';
-import {fetchRestaurantById, fetchAllReviews, addReview} from '../../actions/index';
+import {fetchRestaurantById, fetchRestaurantReviews, addReview} from '../../actions/index';
 import RestaurantInfoCard from '../restaurantInfoCard/restaurantInfoCard'
 
 import ReviewCard from "./ReviewCard";
@@ -60,7 +60,8 @@ console.log( 'data', props.restaurantId);
 
 	useEffect(() => {
 		props.fetchRestaurantById(id);
-		// props.fetchAllReviews();
+		props.fetchRestaurantReviews(id);
+		
 		
 		console.log(reviewData)
 		const avgTotal = reviewData.reduce((acc, curr) => {
@@ -186,10 +187,10 @@ console.log( 'data', props.restaurantId);
 					<div className="review_section">
 						
 						{
-							reviewData.length < 0 ? <h2>No reviews</h2> 
+							props.reviews.length < 1 ? <h2>No reviews</h2> 
 							:
-							reviewData.map(reviewer => {
-								return <ReviewCard reviewer={reviewer}/>
+							props.reviews.map(reviewer => {
+								return <ReviewCard key={reviewer.name} reviewer={reviewer}/>
 							})
 						}
 					</div>
@@ -202,8 +203,8 @@ console.log( 'data', props.restaurantId);
 const mapStateToProps = state => {
     return {
 		restaurantId: state.restaurantId,
-		reviews: state.reviews
+		reviews: state.restaurantReviews
     }
 }
 
-export default connect(mapStateToProps, {fetchRestaurantById, fetchAllReviews, addReview}) (RestaurantsInfo);
+export default connect(mapStateToProps, {fetchRestaurantById, fetchRestaurantReviews, addReview}) (RestaurantsInfo);

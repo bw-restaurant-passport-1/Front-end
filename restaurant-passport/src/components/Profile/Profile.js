@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {FaEdit} from "react-icons/lib/fa";
 import MdBorderColor from "react-icons/lib/md/border-color";
 import MdCameraAlt from "react-icons/lib/md/camera-alt";
