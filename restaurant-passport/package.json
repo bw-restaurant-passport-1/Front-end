@@ -19,6 +19,8 @@
 		"react-scripts": "3.3.0",
 		"redux": "^4.0.4",
 		"redux-thunk": "^2.3.0",
+		"semantic-ui-css": "^2.4.1",
+		"semantic-ui-react": "^0.88.2",
 		"styled-components": "^4.4.1"
 	},
 	"scripts": {
@@ -31,7 +33,15 @@
 		"extends": "react-app"
 	},
 	"browserslist": {
-		"production": [ ">0.2%", "not dead", "not op_mini all" ],
-		"development": [ "last 1 chrome version", "last 1 firefox version", "last 1 safari version" ]
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	}
 }

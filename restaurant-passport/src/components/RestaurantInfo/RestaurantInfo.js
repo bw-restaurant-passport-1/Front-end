@@ -13,8 +13,11 @@ import { useParams } from 'react-router';
 
 const RestaurantsInfo = (props) => {
 
+	console.log(props)
+
 	const {id} = useParams()
 	const restaurantData = props.restaurantId;
+
 	// const reviewData = props.reviews;
 	// Fake data
 	// const [ restaurantData, setRestaurantData ] = useState({
@@ -29,14 +32,11 @@ const RestaurantsInfo = (props) => {
 	// });
 
 
-	
 
-	const [ reviewData, setReviewData ] = useState([
-		{ user_id: '2', restaurant_id: '1', stamped: true, notes: 'It was great', myRating: '3' },
-		{ user_id: '2', restaurant_id: '1', stamped: false, notes: 'It was great', myRating: '5' },
-	])
 
-console.log( 'data', props.restaurantId);
+console.log( 'resturant data', props.restaurantId);
+
+	const [ratingDisplay, setRatingDisplay] = useState(0)
 
 
 
@@ -46,93 +46,52 @@ console.log( 'data', props.restaurantId);
 	const onReviewSubmit = (data, e) => {
 		e.preventDefault();
 		console.log('data submit', data)
-		props.addReview(data)
+
+		// props.addReview(data)
 	}
 
 
 
-	console.log(errors)
+	console.log("error",errors)
+	console.log("formstate", formState)
 
 
-
-	//to display the avg rating for restaurnat selected
-	const [ avgRating, setAvgRating ] = useState(0);
 
 	useEffect(() => {
 		props.fetchRestaurantById(id);
 		props.fetchRestaurantReviews(id);
 		
-		
-		console.log(reviewData)
-		const avgTotal = reviewData.reduce((acc, curr) => {
-			let total = parseInt(acc.myRating) + parseInt(curr.myRating);
-			let avg = total / reviewData.length;
-			return avg;
-		});
-
-		setAvgRating(avgTotal);
 
 
 	}, []);
 
+	useEffect(()=> {
+		console.log("use effect on reviews", props.username)
 
-	// to set stars for review
-	const [HoverIdx, setHover] = useState();
+		props.reviews.forEach((rev) => {
+			console.log(rev,"reviews loop")
+			if(rev.name === props.username){
+				setValue("notes", rev.notes)
+			}
+		})
 
-	const handleClickStar = (e,index) => {
-		setHover(index);
-	}
-	
-	let stars = [];
-	const StarRated = ({handleClick, HoverIdx, index}) => {
-        return (
-            <>
-			{HoverIdx >= index ?
-				<span className="star_rating_review">
-					<FaStar
-						
-						onClick={e => {
-							handleClick(e,index);
-							setValue("myRating", `${index}`)
-							   
-						}} color="gold" 
-					/> 
-				</span>
-				:
-				<span  className="star_rating_review">
-					<FaStar
-						onClick={e => {
-							
-							handleClick(e,index);
-							setValue("myRating", `${index}`)
-							 
-						}} 
-					/>
-				</span>
-            }
-            </>
-		)
-	};
-		
-	for (let i = 0; i < 5; i++) {
-        stars.push(<StarRated key={i} handleClick={handleClickStar} HoverIdx={HoverIdx} index={i + 1}/>)
-	}
+	},[props.reviews])
 
-	//////////////////////////////
 	return (
 		<div
 		className='info_card'>
 			{restaurantData.map (restaurantData => {
-				return <RestaurantInfoCard key={restaurantData.id} restaurantData={restaurantData} avgRating={avgRating} formState={formState} FaStar={FaStar}/>
+				return <RestaurantInfoCard key={restaurantData.id} restaurantData={restaurantData}  formState={formState}/>
 			})
 		}
+		
 			<div className="review_container">
-				<form className="review_form" onSubmit={e => handleSubmit(e, onReviewSubmit)}>
+				<form className="review_form" onSubmit={handleSubmit(onReviewSubmit)}>
 					<label htmlFor="notes" className="notes_label">Review</label>
 					<input
 						className= {`notes ${errors.notes ? "add_rating_errors": ""}`}
-						type="text"
-						placeholder="Write Review here"
+						type="Textarea"
+						placeholder={ errors.notes ? "Your Review Required*" : "Your Review"}
 						name="notes"
 						ref={register({required: true})}
 					/>
@@ -144,39 +103,65 @@ console.log( 'data', props.restaurantId);
 						 ref={register({required: false})}
 					/>
 
-					<div className="review_rating">
-						<input 
-							type="radio"
-							name="myRating"
-							ref={register({required: true})}
-							value="1"
-						/>
-						<input 
-							type="radio"
-							name="myRating"
-							ref={register({required: true})}
-							value="2"
-						/>
-						<input 
-							type="radio"
-							name="myRating"
-							ref={register({required: true})}
-							value="3"
-						/>
-						<input 
-							type="radio"
-							name="myRating"
-							ref={register({required: true})}
-							value="4"
-						/>
-						<input 
-							type="radio"
-							name="myRating"
-							ref={register({required: true})}
-							value="5"
-						/>
-						{stars}
+						
 
+					<div className="review_rating">
+						{errors.myRating && `Please add your rating!` }
+						
+						<span className={`rating ${ ratingDisplay === 5 && "checked"}`}
+							onClick={() =>{
+								setValue("myRating", `5`);
+								setRatingDisplay(5);
+							}}
+						>
+							<input type="radio" name="myRating" id="5" value="5" ref={register({required: true})}/>
+							<label for="5" className="fa fa-star">
+							</label>
+						</span>
+
+						<span className={`rating ${ ratingDisplay === 4 && "checked"}`}
+							onClick={() =>{
+								setValue("myRating", `4`)
+								setRatingDisplay(4);
+							}}
+						>
+							<input type="radio" name="myRating" id="4" value="4" ref={register({required: true})}/>
+							<label for="4" className={`fa fa-star `}>
+							</label>
+						</span>
+
+						<span className={`rating ${ ratingDisplay === 3 && "checked"}`}
+							onClick={() =>{
+								setValue("myRating", `3`)
+								setRatingDisplay(3);
+							}}
+						>
+							<input type="radio" name="myRating" id="3" value="3" ref={register({required: true})}/>
+							<label for="3" className={`fa fa-star `}>
+							</label>
+						</span>
+
+						<span className={`rating ${ ratingDisplay === 2 && "checked"}`}
+							onClick={() =>{
+								setValue("myRating", `2`)
+								setRatingDisplay(2);
+							}}
+						>
+							<input type="radio" name="myRating" id="2" value="2" ref={register({required: true})}/>
+							<label for="2" className={`fa fa-star `}>
+							</label>
+						</span>
+
+						<span className={`rating ${ ratingDisplay === 1 && "checked"}`}
+							onClick={() =>{
+								setValue("myRating", `1`)
+								setRatingDisplay(1);
+							}}
+						>
+							<input type="radio" name="myRating" id="1" value="1" ref={register({required: true})}/>
+							<label for="1" className={`fa fa-star `}>
+							</label>
+						</span>
 					</div>
 
 					<button className="buttons_info review_button" type= "submit">POST</button>
@@ -203,7 +188,8 @@ console.log( 'data', props.restaurantId);
 const mapStateToProps = state => {
     return {
 		restaurantId: state.restaurantId,
-		reviews: state.restaurantReviews
+		reviews: state.restaurantReviews,
+		username : state.user.username
     }
 }
 

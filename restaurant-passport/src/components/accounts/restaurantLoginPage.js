@@ -6,6 +6,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
+import "../../styles/accountsPage.css"
+
+import { Header, Button, Form,Grid,Segment, Message } from 'semantic-ui-react'
+
+
 const Titles = styled.div`
   font-family: 'Girassol', cursive;
 `;
@@ -19,37 +24,62 @@ const RestaurantLoginPage = props => {
     props.login(data).then(() => props.history.push('/dashboard'));
   
   };
-  console.log(props);
+  console.log("props",props);
+  console.log("error", errors)
   
 
   return (
-    <Titles className='login-page'>
-      <div className='forms'>
-        <h1 className='title'>Restaurant Passport Sign-In!</h1>
-        <form className='forms2' onSubmit={handleSubmit(onSubmit)}>
-          <input
-            className='inputs form-control'
-            type='text'
-            placeholder='Username'
-            name='username'
-            ref={register({ required: true, maxLength: 80 })}
+    <Grid columns="equal" className="login-page">
+      <Grid.Column></Grid.Column>
+      <Grid.Column width={8}>
+      
+        <Header id='title' as="h1">Restaurant Passport Sign-In!</Header>
+
+        <Form loading ={props.loggingIn}className='forms2' onSubmit={handleSubmit(onSubmit)}>
+          <Form.Field
+            error= { errors.username}
+            
+          >
+            <label id="label">Username</label>
+            <input
+              className='inputs form-control'
+              type='text'
+              placeholder={`Username ${errors.username ?  "Required" : ""}`}
+              // {`rating ${ ratingDisplay === 5 && "checked"}`}
+              name='username'
+              ref={register({ required: true, maxLength: 80 })}
+            />
+          </Form.Field>
+          
+          <Form.Field
+            error= {errors.password}
+          >
+            <label id="label">Password</label>
+            <input
+              className='inputs form-control'
+              type='password'
+              placeholder={`Password ${errors.password ?  "Required" : ""}`}
+              name='password'
+              ref={register({ required: true, max: 8 })}
+            />
+          </Form.Field>
+
+          <Message
+            error
+            header='Action Forbidden'
+            content='You can only sign up for an account once with a given e-mail address.'
           />
-          {errors.username && <p className='errors'>Username Required</p>}
-          <input
-            className='inputs form-control'
-            type='password'
-            placeholder='Password'
-            name='password'
-            ref={register({ required: true, max: 8 })}
-          />
-          {errors.password && <p className='errors'>Password Required</p>}
-          <button disabled={props.loggingIn} className='inputs buttons' type="submit">{props.loggingIn ? "Signing In..." : "Sign In"}</button>
-        </form>
+
+          <Button basic loading={props.loggingIn} type="submit">{props.loggingIn ? "Signing In..." : "Sign In"}</Button>
+        </Form>
         <Link className='inputs' to='/register'>
           <p> New to Restaurant Passport? Sign up here. </p>
         </Link>
-      </div>
-    </Titles>
+      
+      </Grid.Column>
+      <Grid.Column></Grid.Column>
+
+    </Grid>
   );
 };
 

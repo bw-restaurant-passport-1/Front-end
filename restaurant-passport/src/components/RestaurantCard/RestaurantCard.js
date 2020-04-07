@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FaBookmarkO from 'react-icons/lib/fa/bookmark-o';
 import FaStar from 'react-icons/lib/fa/star';
-import { Router } from 'react-router';
+// import { Router } from 'react-router';
 import placeholder from '../images/restaurant_placeholder.jpg';
 import stamped from '../images/Been_Here.png';
 // import { axiosWithAuth } from '../../utils/axiosWithAuth';

@@ -1,0 +1,29 @@
+
+.login-page {
+	height: 100vh;
+	background: url('../components/images/desktop-login.png') no-repeat center center fixed;
+	background-size: cover;
+}
+
+.login-page .eight {
+    background-color: midnightblue;
+    color: goldenrod;
+}
+
+.login-page #title {
+    font-size: 2.2em;
+    padding: 20px;
+    color: goldenrod;
+}
+
+.login-page #label {
+    color: goldenrod;
+}
+
+
+.register-page {
+	height: 100vh;
+	background: url('../components/images/desktop-register-page.png') no-repeat center center fixed;
+	background-size: cover;
+	background-position: center;
+}

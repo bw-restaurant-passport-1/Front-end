@@ -1,8 +1,9 @@
 import React from 'react';
 import { updateRestaurant } from '../../actions';
-import map from '../images/map_image.jpg'
+import map from '../images/map_image.jpg';
+import FaStar from 'react-icons/lib/fa/star';
 
-const RestaurantInfoCard = ({restaurantData, avgRating, FaStar, formState}) => {
+const RestaurantInfoCard = ({restaurantData, avgRating, formState}) => {
     
     return (
 <div className="rest_info">
