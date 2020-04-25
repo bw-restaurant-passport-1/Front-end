@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 
 import './styles/reset.css';
+import "./App.css"
 
 
 import Dashboard from './components/Dashboard/Dashboard.js';
@@ -16,6 +17,8 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop.js';
 import AddRestaurant from './components/AddRestaurant/AddRestaurant.js';
 import RestaurantInfo from './components/RestaurantInfo/RestaurantInfo';
 
+
+import {Container} from "semantic-ui-react";
 
 
 function App() {

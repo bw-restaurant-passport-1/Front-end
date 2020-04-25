@@ -1,14 +1,18 @@
 import React from 'react';
 import useForm from 'react-hook-form';
-import styled from 'styled-components';
-// import { axiosWithAuth } from '../../utils/axiosWithAuth';
+
+import "../../styles/accountsPage.css"
+
+
 import { signup } from '../../actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Titles = styled.h1`
-  font-family: 'Girassol', cursive;
-`;
+import { Header, Button, Form,Grid,Segment, Message, Responsive,Container, Label } from 'semantic-ui-react';
+
+
+
+
 
 
 const RestaurantCreateAccountPage = props => {
@@ -25,60 +29,138 @@ const RestaurantCreateAccountPage = props => {
 
 
   return (
-    <Titles className='register-page'>
-      <div className='forms'>
-        <h1 className='title'> Restaurant Passport Register </h1>
-        <form className='forms2' onSubmit={handleSubmit(onSubmit)}>
-          <input
-            className='inputs form-control'
-            type='text'
-            placeholder='Username'
-            name='username'
-            ref={register({ required: true, maxLength: 80 })}
-          />
-          {errors.username && <p className='errors'>Username Required</p>}
-          <input
-            className='inputs form-control'
-            type='password'
-            placeholder='Password'
-            name='password'
-            ref={register({ required: true, max: 8 })}
-          />
-          {errors.password && <p className='errors'>Password Required</p>}
+  
+    <Grid columns="equal" divided className='register-page'>
+      <Responsive
+        maxWidth={400}
+        as={Grid.Column}
+        width={1}
+      />
 
-          <input
-            className='inputs form-control'
-            type='text'
-            placeholder='Name'
-            name='name'
-            ref={register({ required: true })}
-          />
-          {errors.name && <p className='errors'>Name Required</p>}
-          <input
-            className='inputs form-control'
-            type='text'
-            placeholder='City'
-            name='city'
-            ref={register({ required: true })}
-          />
-          {errors.city && <p className='errors'>City Required</p>}
+      <Responsive
+        minWidth={400}
+        maxWidth={600}
+        as={Grid.Column}
+        width={2}
+      />
+      
+      <Responsive
+        minWidth={600}
+        as={Grid.Column}
+        width={3}
+      />
 
-          <input
-            className='inputs form-control'
-            type='email'
-            placeholder='Email'
-            name='email'
-            ref={register({ required: true, pattern: /^\S+@\S+$/i })}
-          />
-          {errors.email && <p className='errors'>Email Required</p>}
+      <Grid.Column className="center" >
+
+        <Container>
+          <Header id="title" as="h1">Restaurant Passport Register</Header>
+        </Container>
+
+        <Form loading={props.signingUp} onSubmit={handleSubmit(onSubmit)}>
+          <Form.Field
+            error = {errors.username ? {content: "Please enter your username", pointing: "below"}: null}
+          >
+            <label htmlFor="username">Username</label>
+            <input
+              className='inputs form-control'
+              type='text'
+              placeholder='Username'
+              name='username'
+              ref={register({ required: true, maxLength: 80 })}
+            />
+          </Form.Field>
           
-          <button disabled={props.signingUp} className='inputs buttons' type="submit">{props.signingUp ? "Registering..." : "Register"}</button>
-        </form>
-        <Link className='inputs' to='/'>
-          <p> Already have an account with Restaurant Passport? Sign in here.</p>
-        </Link>
-      </div>
-    </Titles>
+          {/* { <p className='errors'>Username Required</p>} */}
+          <Form.Field
+            error={errors.password && {content: "Please enter your username"}}
+          >
+            <label htmlFor="password">Password</label>
+            <input
+              className='inputs form-control'
+              type='password'
+              placeholder='Password'
+              name='password'
+              ref={register({ required: true, max: 8 })}
+            />
+            {/* {errors.password && <p className='errors'>Password Required</p>} */}
+          </Form.Field>
+          
+          <Form.Field
+            error={errors.name && {content: "Please enter your name"}}
+          >
+            <label htmlFor="name">Name</label>
+            <input
+              className='inputs form-control'
+              type='text'
+              placeholder='Name'
+              name='name'
+              ref={register({ required: true })}
+            />
+
+          </Form.Field>
+
+          <Form.Field
+            error={errors.city && {content:"City Required"}}
+          >
+            <label htmlFor="city">City</label>
+            <input
+              className='inputs form-control'
+              type='text'
+              placeholder='City'
+              name='city'
+              ref={register({ required: true })}
+            />
+          </Form.Field>
+          
+          
+          <Form.Field
+            error={errors.email && {content: "Email Required"}}
+          >
+            <label htmlFor="email">Email</label>
+            <input
+              className='inputs form-control'
+              type='email'
+              placeholder='Email'
+              name='email'
+              ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+            />
+          </Form.Field>
+          
+          <Container textAlign="center">
+            <Button color="yellow" type="submit">{props.signingUp ? "Registering..." : "Register"}</Button>
+          </Container>
+        </Form>
+
+        <Segment textAlign="center" className="accounts_link">
+          <p>Already have an account with Restaurant Passport?</p>
+          <Link className='inputs' to='/'>
+            Sign in here
+          </Link>
+        </Segment>
+        
+      </Grid.Column>
+
+
+      <Responsive
+        maxWidth={400}
+        as={Grid.Column}
+        width={1}
+      />
+
+      <Responsive
+        minWidth={400}
+        maxWidth={600}
+        as={Grid.Column}
+        width={2}
+      />
+      
+      <Responsive
+      minWidth={600}
+        as={Grid.Column}
+        width={3}
+      />
+
+    </Grid>
   );
 };
 

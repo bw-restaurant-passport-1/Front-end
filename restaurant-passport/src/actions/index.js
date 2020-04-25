@@ -22,8 +22,9 @@ export const login = state => dispatch => {
       console.log(res.data,"login response")
     })
     .catch(err => {
-      console.log(err);
-      dispatch({ type: LOGIN_ERROR, payload: err });
+      localStorage.removeItem("token", "user")
+      console.log(err.response);
+      dispatch({ type: LOGIN_ERROR, payload: err.response.data });
     });
 };
 

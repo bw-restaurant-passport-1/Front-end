@@ -60,21 +60,24 @@ export const passportReducer = (state = initialState, action) => {
     case LOGIN_START:
       return {
         ...state,
-        loggingIn: true
+        loggingIn: true,
+        error: {}
       };
     case LOGIN_SUCCESS:
     console.log(state,"logs before username is set in response")
       return {
         ...state,
         loggingIn: false,
-        user: action.payload
+        user: action.payload,
+        error: {}
         
       };
       
     case LOGIN_ERROR:
       return {
         ...state,
-        
+        user: [],
+        error: action.payload,
         loggingIn: false
         //TODO: error: action.payload
       };

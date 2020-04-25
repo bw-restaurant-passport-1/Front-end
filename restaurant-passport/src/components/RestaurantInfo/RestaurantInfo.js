@@ -8,7 +8,7 @@ import {fetchRestaurantById, fetchRestaurantReviews, addReview} from '../../acti
 import RestaurantInfoCard from '../restaurantInfoCard/restaurantInfoCard'
 
 import ReviewCard from "./ReviewCard";
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 
 const RestaurantsInfo = (props) => {

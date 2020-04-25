@@ -1,6 +1,6 @@
 import React from 'react';
 import useForm from 'react-hook-form';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { login } from '../../actions/index';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,12 +8,9 @@ import { Link } from 'react-router-dom';
 
 import "../../styles/accountsPage.css"
 
-import { Header, Button, Form,Grid,Segment, Message } from 'semantic-ui-react'
+import { Header, Button, Form,Grid,Segment, Message, Responsive,Container, Label } from 'semantic-ui-react'
 
 
-const Titles = styled.div`
-  font-family: 'Girassol', cursive;
-`;
 
 const RestaurantLoginPage = props => {
   const { register, handleSubmit, errors } = useForm();
@@ -29,15 +26,37 @@ const RestaurantLoginPage = props => {
   
 
   return (
-    <Grid columns="equal" className="login-page">
-      <Grid.Column></Grid.Column>
-      <Grid.Column width={8}>
-      
-        <Header id='title' as="h1">Restaurant Passport Sign-In!</Header>
+    
+    <Grid columns="equal" divided className="login-page" >
 
-        <Form loading ={props.loggingIn}className='forms2' onSubmit={handleSubmit(onSubmit)}>
+      <Responsive
+        maxWidth={400}
+        as={Grid.Column}
+        width={1}
+      />
+      <Responsive
+        minWidth={400}
+        maxWidth={600}
+        as={Grid.Column}
+        width={2}
+      />
+      
+      <Responsive
+        minWidth={600}
+        as={Grid.Column}
+        width={3}
+      />
+      
+      
+      
+      <Grid.Column className="center" >
+      
+        <Container textAlign="center">
+          <Header id='title' as="h1">Restaurant Passport Sign-In</Header>
+        </Container>
+        <Form loading ={props.loggingIn} onSubmit={handleSubmit(onSubmit)}>
           <Form.Field
-            error= { errors.username}
+            error= { errors.username && {content: "Please enter your Username.", pointing: "below"}}
             
           >
             <label id="label">Username</label>
@@ -52,7 +71,7 @@ const RestaurantLoginPage = props => {
           </Form.Field>
           
           <Form.Field
-            error= {errors.password}
+            error= {errors.password && true}
           >
             <label id="label">Password</label>
             <input
@@ -64,20 +83,48 @@ const RestaurantLoginPage = props => {
             />
           </Form.Field>
 
-          <Message
-            error
-            header='Action Forbidden'
-            content='You can only sign up for an account once with a given e-mail address.'
-          />
 
-          <Button basic loading={props.loggingIn} type="submit">{props.loggingIn ? "Signing In..." : "Sign In"}</Button>
+          <Container textAlign="center">
+            <Button color="yellow" type="submit">{props.loggingIn ? "Signing In..." : "Sign In"}</Button>
+          </Container>
         </Form>
-        <Link className='inputs' to='/register'>
-          <p> New to Restaurant Passport? Sign up here. </p>
-        </Link>
+
+        <Segment textAlign="center" className="accounts_link">
+          <p>New to Restaurant Passport?</p>
+          <Link className='inputs' to='/register'>
+            Sign up here
+          </Link>  
+        </Segment>
+
+
+
+        {props.error.message ? <Message negative  content="Invalid Credentials"/> : null}
+        
+        {console.log(props.error)}
+        
       
       </Grid.Column>
-      <Grid.Column></Grid.Column>
+
+      <Responsive
+        maxWidth={400}
+        as={Grid.Column}
+        width={1}
+      />
+
+      <Responsive
+        minWidth={400}
+        maxWidth={600}
+        as={Grid.Column}
+        width={2}
+      />
+      
+      <Responsive
+      minWidth={600}
+        as={Grid.Column}
+        width={3}
+      />
+      
+      
 
     </Grid>
   );
@@ -86,7 +133,8 @@ const RestaurantLoginPage = props => {
 const mapStateToProps = state => {
   return {
     loggingIn: state.loggingIn,
-	user: state.user
+    user: state.user,
+    error: state.error,
   };
 };
 

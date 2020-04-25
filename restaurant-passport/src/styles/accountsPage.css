@@ -1,25 +1,44 @@
 
 .login-page {
-	height: 100vh;
-	background: url('../components/images/desktop-login.png') no-repeat center center fixed;
+	height: 100%;
+	background: url('../components/images/desktop-login.png') no-repeat center center;
 	background-size: cover;
+	box-sizing: border-box;
+	
 }
 
-.login-page .eight {
+.login-page .center , .register-page  .center {
     background-color: midnightblue;
-    color: goldenrod;
+	color: goldenrod;
+	
 }
 
-.login-page #title {
+
+.login-page #title, .register-page #title {
     font-size: 2.2em;
     padding: 20px;
-    color: goldenrod;
+	color: goldenrod;
+	font-family: 'Girassol', cursive;
 }
 
-.login-page #label {
-    color: goldenrod;
+.login-page .form .field label {
+	color: goldenrod;
+	font-family: 'Special Elite', cursive;
 }
 
+.register-page .form .field label {
+	color: goldenrod;
+	font-family: 'Special Elite', cursive;
+}
+
+.login-page button {
+	
+}
+
+.login-page .accounts_link > *, .register-page .accounts_link > * {
+	color: goldenrod;
+	font-family: 'Special Elite', cursive;
+}
 
 .register-page {
 	height: 100vh;
