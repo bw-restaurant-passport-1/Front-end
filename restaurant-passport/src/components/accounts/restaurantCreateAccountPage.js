@@ -56,7 +56,7 @@ const RestaurantCreateAccountPage = props => {
           <Header id="title" as="h1">Restaurant Passport Register</Header>
         </Container>
 
-        <Form loading={props.signingUp} onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Field
             error = {errors.username ? {content: "Please enter your username", pointing: "below"}: null}
           >
@@ -72,7 +72,7 @@ const RestaurantCreateAccountPage = props => {
           
           {/* { <p className='errors'>Username Required</p>} */}
           <Form.Field
-            error={errors.password && {content: "Please enter your username"}}
+            error={errors.password && {content: "Please enter your username", pointing: "below"}}
           >
             <label htmlFor="password">Password</label>
             <input
@@ -86,7 +86,7 @@ const RestaurantCreateAccountPage = props => {
           </Form.Field>
           
           <Form.Field
-            error={errors.name && {content: "Please enter your name"}}
+            error={errors.name && {content: "Please enter your name", pointing: "below"}}
           >
             <label htmlFor="name">Name</label>
             <input
@@ -100,7 +100,7 @@ const RestaurantCreateAccountPage = props => {
           </Form.Field>
 
           <Form.Field
-            error={errors.city && {content:"City Required"}}
+            error={errors.city && {content:"City Required", pointing: "below"}}
           >
             <label htmlFor="city">City</label>
             <input
@@ -114,7 +114,7 @@ const RestaurantCreateAccountPage = props => {
           
           
           <Form.Field
-            error={errors.email && {content: "Email Required"}}
+            error={errors.email && {content: "Email Required", pointing: "below"}}
           >
             <label htmlFor="email">Email</label>
             <input
@@ -127,7 +127,7 @@ const RestaurantCreateAccountPage = props => {
           </Form.Field>
           
           <Container textAlign="center">
-            <Button color="yellow" type="submit">{props.signingUp ? "Registering..." : "Register"}</Button>
+            <Button color="yellow" disabled={props.signingUp} type="submit">{props.signingUp ? "Registering..." : "Register"}</Button>
           </Container>
         </Form>
 

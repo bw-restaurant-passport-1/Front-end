@@ -54,7 +54,7 @@ const RestaurantLoginPage = props => {
         <Container textAlign="center">
           <Header id='title' as="h1">Restaurant Passport Sign-In</Header>
         </Container>
-        <Form loading ={props.loggingIn} onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Field
             error= { errors.username && {content: "Please enter your Username.", pointing: "below"}}
             
@@ -85,7 +85,7 @@ const RestaurantLoginPage = props => {
 
 
           <Container textAlign="center">
-            <Button color="yellow" type="submit">{props.loggingIn ? "Signing In..." : "Sign In"}</Button>
+            <Button color="yellow" type="submit" disabled={props.loggingIn}>{props.loggingIn ? "Signing In..." : "Sign In"}</Button>
           </Container>
         </Form>
 
